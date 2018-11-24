@@ -24,6 +24,10 @@ function Form:ConfirmForm_OK()
 		return false
 	end
 end
+function Form:ConfirmForm_OKCancel(frmConfirm)
+	dialog("ConfirmForm_OKCancel()no  implement")
+end
+
 function Form:ReturnBase()--以点击左下角出城回城的方式返回主基地
 	
 end
