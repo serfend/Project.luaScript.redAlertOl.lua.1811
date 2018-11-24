@@ -8,10 +8,21 @@ function ToolBar:new (o)
     return o
 end
 function ToolBar:CheckIfInCity()
-
+	local point = screen.findColor(Rect(555, 52, 81, 47), 
+"0|0|0x773e11,1|35|0xc67f39",
+95, screen.PRIORITY_DEFAULT)
+	return point.x>0
 end
 function ToolBar:CheckIfInWorld()
+	local point = screen.findColor(Rect(551, 56, 105, 45), 
+"0|0|0x0e3331,0|33|0x1f8d8e",
+95, screen.PRIORITY_DEFAULT)
+	return point.x>0 
+end
+
+--@summary:检查菜单栏是否有新的消息
+--@param index:菜单按钮的序号
+--@return:返回此按钮是否有红点
+function ToolBar:CheckIfHaveMsg(index)
 
 end
-----@su
---function ToolBar:CheckIfHaveMsg(index)
