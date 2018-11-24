@@ -7,11 +7,14 @@ function Form:new (o)
     self.__index = self
     return o
 end
-function Form:CheckIfAnyDialog()
+function Form:CheckIfRewardDialog()
 	local point = screen.findColor(Rect(630, 359, 59, 66), 
 "0|0|0xffbcad,-8|6|0xf3aa9d,-21|6|0x5e120f",
 95, screen.PRIORITY_DEFAULT)
 	return point.x>0,point
+end
+function Form:CheckIfProductDialog()
+	
 end
 function Form:ConfirmForm_OK()
 	local point = screen.findColor(Rect(254, 798, 213, 106), 
@@ -27,7 +30,6 @@ end
 function Form:ConfirmForm_OKCancel(frmConfirm)
 	dialog("ConfirmForm_OKCancel()no  implement")
 end
-
 function Form:ReturnBase()--以点击左下角出城回城的方式返回主基地
 	
 end
@@ -37,7 +39,11 @@ end
 
 
 function Form:CheckNormalPageTask()
-	Form:CheckPartyAssistance()
+	self:CheckPartyAssistance()
+	local nowScene=toolBar:GetNowScene()
+	if nowScene==1 then
+		Building:CheckAnyFreeBuilding() 
+	end
 end
 function Form:CheckPartyAssistance()
 	point = screen.findColor(Rect(616, 931, 83, 97), 
