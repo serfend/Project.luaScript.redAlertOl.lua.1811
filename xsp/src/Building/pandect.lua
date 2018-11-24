@@ -6,17 +6,25 @@ pandect={
 	cataButtonY=300,
 }
 require "Building.pandect_Other"
+require "Building.pandect_Conscript"
+require "Building.pandect_Panel"
+require "Building.pandect_Expedition"
 function pandect:new (o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
-function pandect:Enter()
+function pandect:Enter(directEnter)
 	local pandectNewEnterButton="0|0|0xff0000,10|-2|0x432b24"
 	local pandectEnterButton="0|0|0xf0f4f6,18|3|0xeff5fd"
-	local point = screen.findColor(Rect(692, 536, 28, 27), pandectNewEnterButton,
-95, screen.PRIORITY_DEFAULT)
+	local point={}
+	if directEnter then
+		point={x=680,y=540}
+	else
+		point = screen.findColor(Rect(692, 536, 28, 27), pandectNewEnterButton,
+	95, screen.PRIORITY_DEFAULT)
+	end
 	if point.x>0 then
 		tap(point.x,point.y+5)
 		sleep(1000)
@@ -35,9 +43,20 @@ function pandect:Exit()
 	tap(20,50)
 end
 function pandect:Run()
-	self:RunConscript()
-	self:RunExpedition()
-	self:RunOther()
+--	screen.keep(true)
+	--685,275  interval 150
+	--不必检测	
+--local taskCanDo={}
+--	for i=1,3 do
+--		r,g,b = getColorRGB(150*i+150,275)
+--		if r>245 and g<50 and b<50 then
+--			taskCanDo[i]=true
+--		end
+--	end
+--	screen.keep(false)
+	self:RunConscript() 
+	self:RunExpedition() 
+	self:RunOther() 
 	self:Exit()
 end
 
@@ -63,4 +82,5 @@ function pandect:RunOther()
 			taskInfo()
 		end
 	end
+	screen.keep(false)
 end
