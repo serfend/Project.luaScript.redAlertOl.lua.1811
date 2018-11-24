@@ -62,6 +62,8 @@ function pandect:CheckIfTreat()
 		self:DoTreat(self:PanelPos(2,1),result)
 	end
 end
+--@summary:注意维修中也会出现【可维修】
+--
 function pandect:DoTreat(targetPos,param)
 	ShowInfo.RunningInfo("<维修部队>")
 	if param==2 then
@@ -70,10 +72,20 @@ function pandect:DoTreat(targetPos,param)
 	else 
 		if param==0 then
 			tap(targetPos.x,targetPos.y)
-			sleep(500)
-			tap(554,1208)--修复按钮所在位置
-			sleep(500)
-			--self:Enter()--修复后会导致界面被关闭
+			sleep(1000)
+			if self:CheckIfRepairing() then
+				MainForm:ExitForm()
+			else
+				tap(554,1208)--修复按钮所在位置
+				sleep(1500)
+				tap(354,451)--修复点击后会退出界面，提出【联盟帮助】
+			end
 		end
 	end
+end
+function pandect:CheckIfRepairing()
+	local point = screen.findColor(Rect(673, 1050, 28, 17), 
+"0|0|0x325995,12|1|0x151515",
+95, screen.PRIORITY_DEFAULT)
+	return point.x>0
 end
