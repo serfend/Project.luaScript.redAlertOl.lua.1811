@@ -17,6 +17,7 @@ function loadSetting()
 	return true
 end
 
+local lastActiveTime=0
 function main()
 	--while not loadSetting() do end
 	
@@ -26,6 +27,7 @@ function main()
 	Building={}
 	Building.normal=normal:new()
 	Building.pandect=pandect:new()
+	Building.building=building:new()
 	ocr=OCR:new()
 
 	--GetUserImages(45,2)
@@ -34,15 +36,23 @@ function main()
 end
 
 function ResetForm()
-
+	lastActiveTime=os.milliTime()-300*1000
 end
 
 function mainLoop()
 	while true do
+		local thisTime=os.milliTime()
+		local activeMode=false
+		if (thisTime-lastActiveTime)/1000>300 then
+			activeMode=true
+			lastActiveTime=thisTime
+			ShowInfo.RunningInfo("本轮主动操作开始")
+		end
+		
 		MainForm:CheckNormalPageTask()
 		--Building:CheckAnyFreeBuilding() 
 		--Building:CheckAnyBuildingButton()
-		local enterPandect=Building.pandect:Enter()
+		local enterPandect=Building.pandect:Enter(activeMode)
 		if enterPandect==0 then
 			Building.pandect:Run()
 		else
