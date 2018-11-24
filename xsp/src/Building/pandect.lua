@@ -43,17 +43,6 @@ function pandect:Exit()
 	tap(20,50)
 end
 function pandect:Run()
---	screen.keep(true)
-	--685,275  interval 150
-	--不必检测	
---local taskCanDo={}
---	for i=1,3 do
---		r,g,b = getColorRGB(150*i+150,275)
---		if r>245 and g<50 and b<50 then
---			taskCanDo[i]=true
---		end
---	end
---	screen.keep(false)
 	self:RunConscript() 
 	self:RunExpedition() 
 	self:RunOther() 
@@ -63,6 +52,7 @@ end
 function pandect:RunConscript()
 	tap(self.cataButton[1],self.cataButtonY)
 	sleep(500)
+	self:RunIfAnyConscript()
 end
 function pandect:RunExpedition()
 	tap(self.cataButton[2],self.cataButtonY)
@@ -77,10 +67,11 @@ function pandect:RunOther()
 	anyTask[1]=self:CheckIfResearch()--填入作战实验室
 	anyTask[2]=self:CheckIfSupply()
 	anyTask[3]=self:CheckIfTreat()--TODO 修复任务最后执行
+	screen.keep(false)
 	for k,taskInfo in ipairs(anyTask) do
 		if taskInfo then--方法，坐标，内容
 			taskInfo()
 		end
 	end
-	screen.keep(false)
+	
 end

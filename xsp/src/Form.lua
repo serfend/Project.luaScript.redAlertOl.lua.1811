@@ -30,19 +30,25 @@ end
 function Form:ConfirmForm_OKCancel(frmConfirm)
 	dialog("ConfirmForm_OKCancel()no  implement")
 end
-function Form:ReturnBase()--以点击左下角出城回城的方式返回主基地
-	
+--@summary:以点击左下角出城回城的方式返回主基地
+function Form:ReturnBase()
+	tap(65,1233)
 end
-
-
-
+function Form:ExitForm(exitAll)
+	local nowScene=toolBar:GetNowScene()
+	if nowScene==0 then
+		tap(20,80)--左上角就是退出按钮
+		sleep(500)
+		if exitAll then self:ExitForm(exitAll) end
+	end
+end
 
 
 function Form:CheckNormalPageTask()
 	self:CheckPartyAssistance()
 	local nowScene=toolBar:GetNowScene()
 	if nowScene==1 then
-		Building:CheckAnyFreeBuilding() 
+		normal:CheckAnyFreeBuilding() 
 	end
 end
 function Form:CheckPartyAssistance()

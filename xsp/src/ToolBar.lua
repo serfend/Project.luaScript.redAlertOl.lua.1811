@@ -1,5 +1,5 @@
 ToolBar = {
-	nowState=0,
+	nowScene=0,
 }--初始化
 function ToolBar:new (o)
     o = o or {}
@@ -19,7 +19,20 @@ function ToolBar:CheckIfInWorld()
 95, screen.PRIORITY_DEFAULT)
 	return point.x>0 
 end
-
+--@summary:获取当前场景
+--@return:0-未知 1-城市 2-世界
+function ToolBar:GetNowScene()
+	screen:keep(true)
+	if self:CheckIfInCity() then
+		self.nowScene=1
+	else
+		if self:CheckIfInWorld() then
+			self.nowScene=2
+		end
+	end
+	screen.keep(false)
+	return self.nowScene
+end
 --@summary:检查菜单栏是否有新的消息
 --@param index:菜单按钮的序号
 --@return:返回此按钮是否有红点

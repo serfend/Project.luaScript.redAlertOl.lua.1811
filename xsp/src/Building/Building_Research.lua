@@ -6,7 +6,7 @@ function building:ResearchBegin()
 		sleep(500)
 		self:ResearchAskHelp()
 	end
-	Building.building:ExitForm(false)
+	MainForm:ExitForm(false)
 end
 
 
