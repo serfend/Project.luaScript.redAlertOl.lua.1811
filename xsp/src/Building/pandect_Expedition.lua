@@ -1,0 +1,3 @@
+function pandect:ExpeditionCheck()
+
+end
