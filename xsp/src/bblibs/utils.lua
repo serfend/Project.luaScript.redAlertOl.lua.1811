@@ -190,15 +190,14 @@ function GetLastValue(iniValue)
 end
 -- 模拟一次点击
 function tap(x, y,delay)
-	sysLog("tap:"..x..","..y)
-	local x, y = x, y
-  math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
+	--sysLog("tap:"..x..","..y)
+  --math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
   local index = math.random(1,5)
   touchDown(index,x, y)
   delay=delay or 0
-  mSleep(math.random(delay+20,delay+30))                --某些特殊情况需要增大延迟才能模拟点击效果
+  sleep(math.random(delay+20,delay+30))                --某些特殊情况需要增大延迟才能模拟点击效果
   touchUp(index, x, y)
-  mSleep(30)
+  sleep(30)
 end
 function distance(x1,y1,x2,y2)
 	return math.sqrt((x2-x1)^2+(y2-y2)^2)
