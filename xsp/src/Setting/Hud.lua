@@ -4,16 +4,23 @@ HUD={
 	resource = createHUD(),		--资源状态
 }
 ShowInfo={
+	lastRunningInfo="",lastResInfo="",
 	RunningInfo=function(info)
-			sysLog("Running:"..info)
-			showHUD(HUD.runing,
-				info,_userDpi*0.03,"0xffffffff","0x4c000000"
-				,0,_fsw*0.5,0,_fsw*0.3,_fsh*0.02)
+			if ShowInfo.lastRunningInfo~=info then
+				sysLog("Running:"..info)
+				ShowInfo.lastRunningInfo=info
+				showHUD(HUD.runing,
+					info,_userDpi*0.03,"0xffffffff","0x4c000000"
+					,0,_fsw*0.5,0,_fsw*0.3,_fsh*0.02)
+			end
 	end,
 	ResInfo=function(info)
-		sysLog("resource:"..info)
-		showHUD(HUD.resource,
-				info,_userDpi*0.03,"0xffffffff","0x4c000000",
-				0,_fsw*0.5,_fsh*0.02,_fsw*0.3,_fsh*0.02)
+		if info~=ShowInfo.lastResInfo then
+			ShowInfo.lastResInfo=info
+			sysLog("resource:"..info)
+			showHUD(HUD.resource,
+					info,_userDpi*0.03,"0xffffffff","0x4c000000",
+					0,_fsw*0.5,_fsh*0.02,_fsw*0.3,_fsh*0.02)
+		end
 	end
 }
