@@ -32,11 +32,13 @@ function Form:ConfirmForm_OKCancel(frmConfirm)
 end
 --@summary:以点击左下角出城回城的方式返回主基地
 function Form:ReturnBase()
+	tap(38,452)
+	sleep(500)
 	tap(65,1233)
 end
 function Form:ExitForm(exitAll)
 	local nowScene=toolBar:GetNowScene()
-	if nowScene==0 then
+	if nowScene==3 then
 		tap(20,80)--左上角就是退出按钮
 		sleep(500)
 		if exitAll then self:ExitForm(exitAll) end

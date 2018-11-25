@@ -19,9 +19,6 @@ end
 local lastActiveTime=0
 function main()
 	--while not loadSetting() do end
-	
-	
-
 	MainForm=Form:new()
 	Building={}
 	Building.normal=normal:new()
@@ -38,19 +35,23 @@ end
 
 function ResetForm()
 	local nowScene=toolBar:GetNowScene()
-	if nowScene==0 then
+	if nowScene==3 then
 		MainForm:ExitForm(true)
 	else if nowScene==2 then
 			MainForm:ReturnBase()
+		else
+			return
 		end
 	end
+	sleep(1000)
 end
 
 function mainLoop()
 	while true do
+		screen.keep(false)
 		local thisTime=os.milliTime()
 		local activeMode=false
-		if (thisTime-lastActiveTime)/1000>300 then
+		if (thisTime-lastActiveTime)/1000>Setting.Runtime.ActiveMode.Interval then
 			activeMode=true
 			lastActiveTime=thisTime
 			ShowInfo.RunningInfo("本轮主动操作开始")

@@ -21,9 +21,9 @@ function pandect:RunIfAnyConscript()
 			anyAction=true
 			sleep(800)
 		else if self:PanelIsBlue(targetPos[1],targetPos[2]) then
-				--等待处理
-			table.insert(waitHandle,k)
+				table.insert(waitHandle,k)
 			else
+			
 			end
 		end
 	end
@@ -37,10 +37,11 @@ end
 --@param index:执行生产的序号
 function pandect:DoConscript(index)
 	local targetPos=self:PanelPos(conscriptInitInfo.Pos[index][1],conscriptInitInfo.Pos[index][2])
+	ShowInfo.ResInfo(string.format("生产%s",conscriptInitInfo.Pos[index][3]))
 	tap(targetPos.x,targetPos.y)
 	sleep(1000)--进入招兵页面
 	if self:CheckIfConscripting() then
-	
+		ShowInfo.ResInfo("正在生产中")
 	else
 		tap(530,1210)--直接开始
 		sleep(500)

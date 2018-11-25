@@ -32,9 +32,12 @@ function ToolBar:GetNowScene()
 	else
 		if self:CheckIfInWorld() then
 			self.nowScene=2
+		else
+			self.nowScene=3
 		end
 	end
 	screen.keep(false)
+	ShowInfo.ResInfo(string.format("当前处于%s场景下",Const.Toolbar.scene[self.nowScene]))
 	return self.nowScene
 end
 --@summary:检查菜单栏是否有新的消息

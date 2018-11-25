@@ -21,7 +21,7 @@ function pandect:NewCheckPandect(activeMode)
 		self:Run()
 	else
 		if enterPandect==-2 then 
-			ShowInfo.RunningInfo("进入总览失败") 
+			ShowInfo.ResInfo("进入总览失败") 
 			return -2
 		end
 	end
@@ -31,13 +31,13 @@ function pandect:Enter(directEnter)
 	local pandectEnterButton="0|0|0xf0f4f6,18|3|0xeff5fd"
 	local point={}
 	if directEnter then
-		point={x=680,y=550}
+		point={x=680,y=580}
 	else
 		point = screen.findColor(Rect(692, 536, 28, 27), pandectNewEnterButton,
 	95, screen.PRIORITY_DEFAULT)
 	end
 	if point.x>0 then
-		tap(point.x,point.y+10)
+		tap(point.x,point.y+30)
 		sleep(1000)
 		point = screen.findColor(Rect(216, 542, 62, 76), pandectEnterButton,
 95, screen.PRIORITY_DEFAULT)
@@ -55,7 +55,7 @@ function pandect:Exit()
 end
 function pandect:Run()
 	self:RunConscript() 
-	self:RunExpedition() 
+	--self:RunExpedition() 
 	if not self:RunOther() then
 		self:NewCheckPandect()
 	end
@@ -63,11 +63,13 @@ function pandect:Run()
 end
 
 function pandect:RunConscript()
+	ShowInfo.RunningInfo("生产军备")
 	tap(self.cataButton[1],self.cataButtonY)
 	sleep(500)
 	self:RunIfAnyConscript()
 end
 function pandect:RunExpedition()
+	ShowInfo.RunningInfo("出征")
 	tap(self.cataButton[2],self.cataButtonY)
 	sleep(500)
 	self:RunIfAnyTroopsFree()
@@ -75,6 +77,7 @@ end
 --@summary:执行面板3的任务
 --@return:任务是否执行完成
 function pandect:RunOther()
+	ShowInfo.RunningInfo("其他选项")
 	tap(self.cataButton[3],self.cataButtonY)
 	sleep(500)
 	screen.keep(true)

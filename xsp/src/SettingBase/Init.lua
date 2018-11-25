@@ -1,11 +1,50 @@
 Setting={
+	Runtime={
+		ActiveMode={
+			Interval=300,--每5分钟执行一次主动检查
+		}
+	},
 	Expedition={
+		--@summary:是否自动补充体力
+		PlayerEnergySupply=false,
+		PlayerMaxEnergy=100,
 		--@summary:targetInfo[1]={Enemy=1,Rank={max=11,min=10}}
 		--@property Enemy:由左至右依次顺序1-7
 		--@property Rank:{max=1,min=1}目标的等级范围
 		TargetInfo={
-			[1]={Enemy=1,Rank={max=10,min=9}},
-			[2]={Enemy=3,Rank={max=7,min=6}}
+			[1]={Enemy=1,Rank={max=10,min=9,now=10}},
+			[2]={Enemy=3,Rank={max=7,min=6,now=7}}
+		}
+	}
+}
+
+Const={
+	Toolbar={
+		scene={
+			[1]="城市",
+			[2]="世界",
+			[3]="子菜单",
+			[4]="其他"
+		}
+	},
+	Expedition={
+		PlayerEnergy={
+			[1]=5,--野怪
+			[2]=15,--兵营
+			[3]=0,
+			[4]=0,
+			[5]=0,
+			[6]=0,
+			[7]=0,
+		},
+		EnemyDescription={
+			[1]="野怪",
+			[2]="兵营",
+			[3]="矿石",
+			[4]="石油",
+			[5]="合金",
+			[6]="稀土",
+			[7]="基地",
 		}
 	}
 }
