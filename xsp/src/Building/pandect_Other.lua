@@ -2,12 +2,20 @@ function pandect:DoResearch(targetPos,param)
 	ShowInfo.RunningInfo("<研究所>")
 	if param==1 then
 		tap(targetPos.x,targetPos.y)
+		sleep(800)
+		self:EnterNextResearch(targetPos)
 	else if param==2 then
-			tap(targetPos.x,targetPos.y)
-			sleep(1000)
-			Building.building:ResearchBegin()
+			self:EnterNextResearch(targetPos)
+		else
+			return false
 		end
 	end
+	return true
+end
+function pandect:EnterNextResearch(targetPos)
+	tap(targetPos.x,targetPos.y)
+	sleep(1000)
+	Building.building:ResearchBegin()
 end
 --1:可直接领取 2:需要研究
 function pandect:CheckIfResearch()
@@ -22,7 +30,7 @@ function pandect:CheckIfResearch()
 		end
 	end
 	return function()
-		self:DoResearch(self:PanelPos(1,1),result)
+		return self:DoResearch(self:PanelPos(1,1),result)
 	end
 end
 

@@ -1,12 +1,12 @@
 --研究所界面下
 function building:ResearchBegin()
 	local anyTask=self:CheckIfAnyResearch()
-	if anyTask then
+	if not anyTask then
 		self:Research(1)
-		sleep(500)
+		sleep(1500)
 		self:ResearchAskHelp()
 	end
-	MainForm:ExitForm(false)
+	MainForm:ExitForm(true)
 end
 
 
@@ -17,9 +17,9 @@ function building:Research(index)
 			tap(550,1230)
 		end
 	end
-	sleep(500)
+	sleep(800)
 	tap(500,970)--直接点击右侧按钮提交
-	sleep(500)
+	sleep(800)
 end
 function building:CheckIfAnyResearch()
 	local point = screen.findColor(Rect(155, 1200, 162, 47), 
@@ -28,10 +28,11 @@ function building:CheckIfAnyResearch()
 	return not (point.x>0)
 end
 function building:ResearchAskHelp()
-	local point = screen.findColor(Rect(36, 128, 640, 1108), 
-"0|0|0xfcfcf0,8|0|0x121212,14|0|0xfffffd",
+	local point = screen.findColor(Rect(44, 137, 662, 1011), 
+"0|0|0xffffff,-11|6|0xffffff,-26|25|0xffffff",
 95, screen.PRIORITY_DEFAULT)
 	if point.x>0 then
-		tap(point.x,point.y)
+		tap(point.x-30,point.y)
+		sleep(1000)
 	end
 end
