@@ -50,7 +50,7 @@ function restartApp(delay)
 	end
 end
 function showRect(x1,y1,x2,y2,timeDelay,color,info)
-	--sysLog("ShowRect"..x1..","..y1.."."..x2..","..y2)
+	sysLog("ShowRect"..x1..","..y1.."."..x2..","..y2)
 	color=color or "0x4c00ff00"
 	info=info or ""
 	timeDelay=timeDelay or 1000
@@ -204,15 +204,14 @@ function distance(x1,y1,x2,y2)
 end
 -- 模拟滑动操作，从点(x1, y1)划到到(x2, y2)
 function swip(x1,y1,x2,y2,step)
-	sysLog("swip"..x1..","..y1.."-"..x2..","..y2)
 	step=step or 10
 	index = math.random(1,5)
     touchDown(index, x1, y1)
     for i=1,step do
 		touchMove(index,(x2-x1)*i/step+x1,(y2-y1)*i/step+y1)
-		mSleep(30)
+		sleep(30)
 	end
-    mSleep(30)
+    sleep(30)
     touchUp(index, x2, y2)
 end
 

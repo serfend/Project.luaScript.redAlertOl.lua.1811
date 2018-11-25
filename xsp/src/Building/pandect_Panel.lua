@@ -28,6 +28,6 @@ end
 function pandect:PanelCheckRangeColor(x,y,w,h,colorInfo)
 	local point = screen.findColor(Rect(x, y, w, h), 
 	colorInfo,
-	95, screen.PRIORITY_DEFAULT)
+	90, screen.PRIORITY_DEFAULT)
 	return point.x>0
 end

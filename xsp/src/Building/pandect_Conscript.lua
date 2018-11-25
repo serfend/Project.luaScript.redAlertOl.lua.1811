@@ -1,6 +1,6 @@
 --@summary:总览.生产军备
 local conscriptInitInfo={
-	conscriptPos={
+	Pos={
 		[1]={[1]=1,[2]=1,[3]="坦克"},
 		[2]={[1]=2,[2]=1,[3]="空军"},
 		[3]={[1]=1,[2]=2,[3]="兵营"},
@@ -12,7 +12,8 @@ function pandect:RunIfAnyConscript()
 	local waitHandle={}
 	local anyAction=false--是否执行了任何操作
 	screen.keep(true)
-	for k,targetPos in ipairs(conscriptInitInfo.conscriptPos) do 
+	for k,targetPos in ipairs(conscriptInitInfo.Pos) do 
+		
 		if self:PanelIsGreen(targetPos[1],targetPos[2]) then
 			local enterPos=self:PanelPos(targetPos[1],targetPos[2])
 			tap(enterPos.x,enterPos.y)
@@ -22,6 +23,7 @@ function pandect:RunIfAnyConscript()
 		else if self:PanelIsBlue(targetPos[1],targetPos[2]) then
 				--等待处理
 			table.insert(waitHandle,k)
+			else
 			end
 		end
 	end
@@ -34,7 +36,7 @@ end
 --@summary:执行生产
 --@param index:执行生产的序号
 function pandect:DoConscript(index)
-	local targetPos=self:PanelPos(conscriptInitInfo.conscriptPos[index][1],conscriptInitInfo.conscriptPos[index][2])
+	local targetPos=self:PanelPos(conscriptInitInfo.Pos[index][1],conscriptInitInfo.Pos[index][2])
 	tap(targetPos.x,targetPos.y)
 	sleep(1000)--进入招兵页面
 	if self:CheckIfConscripting() then

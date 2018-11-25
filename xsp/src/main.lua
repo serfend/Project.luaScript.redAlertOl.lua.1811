@@ -29,7 +29,7 @@ function main()
 	Building.building=building:new()
 	toolBar=ToolBar:new()
 	ocr=OCR:new()
-
+	ocrInfo=OcrInfo:new()
 	lastActiveTime=os.milliTime()-300*1000
 	--GetUserImages(45,2)
 	ResetForm()--初始化
@@ -41,7 +41,7 @@ function ResetForm()
 	if nowScene==0 then
 		MainForm:ExitForm(true)
 	else if nowScene==2 then
-			toolBar:ReturnBase()
+			MainForm:ReturnBase()
 		end
 	end
 end
@@ -57,14 +57,9 @@ function mainLoop()
 			ResetForm()
 		end
 		MainForm:CheckNormalPageTask()
+		Building.pandect:NewCheckPandect(activeMode)
 		
 		
-		local enterPandect=Building.pandect:Enter(activeMode)
-		if enterPandect==0 then
-			Building.pandect:Run()
-		else
-			if enterPandect==-2 then ShowInfo.RunningInfo("进入总览失败") end
-		end
 		sleep(500)
 		ShowInfo.RunningInfo("值勤模式")
 	end

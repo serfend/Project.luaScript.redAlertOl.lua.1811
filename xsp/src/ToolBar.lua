@@ -1,11 +1,15 @@
 ToolBar = {
 	nowScene=0,
+	userEnergy=0,
 }--初始化
 function ToolBar:new (o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
+end
+function ToolBar:SynUserEnergy()
+	
 end
 function ToolBar:CheckIfInCity()
 	local point = screen.findColor(Rect(555, 52, 81, 47), 
