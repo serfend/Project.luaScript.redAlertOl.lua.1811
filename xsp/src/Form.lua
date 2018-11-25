@@ -16,20 +16,6 @@ end
 function Form:CheckIfProductDialog()
 	
 end
-function Form:ConfirmForm_OK()
-	local point = screen.findColor(Rect(254, 798, 213, 106), 
-"0|0|0x7f461e,0|46|0xd99d39",
-95, screen.PRIORITY_DEFAULT)
-	if point.x>0 then
-		tap(point.x,point.y)
-		return true
-	else
-		return false
-	end
-end
-function Form:ConfirmForm_OKCancel(frmConfirm)
-	dialog("ConfirmForm_OKCancel()no  implement")
-end
 --@summary:以点击左下角出城回城的方式返回主基地
 function Form:ReturnBase()
 	tap(38,452)

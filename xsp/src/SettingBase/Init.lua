@@ -1,7 +1,7 @@
 Setting={
 	Runtime={
 		ActiveMode={
-			Interval=300,--每5分钟执行一次主动检查
+			Interval=60,--每1分钟执行一次主动检查
 		}
 	},
 	Expedition={
@@ -11,9 +11,11 @@ Setting={
 		--@summary:targetInfo[1]={Enemy=1,Rank={max=11,min=10}}
 		--@property Enemy:由左至右依次顺序1-7
 		--@property Rank:{max=1,min=1}目标的等级范围
+		--@property Action:0-Dialog_OK 1-5:对应地图中按钮
+		--@property Troop:0-默认 5-最高等级 6-最大负重 7-最快行军 8-均衡搭配 1到4-编队
 		TargetInfo={
-			[1]={Enemy=1,Rank={max=10,min=9,now=10}},
-			[2]={Enemy=3,Rank={max=7,min=6,now=7}}
+			[1]={Enemy=3,Rank={max=7,min=6,now=7},Action=5,Troop=0},
+			[2]={Enemy=1,Rank={max=10,min=9,now=10},Action=0,Troop=0},
 		}
 	}
 }
@@ -45,6 +47,13 @@ Const={
 			[5]="合金",
 			[6]="稀土",
 			[7]="基地",
+		},
+		TargetButton={
+			[1]={200,590},
+			[2]={250,485},
+			[3]={350,425},
+			[4]={470,485},
+			[5]={530,590}
 		}
 	}
 }

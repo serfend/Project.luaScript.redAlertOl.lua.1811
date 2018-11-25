@@ -14,7 +14,7 @@ function pandect:DoExpedition(index)
 	
 	local targetPos=self:PanelPos(expeditionInitInfo.Pos[index][1],expeditionInitInfo.Pos[index][2])
 	tap(targetPos.x,targetPos.y)
-	sleep(1000)
+	sleep(2000)
 	if not Setting.Expedition.PlayerEnergySupply then--若无自动补充体力，则判断当前体力值
 		self.nowPlayerEnergy=self:GetNowPlayerEnergySupply()
 	end
@@ -29,15 +29,19 @@ function pandect:RunIfAnyTroopsFree()
 		if self:PanelIsBlue(targetPos[1],targetPos[2]) then
 			table.insert(waitHandle,k)
 		else
-			print("233")
 		end
 	end
 	screen.keep(false)
 	userEnergySupply=true
 	for k,index in ipairs(waitHandle) do 
 		if self:DoExpedition(index)==false then
-			return
+			break
+		else
+			sleep(500)
+			self:Enter(true)
+			tap(self.cataButton[2],self.cataButtonY)
 		end
 	end
+	return #waitHandle>0
 end
 

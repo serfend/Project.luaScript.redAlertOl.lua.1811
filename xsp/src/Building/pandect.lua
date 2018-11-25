@@ -55,9 +55,13 @@ function pandect:Exit()
 end
 function pandect:Run()
 	self:RunConscript() 
-	--self:RunExpedition() 
+	if self:RunExpedition() then--当执行了出征后需重新开始
+		self:NewCheckPandect(true)
+		return
+	end	
 	if not self:RunOther() then
-		self:NewCheckPandect()
+		self:NewCheckPandect(true)
+		return
 	end
 	self:Exit()
 end
@@ -72,7 +76,7 @@ function pandect:RunExpedition()
 	ShowInfo.RunningInfo("出征")
 	tap(self.cataButton[2],self.cataButtonY)
 	sleep(500)
-	self:RunIfAnyTroopsFree()
+	return self:RunIfAnyTroopsFree()
 end
 --@summary:执行面板3的任务
 --@return:任务是否执行完成

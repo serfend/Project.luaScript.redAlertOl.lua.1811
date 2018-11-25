@@ -6,10 +6,10 @@ function pandect:ExpeditAction_OnTarget(targetInfo)
 	end
 	self:SelectTargetInfo(targetInfo)
 	self:CheckLastExpeditPos()
-	return self:EnsureSelectTarget()
+	return self:EnsureSelectTarget(targetInfo)
 end
 --@summary:决定当前选中
-function pandect:EnsureSelectTarget()
+function pandect:EnsureSelectTarget(targetInfo)
 	local success=false
 	while not success do
 		self:NowSelectExpeditionQueryNext()
@@ -19,15 +19,41 @@ function pandect:EnsureSelectTarget()
 		end
 		success=self:CheckCurrentIfNoOtherPlayer() 
 	end
-	self:SelectCurrentTarget()
+	self:SelectCurrentTarget(targetInfo.Action)
+	sleep(1000)
+	self:ExpeditWithTargetTroop(targetInfo.Troop)
+	ShowInfo.ResInfo("编队已出征")
+	return true
 end
+--@summary:使用设定的编队进行出征
+--@param index:0-默认 1到4-编队 5-最高等级 6-最大负重 7-最快行军 8-均衡搭配
+function pandect:ExpeditWithTargetTroop(index)
+	if index>0 and index<5 then
+		tap(300+90*index,170)--选中编队序号
+	else
+		if index>4 then
+			tap(356,1209)--中间按钮
+			sleep(500)
+			tap(356,800+70*(index-4))--中间选项序号
+		end
+	end
+	sleep(500)
+	tap(560,1210)--出征按钮
+end
+
 --@summary:选中目标
 --@param selectModel:0-弹窗 1-5:由左至右5个按钮
-function pandect:SelectCurrentTarget(selectModel)
+function pandect:SelectCurrentTarget(index)
 	tap(360,640)--屏幕正中间
-	sleep(800)
-	if selectModel==0 then
-		--...
+	sleep(1500)
+	self:SelectMapTargetButton(index)
+end
+--@summary:选中目标按钮
+function pandect:SelectMapTargetButton(index)
+	if index==0 then
+		tap(356,973)--攻击按钮
+	else
+		tap(Const.Expedition.TargetButton[index][1],Const.Expedition.TargetButton[index][2])
 	end
 end
 --@summary:判断当前目标没有其他玩家所控制
