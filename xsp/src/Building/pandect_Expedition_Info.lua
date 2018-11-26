@@ -46,11 +46,17 @@ function pandect:GetNowPlayerEnergySupply()
 	screen.keep(false)
 	return result
 end
-local lastExpeditPos=""
+local lastExpeditPos={}
 --@summary:检查当前坐标是否和上次一致，以此判断是否成功寻找目标
 function pandect:CheckLastExpeditPos()
 	local pos=ocrInfo:GetMapPos()
-	local result= (pos==lastExpeditPos)
-	lastExpeditPos=Pos
+	local result= lastExpeditPos[pos]
+	if not result then 
+		lastExpeditPos[pos]=true
+	end
 	return result
+end
+function pandect:ClearLastPosGroup()
+	lastExpeditPos={}
+	self:CheckLastExpeditPos()
 end

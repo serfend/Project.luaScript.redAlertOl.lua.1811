@@ -21,5 +21,5 @@ if not supportSize then
 	if choiceIfRun == 0 then
 		lua_exit();
 	end
-	setScreenScale(720,1280)
+	setScreenScales(720,1280)
 end

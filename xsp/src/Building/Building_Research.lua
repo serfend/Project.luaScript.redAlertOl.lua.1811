@@ -28,7 +28,7 @@ function building:CheckIfAnyResearch()
 	return not (point.x>0)
 end
 function building:ResearchAskHelp()
-	local point = screen.findColor(Rect(44, 137, 662, 1011), 
+	local point = screen.findColor(Rect(1, 137, 700, 1011), 
 "0|0|0xffffff,-11|6|0xffffff,-26|25|0xffffff",
 95, screen.PRIORITY_DEFAULT)
 	if point.x>0 then

@@ -16,7 +16,7 @@ function loadSetting()
 	return true
 end
 
-local lastActiveTime=0
+
 function main()
 	--while not loadSetting() do end
 	MainForm=Form:new()
@@ -25,9 +25,10 @@ function main()
 	Building.pandect=pandect:new()
 	Building.building=building:new()
 	toolBar=ToolBar:new()
+	party=party:new()
 	ocr=OCR:new()
 	ocrInfo=OcrInfo:new()
-	lastActiveTime=os.milliTime()-300*1000
+	Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
 	--GetUserImages(45,2)
 	ResetForm()--初始化
 	mainLoop()
@@ -51,18 +52,29 @@ function mainLoop()
 		screen.keep(false)
 		local thisTime=os.milliTime()
 		local activeMode=false
-		if (thisTime-lastActiveTime)/1000>Setting.Runtime.ActiveMode.Interval then
+		
+		local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
+			(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
+		if refreshTimeLeft<0 then
 			activeMode=true
-			lastActiveTime=thisTime
+			Setting.Runtime.ActiveMode.LastActiveTime=thisTime
 			ShowInfo.RunningInfo("本轮主动操作开始")
 			ResetForm()
+		else
+			ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒后进行主动操作",refreshTimeLeft),true)
 		end
 		MainForm:CheckNormalPageTask()
+		if activeMode then
+			party:NewCheckParty()
+		end
 		Building.pandect:NewCheckPandect(activeMode)
 		
-		
 		sleep(500)
-		ShowInfo.RunningInfo("值勤模式")
+		Building.building:Run(activeMode)
+		sleep(500)
+		if activeMode then
+			ResetForm()
+		end
 	end
 end
 main()

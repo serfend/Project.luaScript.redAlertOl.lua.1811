@@ -49,13 +49,16 @@ function restartApp(delay)
 		mSleep(5000)
 	end
 end
+function showRectPos(x,y,timeDelay,color,info)
+	showRect(x-10,y-10,x+10,y+10,timeDelay,color,info)
+end
 function showRect(x1,y1,x2,y2,timeDelay,color,info)
 	sysLog("ShowRect"..x1..","..y1.."."..x2..","..y2)
 	color=color or "0x4c00ff00"
 	info=info or ""
 	timeDelay=timeDelay or 1000
 	local tmpHud=createHUD()
-	showHUD(tmpHud,info,_userDpi*0.03,"0xffffffff",color,0,x1,y1,x2-x1,y2-y1)
+	showHUD(tmpHud,info,(x2-x1)*0.2,"0xffffffff",color,0,x1,y1,x2-x1,y2-y1)
 	mSleep(timeDelay)
 	hideHUD(tmpHud)
 	mSleep(30)

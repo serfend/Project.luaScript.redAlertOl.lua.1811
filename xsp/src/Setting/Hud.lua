@@ -5,19 +5,21 @@ HUD={
 }
 ShowInfo={
 	lastRunningInfo="",lastResInfo="",
-	RunningInfo=function(info)
+	RunningInfo=function(info,ingoreLog)
 			if ShowInfo.lastRunningInfo~=info then
-				sysLog("Running:"..info)
+				if not ingoreLog then 
+				sysLog("Running:"..info) end
 				ShowInfo.lastRunningInfo=info
 				showHUD(HUD.runing,
 					info,_userDpi*0.03,"0xffffffff","0x4c000000"
 					,0,_fsw*0.5,0,_fsw*0.3,_fsh*0.02)
 			end
 	end,
-	ResInfo=function(info)
+	ResInfo=function(info,ingoreLog)
 		if info~=ShowInfo.lastResInfo then
+			if not ingoreLog then 
+			sysLog("resource:"..info) end
 			ShowInfo.lastResInfo=info
-			sysLog("resource:"..info)
 			showHUD(HUD.resource,
 					info,_userDpi*0.03,"0xffffffff","0x4c000000",
 					0,_fsw*0.5,_fsh*0.02,_fsw*0.3,_fsh*0.02)

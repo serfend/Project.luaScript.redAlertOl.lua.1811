@@ -5,9 +5,9 @@ local panelPosYBegin=352
 local panelWidth=200
 local panelHeight=150
 
-local panelGreen="0|0|0x38a633,-102|2|0x3fae38,-52|9|0x42b33a"--实验室绿色
-local panelBlue="0|0|0x4880dc,-1|12|0x4982df,-7|18|0x4881dc"--出征蓝色边框--"0|0|0x516dc9,49|11|0x5773ce,94|3|0x4e6bc7"--实验室蓝色
-local panelOrange="0|0|0xe26f30,-30|-2|0xbd4929,-101|-4|0xbb4928"--维修橙色
+local panelGreen={rmax=100,rmin=0,gmax=255,gmin=150,bmax=100,bmin=0}
+local panelBlue={rmax=100,rmin=0,gmax=150,gmin=50,bmax=255,bmin=150}
+local panelOrange={rmax=255,rmin=150,gmax=100,gmin=0,bmax=100,bmin=0}
 function pandect:PanelPos(indexX,indexY)
 	return {x=panelPosX[indexX]+10,y=panelPosYBegin+160*(indexY-1)+10}
 end
@@ -22,12 +22,21 @@ function pandect:PanelIsOrange(indexX,indexY)
 end
 function pandect:PanelCheckColor(indexX,indexY,colorInfo)
 	return self:PanelCheckRangeColor(
-	panelPosX[indexX],panelPosYBegin+160*(indexY-1),
-	panelWidth,panelHeight,colorInfo)
+	panelPosX[indexX]+40,panelPosYBegin+160*(indexY-1)+135,colorInfo)
 end
-function pandect:PanelCheckRangeColor(x,y,w,h,colorInfo)
-	local point = screen.findColor(Rect(x, y, w, h), 
-	colorInfo,
-	95, screen.PRIORITY_DEFAULT)
-	return point.x>0
+function pandect:PanelCheckRangeColor(x,y,colorInfo)
+	local result=true
+	local tr,tg,tb=0,0,0
+	for i=1,3 do
+		local r,g,b=screen.getRGB(x+5*i,y)
+		tr=tr+r
+		tg=tg+g
+		tb=tb+b
+	end
+	tr=tr/3
+	tg=tg/3
+	tb=tb/3
+	result= colorInfo.rmax>tr and colorInfo.rmin<tr and colorInfo.gmax>tg and colorInfo.gmin<tg and colorInfo.bmax>tb and colorInfo.bmin<tb
+	--showRectPos(x,y,1000,nil,result and "有效" or "无效")
+	return result
 end

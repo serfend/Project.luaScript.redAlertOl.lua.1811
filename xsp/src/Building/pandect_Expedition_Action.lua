@@ -2,29 +2,45 @@ function pandect:ExpeditAction_OnTarget(targetInfo)
 	local requireEnergy=Const.Expedition.PlayerEnergy[targetInfo.Enemy]
 	if self.nowPlayerEnergy< requireEnergy then
 		ShowInfo.ResInfo(string.format("体力%s,不足%s",self.nowPlayerEnergy,requireEnergy))
-		return false
+		return -2
 	end
-	self:SelectTargetInfo(targetInfo)
-	self:CheckLastExpeditPos()
-	return self:EnsureSelectTarget(targetInfo)
+	local result=-4
+	targetInfo.Rank.now=targetInfo.Rank.max
+	while true do
+		self:SelectTargetInfo(targetInfo)
+		result=self:EnsureSelectTarget(targetInfo)
+		if result==0 then
+			break
+		end
+		targetInfo.Rank.now=targetInfo.Rank.now-1
+		if targetInfo.Rank.now<targetInfo.Rank.min then
+			ShowInfo.ResInfo("已无目标可选")
+			return -4
+		end
+	end
+	return 0
 end
 --@summary:决定当前选中
 function pandect:EnsureSelectTarget(targetInfo)
 	local success=false
+	self:ClearLastPosGroup()
 	while not success do
 		self:NowSelectExpeditionQueryNext()
 		if self:CheckLastExpeditPos() then
-			dialog("已无目标可选")
-			return false
+			return -4
 		end
 		success=self:CheckCurrentIfNoOtherPlayer() 
+		if success then
+			ShowInfo.ResInfo("发现目标,准备出征")
+		end
 	end
 	self:SelectCurrentTarget(targetInfo.Action)
 	sleep(1000)
 	self:ExpeditWithTargetTroop(targetInfo.Troop)
 	ShowInfo.ResInfo("编队已出征")
-	return true
+	return 0
 end
+
 --@summary:使用设定的编队进行出征
 --@param index:0-默认 1到4-编队 5-最高等级 6-最大负重 7-最快行军 8-均衡搭配
 function pandect:ExpeditWithTargetTroop(index)
@@ -58,7 +74,17 @@ function pandect:SelectMapTargetButton(index)
 end
 --@summary:判断当前目标没有其他玩家所控制
 function pandect:CheckCurrentIfNoOtherPlayer() 
-	return true
+	local point = screen.findColor(Rect(336, 474, 51, 52), 
+"0|0|0x1fc32e,-4|-3|0x1ca22b",
+95, screen.PRIORITY_DEFAULT)
+	if point.x<1 then
+		point = screen.findColor(Rect(336, 474, 51, 52), 
+"0|0|0xd72522,6|-6|0xa82421",
+95, screen.PRIORITY_DEFAULT)
+		return point.x<1
+	else
+		return false
+	end
 end
 
 --@summary:在出征模式下，依据出征目标信息选择目标

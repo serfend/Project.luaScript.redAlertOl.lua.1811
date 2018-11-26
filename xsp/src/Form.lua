@@ -1,5 +1,5 @@
 Form = {
-	nowState=0,
+	nowState=0,lastScene=0
 }--初始化
 function Form:new (o)
     o = o or {}
@@ -21,6 +21,7 @@ function Form:ReturnBase()
 	tap(38,452)
 	sleep(500)
 	tap(65,1233)
+	sleep(500)
 end
 function Form:ExitForm(exitAll)
 	local nowScene=toolBar:GetNowScene()
@@ -31,20 +32,23 @@ function Form:ExitForm(exitAll)
 	end
 end
 
-
 function Form:CheckNormalPageTask()
 	self:CheckPartyAssistance()
 	local nowScene=toolBar:GetNowScene()
 	if nowScene==1 then
 		normal:CheckAnyFreeBuilding() 
 	end
+	if lastScene~=nowScene then--场景发生变化，则说明用户进行了操作，取消主动操作
+		Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()
+		lastScene=nowScene
+	end
 end
 function Form:CheckPartyAssistance()
-	point = screen.findColor(Rect(616, 931, 83, 97), 
-"0|0|0xecf1fb,26|-14|0xff0000,-23|0|0xf2f4fb,6|10|0xdae6fa",
+	local point = screen.findColor(Rect(666, 931, 46, 49), 
+"0|0|0xfd0000,18|0|0xfd0000",
 95, screen.PRIORITY_DEFAULT)
 	if point.x>0 then
-		tap(point.x,point.y)
+		tap(656,978)
 		ShowInfo.RunningInfo("<联盟帮助>")
 	end
 end

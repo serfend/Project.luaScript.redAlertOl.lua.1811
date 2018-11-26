@@ -31,7 +31,7 @@ function pandect:Enter(directEnter)
 	local pandectEnterButton="0|0|0xf0f4f6,18|3|0xeff5fd"
 	local point={}
 	if directEnter then
-		point={x=680,y=580}
+		point={x=700,y=570}
 	else
 		point = screen.findColor(Rect(692, 536, 28, 27), pandectNewEnterButton,
 	95, screen.PRIORITY_DEFAULT)
@@ -51,9 +51,11 @@ function pandect:Enter(directEnter)
 	end
 end
 function pandect:Exit()
-	tap(20,50)
+	MainForm:ExitForm()
 end
 function pandect:Run()
+	ShowInfo.RunningInfo("总览操作")
+	self:ResetSetting()
 	self:RunConscript() 
 	if self:RunExpedition() then--当执行了出征后需重新开始
 		self:NewCheckPandect(true)
@@ -65,7 +67,10 @@ function pandect:Run()
 	end
 	self:Exit()
 end
-
+--@summary:运行前重置上次的设置
+function pandect:ResetSetting()
+	banTroopQueue={}
+end
 function pandect:RunConscript()
 	ShowInfo.RunningInfo("生产军备")
 	tap(self.cataButton[1],self.cataButtonY)
