@@ -1,10 +1,14 @@
-local todayValid=true
-local lastUnhdlExceptionTime=0
+
 function party:RunAttainTaskward()
+	local todayValid=storage.get("todayValid",true)
+	local lastUnhdlExceptionTime=storage.get("lastUnhdlExceptionTime",0)
 	if not todayValid then
-		if os.milliTime()-lastUnhdlExceptionTime >1000*86400 then
-			todayValid=true
+		local nowTime=os.milliTime()
+		if nowTime-lastUnhdlExceptionTime >1000*86400 then
+			storage.put("todayValid",true)
+			ShowInfo.ResInfo("领取任务奖励")
 		else
+			storage.put("lastUnhdlExceptionTime",nowTime)
 			ShowInfo.ResInfo("防封需要,24h内取消任务获取")
 			return false
 		end
@@ -15,9 +19,8 @@ function party:RunAttainTaskward()
 	sleep(500)
 	local r,g,b=screen.getRGB(288,1234)
 	if r>50 and g>50 and b>50 then
-		todayValid=false
+		storage.put("todayValid",false)
 	end
-	--TODO 此处需要添加确定键
 	MainForm:ExitForm()--返回上一层
 	return true
 end
