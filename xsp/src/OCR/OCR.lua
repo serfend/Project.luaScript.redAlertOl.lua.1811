@@ -1,7 +1,8 @@
 OcrInfo={
 	fore={
 		mapPos="0xe1e0e0-0xa0a0a0",
-		mapTargetRank="0xa99956-0xa0a022"
+		mapTargetRank="0xa99956-0xa0a022",
+		PandectLeftTime="0x99894d-0x41ffff",
 	}
 }
 function OcrInfo:new (o)
@@ -14,7 +15,11 @@ function OcrInfo:GetMapTargetRank()
 	local code,result=ocr:GetMapPos(255,1125,61,20,self.fore.mapTargetRank)
 	return result
 end
-
+--@summary:获取总览剩余时间
+function OcrInfo:GetPandectLeftTime(x,y,w,h)
+	local code,result=ocr:GetMapPos(x,y,w,h,self.fore.PandectLeftTime)
+	return result
+end
 
 --@summary:需保证当前在地图场景下
 function OcrInfo:GetMapPos()
