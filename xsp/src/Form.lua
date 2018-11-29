@@ -1,5 +1,5 @@
 Form = {
-	nowState=0,lastScene=0
+	nowState=0,lastScene=0,mapPos={}
 }--初始化
 function Form:new (o)
     o = o or {}
@@ -36,7 +36,7 @@ function Form:CheckNormalPageTask()
 	self:CheckPartyAssistance()
 	local nowScene=toolBar:GetNowScene()
 	if nowScene==1 then
-		normal:CheckAnyFreeBuilding() 
+		normal:CheckAnyFreeBuilding() --当在城市中时立即检查建筑升级情况
 	end
 	if lastScene~=nowScene then--场景发生变化，则说明用户进行了操作，取消主动操作
 		Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()

@@ -4,8 +4,8 @@ require "util"--加载工具
 require "Setting.SettingACheck"--加载全局设置
 
 function loadSetting()
-	userTargetSettingName=getStringConfig("UserSettingBase","默认设置")
-	ui=UI:new()
+	userTargetSettingName=storage.get("UserSettingBase","默认设置")
+	ui=sfUI:new()
 	option,userSetting=ui:show(userTargetSettingName)
 	if option==0 then 
 		setting=SettingBase:new()
@@ -18,12 +18,13 @@ end
 
 
 function main()
+	math.randomseed(os.milliTime())
 	--while not loadSetting() do end
 	MainForm=Form:new()
 	Building={}
 	Building.normal=normal:new()
 	Building.pandect=pandect:new()
-	Building.building=building:new()
+	Building.building=CityBuilding:new()
 	toolBar=ToolBar:new()
 	party=party:new()
 	ocr=OCR:new()
@@ -31,6 +32,8 @@ function main()
 	Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
 	--GetUserImages(45,2)
 	ResetForm()--初始化
+	Building.building:Navigate("建筑工厂")
+	
 	mainLoop()
 end
 
@@ -61,18 +64,19 @@ function mainLoop()
 			ShowInfo.RunningInfo("本轮主动操作开始")
 			ResetForm()
 		else
-			ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒后进行主动操作",refreshTimeLeft),true)
+			ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
 		end
 		MainForm:CheckNormalPageTask()
+		if Building.building:Run(activeMode) then
+			sleep(500)
+		end
 		if activeMode then
 			party:NewCheckParty()
 		end
 		Building.pandect:NewCheckPandect(activeMode)
 		
-		sleep(500)
-		Building.building:Run(activeMode)
-		sleep(500)
 		if activeMode then
+			ShowInfo.RunningInfo("<恢复状态>")
 			ResetForm()
 		end
 	end

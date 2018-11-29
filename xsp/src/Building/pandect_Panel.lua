@@ -8,6 +8,17 @@ local panelHeight=150
 local panelGreen={rmax=100,rmin=0,gmax=255,gmin=150,bmax=100,bmin=0}
 local panelBlue={rmax=100,rmin=0,gmax=150,gmin=50,bmax=255,bmin=150}
 local panelOrange={rmax=255,rmin=150,gmax=100,gmin=0,bmax=100,bmin=0}
+
+function pandect:GetPanelTimeLeft(x,y)
+	local pos=PanelPos(x,y)
+	pos.x=pos.x+85
+	pos.y=pos.y+120
+	local raw=ocrInfo:GetPandectLeftTime(pos.x,pos.y,pos.x+84,pos.y+19)
+	print(raw)
+	sleep(5000)
+	return 1
+end
+--85,120=> 594 471 =>678(+84) 490(+19)
 function pandect:PanelPos(indexX,indexY)
 	return {x=panelPosX[indexX]+10,y=panelPosYBegin+160*(indexY-1)+10}
 end
