@@ -50,6 +50,7 @@ local lastExpeditPos={}
 --@summary:检查当前坐标是否和上次一致，以此判断是否成功寻找目标
 function pandect:CheckLastExpeditPos()
 	local pos=ocrInfo:GetMapPos()
+	MainForm.mapPos=pos
 	local result= lastExpeditPos[pos]
 	if not result then 
 		lastExpeditPos[pos]=true

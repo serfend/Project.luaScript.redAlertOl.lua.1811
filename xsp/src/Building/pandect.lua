@@ -4,6 +4,9 @@ pandect={
 		[1]=350,[2]=500,[3]=650
 	},
 	cataButtonY=300,
+	Expedition={
+		nowQueue
+	}
 }
 require "Building.pandect_Other"
 require "Building.pandect_Conscript"
@@ -26,6 +29,11 @@ function pandect:NewCheckPandect(activeMode)
 		end
 	end
 end
+function pandect:SynPlayerEnergy()
+	if not Setting.Expedition.PlayerEnergySupply then--若无自动补充体力，则判断当前体力值
+		self.nowPlayerEnergy=self:GetNowPlayerEnergySupply()
+	end
+end
 function pandect:Enter(directEnter)
 	local pandectNewEnterButton="0|0|0xff0000,10|-2|0x432b24"
 	local pandectEnterButton="0|0|0xf0f4f6,18|3|0xeff5fd"
@@ -37,6 +45,7 @@ function pandect:Enter(directEnter)
 	95, screen.PRIORITY_DEFAULT)
 	end
 	if point.x>0 then
+		self:SynPlayerEnergy()
 		tap(point.x,point.y+30)
 		sleep(1000)
 		point = screen.findColor(Rect(216, 542, 62, 76), pandectEnterButton,
@@ -55,6 +64,8 @@ function pandect:Exit()
 end
 function pandect:Run()
 	ShowInfo.RunningInfo("总览操作")
+	
+	
 	self:ResetSetting()
 	self:RunConscript() 
 	if self:RunExpedition() then--当执行了出征后需重新开始
@@ -69,16 +80,16 @@ function pandect:Run()
 end
 --@summary:运行前重置上次的设置
 function pandect:ResetSetting()
-	banTroopQueue={}
+	self.banTroopQueue={}
 end
 function pandect:RunConscript()
-	ShowInfo.RunningInfo("生产军备")
+	ShowInfo.RunningInfo("<生产军备>")
 	tap(self.cataButton[1],self.cataButtonY)
 	sleep(500)
 	self:RunIfAnyConscript()
 end
 function pandect:RunExpedition()
-	ShowInfo.RunningInfo("出征")
+	ShowInfo.RunningInfo("<出征>")
 	tap(self.cataButton[2],self.cataButtonY)
 	sleep(500)
 	return self:RunIfAnyTroopsFree()
