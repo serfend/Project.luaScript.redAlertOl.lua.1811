@@ -6,12 +6,17 @@ function normal:new (o)
     self.__index = self
     return o
 end
+--@summary:判断是否有建筑可免费完成
 function normal:CheckAnyFreeBuilding()
 	local point = screen.findColor(Rect(12, 171, 77, 227), 
 "0|0|0x2a6f1f,2|20|0x257c15,2|48|0x25910e",
 95, screen.PRIORITY_DEFAULT)
 	if point.x>0 then
 		tap(point.x,point.y)
+		sleep(800)
+		if not normal:CheckAnyFreeBuilding() then
+			Building.building.Run(true)--建筑空闲，进入一轮
+		end
 		return true
 	else
 		return false
