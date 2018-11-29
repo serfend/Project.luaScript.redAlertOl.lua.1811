@@ -1,23 +1,22 @@
-
+Global={
+	size={},dpi=0
+}
 _isDebug = false
 _fitScreen=true
-_fsw, _fsh = getScreenSize()
-_sw = _fsh - 1
-_sh = _fsw - 1
-_userDpi=getScreenDPI()
-_orientation = 0--dialogRet("请选择您设备的放置方式：", "", "Home键在右", "Home键在左", 0)
-setSysConfig("isLogFile","1")
-toast(string.format("%s*%s:%s" ,_fsw, _fsh,_userDpi) )
-printf("%s*%s:%s" ,_fsw, _fsh,_userDpi )
+screen.init(screen.PORTRAIT)
+Global.size=screen.getSize()
+Global.dpi=screen.getDPI()
 local supportSize=false
-if  _fsw==720 and _fsh==1280 and _userDpi==320 then
+if  Global.size.width==720 and Global.size.height==1280 and Global.dpi==320 then
 	supportSize=true
 else
 	supportSize=false
 end
 if not supportSize then
 	_fitScreen=false
-	choiceIfRun = dialogRet("不支持当前分辨率".._fsw.."*".._fsh.."\n 强制运行无法保证脚本功能能够正常运转", "停止运行", "强制运行", "", 0)
+	choiceIfRun = dialogRet(
+		string.format("不支持当前分辨率%dw*%dh:%ddpi\n 强制运行无法保证脚本功能能够正常运转",Global.size.width,Global.size.height,Global.dpi), 
+	"停止运行", "强制运行", "", 0)
 	if choiceIfRun == 0 then
 		lua_exit();
 	end
