@@ -1,5 +1,6 @@
 require "Setting.SettingUserInterface"
 require "SettingBase.Init"
+require "SettingBase.Screen"
 
 require "Form"
 require "Application"

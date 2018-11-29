@@ -1,16 +1,35 @@
---@summary:克制关系 坦克>飞机>步兵
+
+
 Setting={
+	User={
+		list={},
+		userNum=function() return #Setting.User.list end,
+	},
+	Building={
+		Enable=true,
+		SortRelyOnSystem=false,
+		TraceBuilding=false,--当建筑条件不满足时，自动满足此条件
+		SpeedUp={--满足剩余时间时秒建筑
+			Enable=false,
+			MinSpeedUpTime=30,
+		},
+		List={
+			--建筑名={Priority=1,MaxRank=1}
+		},
+	},
 	Runtime={
 		ActiveMode={
-			Interval=600,--每1分钟执行一次主动检查
+			Interval=60,--每1分钟执行一次主动检查
 			--@summary:上次主动操作开始的时间
 			LastActiveTime=0,
 		},
 		
 	},
 	Expedition={
+		PlayerEnergyPreserve=50,
 		--@summary:是否自动补充体力
 		PlayerEnergySupply=false,
+		PlayerNoEnergyTargetEnable=false,
 		PlayerMaxEnergy=100,
 		--@summary:targetInfo[1]={Enemy=1,Rank={max=11,min=10}}
 		--@property Enemy:由左至右依次顺序1-7
@@ -18,9 +37,16 @@ Setting={
 		--@property Action:0-Dialog_OK 1-5:对应地图中按钮
 		--@property Troop:0-默认 5-最高等级 6-最大负重 7-最快行军 8-均衡搭配 1到4-编队
 		TargetInfo={
-			[1]={Enemy=0,Rank={max=12,min=11},Action=0,Troop=0},
-			[2]={Enemy=0,Rank={max=10,min=9},Action=0,Troop=0},
-			[3]={Enemy=2,Rank={max=12,min=11},Action=5,Troop=0}
+			[1]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
+			[2]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
+			[3]={Enemy=3,Rank={max=14,min=12},Action=0,Troop=0},
+			[4]={Enemy=3,Rank={max=14,min=12},Action=0,Troop=0},
+		},
+		NoEnergyTargetInfo={
+			[1]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
+			[2]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
+			[3]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
+			[4]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
 		}
 	},
 	Conscription={
@@ -45,14 +71,16 @@ Setting={
 			AssistOther={
 				Enable=true,
 				--1:绿色 2:蓝色 3:紫色 4:金色
-				minTreasure=2,
+				TreasureSort={4,3,2,1},
 			},
 			Self={
 				Enable=true,
-				minTreasure=2,
+				AutoRefresh=true,
+				TreasureSort={4,3,2},
 			}
 		}
-	}
+	},
+	
 }
 
 Const={
@@ -68,21 +96,24 @@ Const={
 		PlayerEnergy={
 			[1]=5,--野怪
 			[2]=15,--兵营
-			[3]=0,
+			[3]=5,--野怪
 			[4]=0,
 			[5]=0,
 			[6]=0,
 			[7]=0,
+			[8]=15,
 		},
-		EnemyDescription={
+		Description={
 			[1]="野怪",
 			[2]="兵营",
-			[3]="矿石",
-			[4]="石油",
-			[5]="合金",
-			[6]="稀土",
-			[7]="基地",
+			[3]="叛军",
+			[4]="矿石",
+			[5]="石油",
+			[6]="合金",
+			[7]="稀土",
+			[8]="基地",
 		},
+		
 		TargetButton={
 			[1]={200,590},
 			[2]={250,485},
