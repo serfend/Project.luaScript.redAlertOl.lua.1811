@@ -54,7 +54,7 @@ function showRectPos(x,y,timeDelay,color,info)
 end
 function showRect(x1,y1,x2,y2,timeDelay,color,info)
 	sysLog("ShowRect"..x1..","..y1.."."..x2..","..y2)
-	color=color or "0x4c00ff00"
+	color=color or "0xacff0000"
 	info=info or ""
 	timeDelay=timeDelay or 1000
 	local tmpHud=createHUD()
@@ -210,11 +210,12 @@ function swip(x1,y1,x2,y2,step)
 	step=step or 10
 	index = math.random(1,5)
     touchDown(index, x1, y1)
+	sleep(30)
     for i=1,step do
 		touchMove(index,(x2-x1)*i/step+x1,(y2-y1)*i/step+y1)
 		sleep(30)
 	end
-    sleep(30)
+    sleep(500)
     touchUp(index, x2, y2)
 end
 
