@@ -6,7 +6,8 @@ pandect={
 	cataButtonY=300,
 	Expedition={
 		nowQueue
-	}
+	},
+	banTroopQueue={}
 }
 require "Building.pandect_Other"
 require "Building.pandect_Conscript"
@@ -64,9 +65,7 @@ function pandect:Exit()
 end
 function pandect:Run()
 	ShowInfo.RunningInfo("总览操作")
-	
-	
-	self:ResetSetting()
+
 	self:RunConscript() 
 	if self:RunExpedition() then--当执行了出征后需重新开始
 		self:NewCheckPandect(true)
@@ -81,6 +80,7 @@ end
 --@summary:运行前重置上次的设置
 function pandect:ResetSetting()
 	self.banTroopQueue={}
+	self.banTroopQueueAll=false
 end
 function pandect:RunConscript()
 	ShowInfo.RunningInfo("<生产军备>")
@@ -89,6 +89,10 @@ function pandect:RunConscript()
 	self:RunIfAnyConscript()
 end
 function pandect:RunExpedition()
+	if self.banTroopQueueAll then
+		ShowInfo.ResInfo("当前出征无效,已跳过")
+		return false
+	end
 	ShowInfo.RunningInfo("<出征>")
 	tap(self.cataButton[2],self.cataButtonY)
 	sleep(500)

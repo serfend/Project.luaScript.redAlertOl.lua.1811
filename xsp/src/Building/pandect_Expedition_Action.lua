@@ -1,21 +1,42 @@
 function pandect:ExpeditAction_OnTarget(targetInfo)
 	
 	local result=-4
-	targetInfo.Rank.now=targetInfo.Rank.max
+	local nowRankRange=self:GetNowRankRange()
+	if nowRankRange==-1 then
+		ShowInfo.ResInfo("获取目标等级失败")
+		sleep(1000)
+		return -16
+	end
+	local actualRankMax=targetInfo.Rank.max>0 and targetInfo.Rank.max or nowRankRange+targetInfo.Rank.max
+	local actualRankMin=targetInfo.Rank.min>0 and targetInfo.Rank.min or nowRankRange+targetInfo.Rank.min
+	
+	
+	targetInfo.Rank.now=actualRankMax<nowRankRange and actualRankMax or nowRankRange
+	if targetInfo.Rank.now<actualRankMin then
+		ShowInfo.ResInfo("当前等级最大仅%d,不满足%d",targetInfo.Rank.now,actualRankMin)
+		sleep(1000)
+		return -32
+	end
+	local firstTime=true
 	while true do
-		self:SelectTargetInfo(targetInfo)
+		self:SelectTargetInfo(targetInfo,nowRankRange,firstTime)
+		firstTime=false
 		result=self:EnsureSelectTarget(targetInfo)
 		if result==0 then
 			break
-		end
-		targetInfo.Rank.now=targetInfo.Rank.now-1
-		if targetInfo.Rank.now<targetInfo.Rank.min then
-			ShowInfo.ResInfo("已无目标可选")
-			return -4
+			else if result==-4 then--仅只有无目标可选时继续
+				targetInfo.Rank.now=targetInfo.Rank.now-1
+				if targetInfo.Rank.now<actualRankMin then
+					ShowInfo.ResInfo("已无目标可选")
+					return -4
+				end
+			else
+				return result
+			end
 		end
 	end
 	return 0
-end
+end 
 --@summary:决定当前选中
 function pandect:EnsureSelectTarget(targetInfo)
 	local success=false
@@ -38,9 +59,12 @@ function pandect:EnsureSelectTarget(targetInfo)
 	end
 	self:SelectCurrentTarget(targetInfo.Action)
 	sleep(1000)
-	self:ExpeditWithTargetTroop(targetInfo.Troop)
-	ShowInfo.ResInfo("编队已出征")
-	return 0
+	if self:ExpeditWithTargetTroop(targetInfo.Troop) then
+		ShowInfo.ResInfo("编队已出征")
+		return 0
+	else
+		return -8 
+	end
 end
 
 --@summary:使用设定的编队进行出征
@@ -48,6 +72,15 @@ end
 function pandect:ExpeditWithTargetTroop(index)
 	if index>0 and index<5 then
 		tap(300+90*index,170)--选中编队序号
+		sleep(800)
+		local r,g,b=screen.getRGB(433,726)
+		if r<100 and g>100 and b>150 then
+			return true
+		else
+			MainForm:ExitForm(true)
+			ShowInfo.ResInfo("选取编队失败")
+			return false
+		end
 	else
 		if index>4 then
 			tap(356,1209)--中间按钮
@@ -57,6 +90,15 @@ function pandect:ExpeditWithTargetTroop(index)
 	end
 	sleep(500)
 	tap(560,1210)--出征按钮
+	sleep(500)
+	local r,g,b=screen.getRGB(474,1230)
+	if r<50 and g>100 and b>150 then
+		MainForm:ExitForm(true)
+		ShowInfo.ResInfo("出兵失败")
+		return false
+	else		
+		return true
+	end
 end
 
 --@summary:选中目标
@@ -83,30 +125,27 @@ function pandect:CheckCurrentIfNoOtherPlayer()
 	if point.x<1 then
 		point = screen.findColor(Rect(336, 474, 51, 52), 
 "0|0|0xd72522,6|-6|0xa82421",
-95, screen.PRIORITY_DEFAULT)--没有被占领
+90, screen.PRIORITY_DEFAULT)--没有被占领
 		if point.x<0 then
 			point = screen.findColor(Rect(333, 577, 52, 44), 
 	"0|0|0xc70e1e",
 	95, screen.PRIORITY_DEFAULT)--是否有红色
 			if point.x>0 then
 				if point.x>360 or point.y>640 then
+					printf("red but not on first(%d,%d)",point.x,point.y)
 					result= true--红色不在左上角则表明无聚焦点
 				else
-					r,g,b=screen.getRGB(720-point.x,1280-point.y)
-					if r>150 and g<100 and b<100 then
-						result= false--确实有人在集火
-					else	
-						print("目标确认无误"..r)
-						result= true
-					end
+					return false
 				end
 			else
 				result= true
 			end
 		else
+			ShowInfo.ResInfo("目标已被友方占领")
 			result= true
 		end
 	else
+		ShowInfo.ResInfo("目标已被敌方占领")
 		result= false
 	end
 	return result
@@ -114,13 +153,16 @@ end
 
 --@summary:在出征模式下，依据出征目标信息选择目标
 --@param targetInfo:{Enemy=index,Rank={max,min,now}}
-function pandect:SelectTargetInfo(targetInfo)
+--@param nowRankRange:当前游戏中最大等级
+function pandect:SelectTargetInfo(targetInfo,nowRankRange,BothModefyRankAndEnemy)
 	ShowInfo.ResInfo(string.format("选中 %s 等级:%d",
 		Const.Expedition.Description[targetInfo.Enemy],
 		targetInfo.Rank.now
 	))
-	self:SelectTargetEnemy(targetInfo.Enemy)
-	self:SelectTargetRank(targetInfo.Rank.now)
+	if BothModefyRankAndEnemy then
+		self:SelectTargetEnemy(targetInfo.Enemy)
+	end
+	self:SelectTargetRank(targetInfo.Rank.now,nowRankRange)
 end
 function pandect:SelectTargetEnemy(index,notReset)
 	if not notReset then
@@ -141,18 +183,17 @@ end
 --@summary:点击【查找】按钮位置
 function pandect:NowSelectExpeditionQueryNext()
 	tap(600,1180)
-	sleep(500)
+	sleep(1000)
 end
-function pandect:SelectTargetRank(index)
-	local nowRankRange=self:GetNowRankRange()
+function pandect:SelectTargetRank(index,gameMaxRank)
 	local beginX=107
 	local endX=420
-	local targetX=beginX+((index-1)*(endX-beginX))/nowRankRange
+	local targetX=beginX+((index-1)*(endX-beginX))/gameMaxRank
 	local nowPos=screen.findColor(Rect(100, 1167, 330, 37), 
 "0|0|0xdb8621,7|0|0xd6d3b0,12|0|0x050507",
 95, screen.PRIORITY_DEFAULT)
 	if nowPos.x==-1 then nowPos={x=420,y=1182} end
-	if math.abs(nowPos.x-targetX)>0.2*(endX-beginX)/nowRankRange then
+	if math.abs(nowPos.x-targetX)>0.1*(endX-beginX)/gameMaxRank then
 		swip(nowPos.x,nowPos.y,targetX,1182,5)--进度条位置在y:1182
 	end
 end

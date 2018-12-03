@@ -62,14 +62,32 @@ function pandect:RunIfAnyTroopsFree()
 	for k,index in ipairs(waitHandle) do 
 		local result=self:DoExpedition(index)
 		if result<0 then
-			if result==-2 then
+			if result==-2 then--体力不足
 				self.banTroopQueue[index]=true
 				invalidCount=invalidCount+1
-			else if result==-1 then
+			else 
+				if result==-1 then--目标未设置
 					invalidCount=invalidCount+1
-				else if result==-4 then
+				else 
+					if result==-4 then--体力不足
+						invalidCount=invalidCount+1
 						self.banTroopQueue[index]=true
 						break
+					else 
+						if result==-8 then--出征失败，通常是无兵可用，则应立即返回
+							MainForm:ExitForm()
+							self.banTroopQueueAll=true
+							self.banTroopQueue[index]=true
+							break
+						else 
+							if result==-16 then --获取目标的等级失败
+								break
+							else 
+								if result==-32 then --设置有误，最大等级不满足最低设置
+									break
+								end
+							end
+						end
 					end
 				end
 			end

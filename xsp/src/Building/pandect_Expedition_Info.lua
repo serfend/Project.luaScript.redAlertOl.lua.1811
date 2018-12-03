@@ -1,14 +1,24 @@
 
-function pandect:GetNowRankRange()
+function pandect:GetNowRankRange(tryRangeGetTime)
+	tryRangeGetTime=tryRangeGetTime or 0
 	local rawPos=ocrInfo:GetMapTargetRank()
 	print(string.format("rawRank:%s",rawPos))
 	local checkIndex,_=string.find(rawPos,"%(")
+	if not checkIndex then
+		tryRangeGetTime=tryRangeGetTime+1
+		if tryRangeGetTime>3 then 
+			return -1
+		end
+		
+		sleep(1000)
+		return self:GetNowRankRange()
+	end
 	if checkIndex>0 then
-		return string.sub(rawPos,checkIndex+1)
+		return tonumber(string.sub(rawPos,checkIndex+1))
 	else 
 		checkIndex=string.find(rawPos,"/")
 		if checkIndex>0 then
-			return string.sub(rawPos,checkIndex+1)
+			return tonumber(string.sub(rawPos,checkIndex+1))
 		else
 			return tonumber(rawPos)
 		end

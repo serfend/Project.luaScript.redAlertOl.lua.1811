@@ -13,7 +13,7 @@ function party:HandleSelfWaitAssistPreasure()
 	for k,p in ipairs(targets) do
 		ShowInfo.ResInfo(string.format("请求帮助%d阶宝藏",p.Type))
 		tap(p.x,p.y)
-		sleep(500)
+		sleep(1500)
 		return self:HandleSelfWaitAssistPreasure()
 	end
 end

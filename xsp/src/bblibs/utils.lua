@@ -215,8 +215,9 @@ function swip(x1,y1,x2,y2,step)
 		touchMove(index,(x2-x1)*i/step+x1,(y2-y1)*i/step+y1)
 		sleep(30)
 	end
-    sleep(500)
+    sleep(200)
     touchUp(index, x2, y2)
+	sleep(100)
 end
 
 

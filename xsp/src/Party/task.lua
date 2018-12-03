@@ -1,4 +1,14 @@
-
+function party:TaskSignUpReward()
+	local r,g,b=screen.getRGB(565,400) 
+	if r>180 and g>120 and b<100 then
+		ShowInfo.ResInfo("联盟任务签到奖励")
+		tap(570,390)--签到按钮
+		return true
+	else
+		print("TaskSignUpReward.Exception()"..r..","..g..","..b)
+	end
+	return false
+end
 function party:RunAttainTaskward()
 	local todayValid=storage.get("todayValid",true)
 	local lastUnhdlExceptionTime=storage.get("lastUnhdlExceptionTime",0)
@@ -13,8 +23,6 @@ function party:RunAttainTaskward()
 			return false
 		end
 	end
-	tap(356,974)
-	sleep(1000)
 	tap(361,1214)--全部领取
 	sleep(500)
 	local r,g,b=screen.getRGB(288,1234)
@@ -32,6 +40,11 @@ function party:CheckIfNewTaskward()
 	local r,g,b=screen.getRGB(400,1065)--任务信息点
 	if  (r>200 and g<100 and b<100) then
 		return function()
+			tap(356,974)--进入任务页面
+			sleep(1000)
+			if self:TaskSignUpReward() then
+				sleep(500)
+			end
 			self:RunAttainTaskward()
 		end
 	end

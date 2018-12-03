@@ -11,13 +11,16 @@ function party:RunSelfTreasure()
 	tap(364,173)
 	sleep(500)
 	self:HandleSelfWaitAssistPreasure()--求助
+	sleep(500)
 	self:ReceivePreasure()
+	MainForm:ExitForm()--返回上一层
 end
 function party:RunAssistOtherTreasure()
 	ShowInfo.ResInfo("帮助其他玩家")
 	tap(587,173)
 	sleep(500)
 	self:AssistOtherPreasure()
+	
 end
 function party:RunTreasure()
 	local anyTask={}
@@ -61,8 +64,17 @@ function party:CheckIfNewTreasure()
 	if not Setting.Party.Treasure.Enable then
 		return
 	end
-	local r,g,b=screen.getRGB(396,1170)--礼品信息点
-	if  (r>200 and g<100 and b<100) then
+	local todayNewCheck=storage.get("party.treasure.todayNewCheck","")
+	local needCheck=false
+	if todayNewCheck==os.date("%Y-%m-%d") then
+		local r,g,b=screen.getRGB(396,1170)--礼品信息点
+		needCheck=(r>200 and g<100 and b<100)
+	else
+		storage.put("party.treasure.todayNewCheck",os.date("%Y-%m-%d"))
+		needCheck=true
+	end
+	
+	if needCheck  then
 		return function()
 			self:RunTreasure()
 		end

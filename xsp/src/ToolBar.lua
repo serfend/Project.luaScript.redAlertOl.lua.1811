@@ -8,9 +8,6 @@ function ToolBar:new (o)
     self.__index = self
     return o
 end
-function ToolBar:SynUserEnergy()
-	
-end
 function ToolBar:CheckIfInCity()
 	--showRect(555,52,555+81,52+47,5000)
 	local point = screen.findColor(Rect(555, 52, 81, 47), 

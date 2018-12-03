@@ -7,16 +7,16 @@ function party:GetAssistOtherPreasure()
 	local points = screen.findColors(Rect(540, 310, 154, 843), 
 "0|0|0xfbfcfc,0|18|0x528cc9,15|18|0xffffff,15|0|0xf9fafb",
 95, screen.PRIORITY_DEFAULT)
-	points=exceptPosTableByNewtonDistance(points,20)
+	points=exceptPosTableByNewtonDistance(points,50)
 	return self:TransformPointToPreasureType(points)
 end
 
 --@summary:检查含有【求】字样的蓝色按钮并返回所有坐标
 function party:GetSelfWaitAssistPreasure()
-	local points = screen.findColors(Rect(540, 310, 154, 843), 
-"0|0|0xfdfefe,0|15|0x4885c6,13|15|0xcaddef,13|0|0xfdfefe",
+	local points = screen.findColors(Rect(531, 305, 165, 855), 
+"0|0|0xffffff,0|15|0xfefeff,10|15|0xfbfdfe,10|8|0x3e6fae",
 95, screen.PRIORITY_DEFAULT)
-	points=exceptPosTableByNewtonDistance(points,20)
+	points=exceptPosTableByNewtonDistance(points,50)
 	return self:TransformPointToPreasureType(points)
 end
 
@@ -25,7 +25,7 @@ function party:GetSelfWaitDigPreasure()
 	local points = screen.findColors(Rect(540, 310, 154, 843), 
 "0|0|0xf5f7f9,0|11|0x437bbb,13|11|0x497fbe,13|-2|0xf6f8fa",
 95, screen.PRIORITY_DEFAULT)
-	points=exceptPosTableByNewtonDistance(points,20)
+	points=exceptPosTableByNewtonDistance(points,50)
 	return self:TransformPointToPreasureType(points)
 end
 

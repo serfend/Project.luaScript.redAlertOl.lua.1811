@@ -17,6 +17,11 @@ function CityBuilding:Run(activeMode)
 	if not activeMode then 
 		return 
 	end
+	self.ConstructQueueFree[1]=false
+	self.ConstructQueueFree[2]=false
+	ResetForm()
+	ShowInfo.RunningInfo("<建筑>")
+	sleep(2000)
 	self:CheckFreeQueueNum()
 	self:UpLevelBuilding()
 end

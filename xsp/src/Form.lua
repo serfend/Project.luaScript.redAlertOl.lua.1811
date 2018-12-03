@@ -33,8 +33,12 @@ function Form:ExitForm(exitAll)
 end
 
 function Form:CheckNormalPageTask()
+	if normal:CheckIfAnyEnemyConquer() then
+		return 
+	end
 	self:CheckPartyAssistance()
 	local nowScene=toolBar:GetNowScene()
+	
 	if nowScene==1 then
 		normal:CheckAnyFreeBuilding() --当在城市中时立即检查建筑升级情况
 	end

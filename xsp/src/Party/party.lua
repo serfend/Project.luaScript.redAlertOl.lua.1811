@@ -7,6 +7,7 @@ party={
 require "Party.treasure"
 require "Party.task"
 require "Party.gift"
+require "Party.donation"
 function party:new (o)
     o = o or {}
     setmetatable(o, self)
@@ -23,6 +24,7 @@ function party:Run()
 	anyTask[1]=self:CheckIfNewTreasure()
 	anyTask[2]=self:CheckIfNewTaskward()
 	anyTask[3]=self:CheckIfNewGift()
+	anyTask[4]=self:CheckIfDonation()
 	screen.keep(false)
 	for k,taskInfo in ipairs(anyTask) do
 		if taskInfo then--方法

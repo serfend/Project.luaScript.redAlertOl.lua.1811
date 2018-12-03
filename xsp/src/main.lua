@@ -32,7 +32,6 @@ function main()
 	Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
 	--GetUserImages(45,2)
 	ResetForm()--初始化
-	Building.building:Navigate("建筑工厂")
 	
 	mainLoop()
 end
@@ -51,34 +50,43 @@ function ResetForm()
 end
 
 function mainLoop()
+	Building.building:Navigate("特惠商人")
 	while true do
 		screen.keep(false)
 		local thisTime=os.milliTime()
 		local activeMode=false
 		
-		local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
-			(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
-		if refreshTimeLeft<0 then
-			activeMode=true
-			Setting.Runtime.ActiveMode.LastActiveTime=thisTime
-			ShowInfo.RunningInfo("本轮主动操作开始")
-			ResetForm()
+		if normal.InDanger then
+			ShowInfo.RunningInfo("【防御模式】")
 		else
-			ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
+			local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
+				(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
+			if refreshTimeLeft<0 then
+				activeMode=true
+				Setting.Runtime.ActiveMode.LastActiveTime=thisTime
+				ShowInfo.RunningInfo("本轮主动操作开始")
+				ResetForm()
+			else
+				ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
+			end
 		end
 		MainForm:CheckNormalPageTask()
-		if Building.building:Run(activeMode) then
-			sleep(500)
+		if not normal.InDanger then
+			if activeMode then
+				party:NewCheckParty()
+			end
+			
+			Building.pandect:ResetSetting()
+			Building.pandect:NewCheckPandect(activeMode)
+			if Building.building:Run(activeMode) then
+				sleep(500)
+			end
+			if activeMode then
+				ShowInfo.RunningInfo("<恢复状态>")
+				ResetForm()
+			end
 		end
-		if activeMode then
-			party:NewCheckParty()
-		end
-		Building.pandect:NewCheckPandect(activeMode)
 		
-		if activeMode then
-			ShowInfo.RunningInfo("<恢复状态>")
-			ResetForm()
-		end
 	end
 end
 main()

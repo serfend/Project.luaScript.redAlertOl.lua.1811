@@ -3,6 +3,7 @@ OcrInfo={
 		mapPos="0xe1e0e0-0xa0a0a0",
 		mapTargetRank="0xa99956-0xa0a022",
 		PandectLeftTime="0x99894d-0x41ffff",
+		DonationTime="0xafa46a-0x4c9c4c",
 	}
 }
 function OcrInfo:new (o)
@@ -20,7 +21,10 @@ function OcrInfo:GetPandectLeftTime(x,y,w,h)
 	local code,result=ocr:GetMapPos(x,y,w,h,self.fore.PandectLeftTime)
 	return result
 end
-
+function OcrInfo:GetNowPartyDonationTime(x,y,w,h)
+	local code,result=ocr:GetMapPos(x,y,w,h,self.fore.DonationTime)
+	return result
+end
 --@summary:需保证当前在地图场景下
 function OcrInfo:GetMapPos()
 	local judgeY=155
