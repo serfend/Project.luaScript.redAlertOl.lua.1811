@@ -84,16 +84,24 @@ function CityBuilding:ReEnterCity()
 	sleep(1500)
 	ResetForm()
 end
-function CityBuilding:Navigate(buildingName)
-	self:ReEnterCity()
-	if not self:CheckIfActualyInPoint() then
-		ShowInfo.ResInfo("处理总览以修正坐标")
-		Building.pandect:NewCheckPandect(true)
+local lastPosX,lastPosY=0,0
+function CityBuilding:Navigate(buildingName,relyOnLastBuilding)
+	local targetX,targetY=0,0
+	if relyOnLastBuilding then
+		targetX,targetY=CityMap[buildingName].x-lastPosX,CityMap[buildingName].y-lastPosY
+	else
 		self:ReEnterCity()
+		if not self:CheckIfActualyInPoint() then
+			ShowInfo.ResInfo("处理总览以修正坐标")
+			Building.pandect:NewCheckPandect(true)
+			self:ReEnterCity()
+		end
+		targetX,targetY=CityMap[buildingName].x,CityMap[buildingName].y
 	end
+	lastPosX,lastPosY=targetX,targetY
 	ShowInfo.ResInfo(string.format("寻找建筑:%s",buildingName))
 	sleep(500)
-	local targetX,targetY=CityMap[buildingName].x,CityMap[buildingName].y
+	
 	self:NavigateScreen(targetX,targetY)
 	tap(360,640)
 	sleep(1000)

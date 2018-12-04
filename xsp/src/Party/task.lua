@@ -5,7 +5,11 @@ function party:TaskSignUpReward()
 		tap(570,390)--签到按钮
 		return true
 	else
-		print("TaskSignUpReward.Exception()"..r..","..g..","..b)
+		if r==g and g==b and r>100 and r<140 then
+			--奖励已领取状态
+		else
+			print("TaskSignUpReward.Exception()"..r..","..g..","..b)
+		end
 	end
 	return false
 end

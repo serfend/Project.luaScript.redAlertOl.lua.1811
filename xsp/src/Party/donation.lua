@@ -4,13 +4,17 @@ function party:CheckIfDonation()
 		return false
 	end
 	canUpdateTime=self:GetNowDonateTimes()
-	if canUpdateTime and canUpdateTime>Setting.Party.Donation.MinDonateTime then
-		return function()
-			self:DonateAll(canUpdateTime)
+	if canUpdateTime then
+		if canUpdateTime>Setting.Party.Donation.MinDonateTime then
+			return function()
+				self:DonateAll(canUpdateTime)
+			end
+		else
+			ShowInfo.ResInfo(string.format("当前捐献:%d/%d",canUpdateTime,Setting.Party.Donation.MinDonateTime))
+			return false
 		end
 	else
-		ShowInfo.ResInfo("当前捐献:%d/%d",canUpdateTime,Setting.Party.Donation.MinDonateTime)
-		return false
+		ShowInfo.ResInfo("当前次数识别失败")
 	end
 end
 

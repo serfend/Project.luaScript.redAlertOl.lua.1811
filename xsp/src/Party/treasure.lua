@@ -13,12 +13,12 @@ function party:RunSelfTreasure()
 	self:HandleSelfWaitAssistPreasure()--求助
 	sleep(500)
 	self:ReceivePreasure()
-	MainForm:ExitForm()--返回上一层
+	
 end
 function party:RunAssistOtherTreasure()
 	ShowInfo.ResInfo("帮助其他玩家")
 	tap(587,173)
-	sleep(500)
+	sleep(5000)
 	self:AssistOtherPreasure()
 	
 end

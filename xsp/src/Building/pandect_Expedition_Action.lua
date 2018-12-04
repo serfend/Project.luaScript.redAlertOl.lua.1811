@@ -1,6 +1,7 @@
 function pandect:ExpeditAction_OnTarget(targetInfo)
 	
 	local result=-4
+	self:SelectTargetEnemy(targetInfo.Enemy)
 	local nowRankRange=self:GetNowRankRange()
 	if nowRankRange==-1 then
 		ShowInfo.ResInfo("获取目标等级失败")
@@ -17,10 +18,12 @@ function pandect:ExpeditAction_OnTarget(targetInfo)
 		sleep(1000)
 		return -32
 	end
-	local firstTime=true
 	while true do
-		self:SelectTargetInfo(targetInfo,nowRankRange,firstTime)
-		firstTime=false
+		self:SelectTargetRank(targetInfo.Rank.now,nowRankRange)
+		ShowInfo.ResInfo(string.format("选中 %s 等级:%d",
+			Const.Expedition.Description[targetInfo.Enemy],
+			targetInfo.Rank.now
+		))
 		result=self:EnsureSelectTarget(targetInfo)
 		if result==0 then
 			break
@@ -151,19 +154,6 @@ function pandect:CheckCurrentIfNoOtherPlayer()
 	return result
 end
 
---@summary:在出征模式下，依据出征目标信息选择目标
---@param targetInfo:{Enemy=index,Rank={max,min,now}}
---@param nowRankRange:当前游戏中最大等级
-function pandect:SelectTargetInfo(targetInfo,nowRankRange,BothModefyRankAndEnemy)
-	ShowInfo.ResInfo(string.format("选中 %s 等级:%d",
-		Const.Expedition.Description[targetInfo.Enemy],
-		targetInfo.Rank.now
-	))
-	if BothModefyRankAndEnemy then
-		self:SelectTargetEnemy(targetInfo.Enemy)
-	end
-	self:SelectTargetRank(targetInfo.Rank.now,nowRankRange)
-end
 function pandect:SelectTargetEnemy(index,notReset)
 	if not notReset then
 		swip(20,990,648,990)
