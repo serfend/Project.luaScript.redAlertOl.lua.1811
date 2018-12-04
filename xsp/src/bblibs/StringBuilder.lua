@@ -14,7 +14,12 @@ end
 function StringBuilder:ToString()
 	return table.concat(self.data)
 end
-
+function StringBuilder:Clear()
+	self.data={}
+end
+function StringBuilder:Length()
+	return #self.data
+end
 function string:getNumOnly(str)
 	local cstr=StringBuilder:new()
 	local strLen=string.len(str)

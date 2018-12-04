@@ -3,7 +3,6 @@
 Setting={
 	User={
 		list={},
-		userNum=function() return #Setting.User.list end,
 	},
 	Building={
 		Enable=true,

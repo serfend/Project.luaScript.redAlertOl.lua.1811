@@ -1,6 +1,7 @@
 -- 作者boyliang
 -- 时间: 2015-11-26
 require "bblibs.StringBuilder"
+StrUtils=require "bblibs.StrUtilsAPI"
 -- 格式化输出
 function sysLogFmt(fmt, ...)
   sysLog(string.format(fmt, ...))
@@ -128,6 +129,22 @@ function sleepWithCheckLoading(interval)
 		end
 	end
 end
+function sleepWithCheckEnemyConquer(interval)
+	if normal:CheckIfAnyEnemyConquer() then
+		ShowInfo.RunningInfo("【防御模式】")
+		while normal:CheckIfAnyEnemyConquer() do
+			sleep(1000)
+		end
+		return
+	end
+	if interval<1000 then
+		sleep(interval)
+	else
+		sleep(1000)
+		sleepWithCheckEnemyConquer(interval-1000)
+	end
+	
+end
 -- 任意输出
 function sysLogLst(...)
   local msg = ''
@@ -226,14 +243,9 @@ function cmpColor(array, s, isKeepScreen)
   s = s or 90
   s = math.floor(0xff * (100 - s) * 0.01)
   isKeepScreen = isKeepScreen or false
-  
-  local lockscreen = function(flag)
-    if isKeepScreen == true then
-      keepScreen(flag)
-    end
-  end
 
-  lockscreen(true)
+
+  screen.keep(true)
   for i = 1, #array do
     local lr,lg,lb = getColorRGB(array[i][1], array[i][2])
     local rgb = array[i][3]
@@ -243,11 +255,38 @@ function cmpColor(array, s, isKeepScreen)
     local b = math.floor(rgb%0x100)
 
     if math.abs(lr-r) > s or math.abs(lg-g) > s or math.abs(lb-b) > s then
-      lockscreen(false)
+      screen.keep(false)
       return false
     end
   end
 
-  lockscreen(false)
+  screen.keep(false)
   return true
+end
+
+function string.contains(raw,finding)
+	local index=string.find(raw,finding)
+	return index and index>0
+end
+function string.GetElement(raw,strBegin,strEnd,nowPos)
+	local beginIndex,beginEndIndex=string.find(raw,strBegin,nowPos)
+	if beginIndex then
+		local endIndex,endEndIndex=string.find(raw,strEnd,beginIndex,beginIndex)
+		return string.sub(raw,beginEndIndex+1,endIndex-1),endIndex
+	else
+		return nil
+	end
+end
+function string.GetAllElement(raw,strBegin,strEnd)
+	local tmp={}
+	local tmpInfo=""
+	local nowPos=1
+	while true do
+		tmpInfo,nowPos=string.GetElement(raw,strBegin,strEnd,nowPos)
+		if tmpInfo then
+			table.insert(tmp,tmpInfo)
+		else
+			return tmp
+		end
+	end
 end

@@ -16,8 +16,36 @@ function loadSetting()
 	return true
 end
 
-
+function msgCallBack(msg)
+	print("来自服务器:"..msg)
+	if string.contains(msg,"<SetSetting>") then
+		local list=string.GetAllElement(msg,"<setting>","</setting>")
+		for i,v in ipairs(list) do
+			local key=string.GetElement(v,"<key>","</key>")
+			local value=string.GetElement(v,"<value>","</value>")
+			local tmp=split(key,".")--设置.子设置.子子设置
+			local rawSet=Setting
+			for j=1,#tmp-1 do
+				rawSet=rawSet[v2]
+			end
+			local checkNumber=tonumber(tmp[#tmp])--判断最后一项是否为数字
+			if checkNumber then
+				rawSet[checkNumber]=value
+			else
+				rawSet[tmp[#tmp]]=value
+			end
+		end
+	end
+	if string.contains(msg,"<GetAllSetting>") then
+		connection:send("AllSetting",formatTable(Setting))
+	end
+end
 function main()
+	encrypt=Encrypt:new()
+	connection=TcpClient:new()
+	connection.msgCallBack=msgCallBack
+	connection:start()
+--	connection:send("AllSetting",formatTable(Setting))
 	math.randomseed(os.milliTime())
 	--while not loadSetting() do end
 	MainForm=Form:new()

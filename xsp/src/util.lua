@@ -27,9 +27,10 @@ local pairs = pairs
 local tostring = tostring
 local next = next
 
+local tmpTableData=nil
 -- 格式化输出table（力荐）
-printTable = function (root)
-
+formatTable = function (root)
+	tmpTableData=StringBuilder:new()
 	local rootType = type(root)
 	if rootType == "table" then
 		local cache = {  [root] = "." }
@@ -55,13 +56,14 @@ printTable = function (root)
 			return tconcat(temp, "\n" .. space)
 		end
 		if not notPrint then
-			print(_dump(root, "", ""))
+			tmpTableData:Append(_dump(root, "", ""))
 		else
 			return _dump(root, "", "")
 		end
 	else
-		print("[printr error]: not support type")
+		tmpTableData:Append("[printr error]: not support type")
 	end
+	return tmpTableData:ToString()
 end
 
 -- local posCache = {}
