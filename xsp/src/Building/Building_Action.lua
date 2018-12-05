@@ -61,6 +61,7 @@ function CityBuilding:UpLevelBuildingByPriority()
 	for index,v in ipairs(Setting.Building.List) do
 		table.insert(buildingInPriority[v.Priority],v)
 	end
+	self:ResetBuildingNavigator()
 	for i=1,7 do
 		if buildingInPriority[i] then
 			for index,building in ipairs(buildingInPriority[i]) do
@@ -74,23 +75,28 @@ function CityBuilding:UpLevelBuildingByPriority()
 	end
 end
 function CityBuilding:RunBuilding(buildingName)
-	self:Navigate(buildingName)
+	self:Navigate(buildingName,true)
 	local success=self:NowSelectBuildingUpLevel()
 	return success
 end
-
+--summary:重置建筑导航，将导致寻址时退回重进城市
+function CityBuilding:ResetBuildingNavigator()
+	firstTimeFindingBuilding=true--归零上次移动
+end
 function CityBuilding:ReEnterCity()
 	tap(65,1233)
 	sleep(1500)
 	ResetForm()
 end
+local firstTimeFindingBuilding=true
 local lastPosX,lastPosY=0,0
 function CityBuilding:Navigate(buildingName,relyOnLastBuilding)
 	local targetX,targetY=0,0
-	if relyOnLastBuilding then
+	if relyOnLastBuilding and not firstTimeFindingBuilding then
 		targetX,targetY=CityMap[buildingName].x-lastPosX,CityMap[buildingName].y-lastPosY
 	else
 		self:ReEnterCity()
+		firstTimeFindingBuilding=false
 		if not self:CheckIfActualyInPoint() then
 			ShowInfo.ResInfo("处理总览以修正坐标")
 			Building.pandect:NewCheckPandect(true)
@@ -98,7 +104,7 @@ function CityBuilding:Navigate(buildingName,relyOnLastBuilding)
 		end
 		targetX,targetY=CityMap[buildingName].x,CityMap[buildingName].y
 	end
-	lastPosX,lastPosY=targetX,targetY
+	lastPosX,lastPosY=CityMap[buildingName].x,CityMap[buildingName].y
 	ShowInfo.ResInfo(string.format("寻找建筑:%s",buildingName))
 	sleep(500)
 	
@@ -115,15 +121,12 @@ function CityBuilding:CheckIfActualyInPoint()
 end
 function CityBuilding:NavigateScreen(dx,dy)
 	printf("移动(%d,%d)",dx,dy)
-	local randomX=(math.random()*0.6-0.3)*Global.size.width
-	local randomY=(math.random()*0.6-0.3)*Global.size.height
-	local beginX=randomX+360
-	local beginY=randomY+640
+--	local randomX=(math.random()*0.2-0.1)*Global.size.width
+--	local randomY=(math.random()*0.2-0.1)*Global.size.height
+	local beginX=360
+	local beginY=640
 	local dis=math.abs(dx)+math.abs(dy)+20
---	for i=1,5 do
---		showRect(beginX-15,beginY-15,beginX+15,beginY+15,500,"0xffff0000")
---		sleep(400)
---	end
+
 	swip(beginX,beginY,beginX-dx,beginY-dy,dis/50)
 	showRect(355,635,365,645,500)
 end
