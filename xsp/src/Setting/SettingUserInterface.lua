@@ -3,6 +3,7 @@ sfUI={
 }
 require "Setting.layout.CSS"
 require "Setting.layout.context"
+require "Setting.layout.normal"
 wui=require "wui.wui"
 function sfUI:new (o)
     o = o or {}

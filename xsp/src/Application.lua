@@ -1,41 +1,37 @@
 Application={
-	version="0.6.65",
-	updateDate="2018-10-15 16:19",
+	version="0.1.0",
+	updateDate="2018-12-5 7:21",
 	author="serfend",
 	groupQQ="638804493",
 	UpdateInfo={
-		"新增检测保护过期提醒",
-		"修复当策略点识别失败时报错的BUG",
-		"新增自定义爆仓规则",
-		"紧急修复无归属建筑无法识别资源量的BUG",
-		"修改为仅在任意一种或多种资源达到仓库容量80%以上时尝试使用",
-		"新增水晶定向秒建筑功能",
-		"新增建筑前使用建筑大师功能",
-		"新增主线任务完成时自动合并部队的功能",
-		"修复任务重复进行的BUG",
-		"优化策略使用规则",
-		"优化城市建设算法",
-		"修复城市野地过多时无法建筑的BUG",
-		"新增 一键清空 军备和组建 设置",
-		"新增 空军 军备和组建",
-		"新增 [使用水晶] 设置 被开启时 提醒",
+		
 	},
 	ProcessInfo={
-		[1]={1,"按队列顺序自动收集/使用/补充策略(在主城)"},
-		[2]={1,"按条件升级/建造/重建/修理建筑"},
-		[3]={1,"实现自动完成和结束任务"},
-		[4]={1,"主动收集野外事件"},
-		[5]={1,"补给不足的城市生产补给"},
-		[6]={1,"一键生产军备/组建部队(只支持陆军)"},
-		[7]={1,"智能合并部队"},
-		[8]={-1,"处理外交请求"},
-		[9]={-1,"一键超远距移动"},
-		[10]={-1,"接受玩家指令移动部队"},
-		[11]={-1,"拓展领土"},
-		[12]={-1,"进攻15叛"},
-		[13]={-1,"进攻鹰城"},
-		[14]={-1,"守护城市"},
-		[15]={-1,"进攻玩家"},
-		[16]={-1,"支援友军"},
+		
 	}
 }
+function Application:new (o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function Application:DeviceID()
+	local lastID=storage.get("client.ID","")
+	if lastID=="" then
+		lastID=self:GenerateId()
+		storage.put("client.ID",lastID)
+	end
+	return lastID
+end
+local alphabet = "0123456789abcdefghijklmnopqrstuvwxyz"
+function Application:GenerateId()
+	local len=string.len(alphabet)
+	local tmp=StringBuilder:new()
+	for i=1,16 do
+		local index=math.floor(math.random()*len)+1
+		tmp:Append(string.sub(alphabet,index,index))
+	end
+	return tmp:ToString()
+end

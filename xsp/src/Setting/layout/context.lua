@@ -1,14 +1,14 @@
 Context={
 	
-	btn={
-			id = 'test_btn',
+	BtnNormal={
+			id = 'Btn',
 			view = 'div',
 			class = 'button',
 			subviews = {
 				{
 					view = 'text',
 					class = 'txt',
-					value = 'ok'
+					value = '按钮内容'
 				}
 			}
 		},
@@ -29,5 +29,30 @@ Context={
 			['align-items'] = 'center',
 		}
 	},
+	
+	retDialog={
+		view="scroller",
+		style={
+			['background-color'] = '#a1000000',
+			['align-items'] = 'center',
+		},
+	},
+	
+	TimeSpan={
+		id="timeSpan",
+		view="div",
+		style={
+			['align-items'] = 'center',
+			['background-color'] = '#ef3fff7f',
+			height=10,
+			['font-size'] = 5,
+		},
+		subviews = {
+				{
+					view = 'text',
+					value = "倒计时"
+				}
+			}
+	}
 }
 

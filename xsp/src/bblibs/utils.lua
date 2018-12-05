@@ -290,3 +290,7 @@ function string.GetAllElement(raw,strBegin,strEnd)
 		end
 	end
 end
+
+function string.GetElementInItem(raw,item)
+	return string.GetElement(raw,"<"..item..">","</"..item..">")
+end
