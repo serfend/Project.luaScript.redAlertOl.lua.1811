@@ -1,3 +1,5 @@
+require "Setting.layout.UI_Timespan"
+require "Setting.layout.UI_Button"
 View = {
 	
 }--初始化
@@ -19,43 +21,49 @@ function View.SetLayoutCenter(w,h)
 	}
 end
 
+function View.BuildTimeSpan(spanView,timeCount)
+	local timespan=UI_Timespan:new()
+	timespan:Init(spanView,timeCount)
+	return timespan
+end
+
 --@summary:初始化按钮样式
 --@param Color3B themeColor:(r,g,b)主题色
 --@param UIView targetView:目标对象
 function View.SetButtonStyle(themeColor,targetView)
 	--ENABLED
-	local enableColor=themeColor
+	local enableColor=Color3B(themeColor)
 	targetView:setPseudoStyle(UI.PSEUDO.ENABLED,'background-image' , 
 		string.format('linear-gradient(to bottom right, %s, %s)',
-			enableColor.toValue(),
-			View.Color3BModefy(enableColor,0.2).toValue()
+			string.format("#%x",enableColor:toValue()),
+			string.format("#%x",View.Color3BModify(enableColor,0.5):toValue())
 			)
 		)
 	--ACTIVE
---	local activeColor=themeColor
---	targetView:setPseudoStyle(UI.PSEUDO.ACTIVE,'background-image' , 
---		string.format('linear-gradient(to bottom right, %s, %s)',
---		activeColor.toValue(),
---		View.Color3BModefy(activeColor,1.25).toValue()
---		)
---	)	
---	--DISABLE
---	local disableColorDark=Color3B(12,12,12)
---	local maxColor=max(themeColor.r,themeColor.g,themeColor.b)
---	local disableColorLight=Color3B(maxColor,maxColor,maxColor)
---	targetView:setPseudoStyle(UI.PSEUDO.DISABLED,'background-image' , 
---		string.format('linear-gradient(to bottom right, %s, %s)',
---		disableColorDark.toValue(),
---		disableColorLight.toValue()
---		)
---	)
+	local activeColor=Color3B(themeColor)
+	targetView:setPseudoStyle(UI.PSEUDO.ACTIVE,'background-image' , 
+		string.format('linear-gradient(to bottom right, %s, %s)',
+		string.format("#%x",activeColor:toValue()),
+		string.format("#%x",View.Color3BModify(activeColor,0.1):toValue())
+		)
+	)	
+	--DISABLE
+	local disableColorDark=Color3B(12,12,12)
+	local maxColor=math.max(themeColor.r,themeColor.g,themeColor.b)
+	local disableColorLight=Color3B(maxColor,maxColor,maxColor)
+	targetView:setPseudoStyle(UI.PSEUDO.DISABLED,'background-image' , 
+		string.format('linear-gradient(to bottom right, %s, %s)',
+		string.format("#%x",disableColorLight:toValue()),
+		string.format("#%x",disableColorDark:toValue())
+		)
+	)
 end
 
 --@summary:按比例变换颜色值
 --@param Color3B color:原始颜色
---@rate floot rate:比例
-function View.Color3BModefy(color,rate)
-	local tmp=color
+--@rate float rate:比例
+function View.Color3BModify(color,rate)
+	local tmp=Color3B(color)
 	tmp.r=math.floor(tmp.r*rate)
 	tmp.g=math.floor(tmp.g*rate)
 	tmp.b=math.floor(tmp.b*rate)

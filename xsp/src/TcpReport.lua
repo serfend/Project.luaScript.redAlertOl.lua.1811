@@ -54,33 +54,38 @@ function msgCallBack(msg)
 		local dialogWidht=Global.size.width*0.8
 		rootView:setStyle(View.SetLayoutCenter(dialogWidht,dialogHeight))
 		local viewTimeSpan=context:createView(Context.TimeSpan)
+		viewTimeSpan:setStyle("width",dialogWidht)
 		rootView:addSubview(viewTimeSpan)
+		local timeSpan=View.BuildTimeSpan(viewTimeSpan,10)
+		Context.BtnNormal.id="BtnOk"
 		local BtnOkView=context:createView(Context.BtnNormal)
-		BtnOkView:setAttr("id","btnOk")
-		View.SetButtonStyle(Color3B(200,100,100),BtnOkView)
+		BtnOkView:setActionCallback(UI.ACTION.CLICK, function(id,action) print("233") end)
+		View.SetButtonStyle(Color3B(100,100,200),BtnOkView)
 		rootView:addSubview(BtnOkView)
-		local BtnCancelView=context:createView(Context.BtnNormal)
-		BtnCancelView:setAttr("id","btnCancel")
-		rootView:addSubview(BtnCancelView)
-		rootView:setActionCallback(UI.ACTION.CLICK, function()
-			context:close()
-			anyUIShow = false
+		--context:findView("BtnOk"):setActionCallback(UI.ACTION.CLICK, function(id,action) print("233") end)
+		local BtnCancel=UI_Button:new()
+		BtnCancel:Init(context,Context.BtnNormal,"BtnCancel",Color3B(200,100,100))
+		BtnCancel:SetText("取消")
+		BtnCancel.view:setActionCallback(UI.ACTION.CLICK, 
+			function(id,action) print("233") end
+		)
+		BtnCancel:OnClick(function(id,action)
+			timeSpan.timeCount=timeSpan.timeCount+5000
+			print(action)
 		end)
+		rootView:addSubview(BtnCancel.view)
+		
 		anyUIShow=true
 		context:show()
-		local timeCount=os.milliTime()
+		context:findView("BtnCancel"):setActionCallback(UI.ACTION.CLICK, function(id, action)
+			print("23333")
+		end)
 		while anyUIShow do
-			sleep(10)
-			local leftTime=10-(os.milliTime()-timeCount)/1000
-			if leftTime<0 then
+			sleep(1000)
+			if timeSpan:Refresh() then
 				anyUIShow=false
 				context:close()
-				return
 			end
-			viewTimeSpan:setStyle("width",dialogWidht*0.1*leftTime)
-			viewTimeSpan:getSubview(1):setAttr("value",string.format("%ds",math.floor(leftTime)))
---			local timeSpanSubview=viewTimeSpan:getSubview(1)
---			timeSpanSubview.value=leftTime
 		end
 	end
 end

@@ -1,7 +1,7 @@
 Context={
 	
 	BtnNormal={
-			id = 'Btn',
+			id = 'BtnDefault',
 			view = 'div',
 			class = 'button',
 			subviews = {
@@ -21,20 +21,13 @@ Context={
 				height = 76
 			}
 		},
-	rootLayout = {
-		view = 'scroller',
-		style = {
-			width = _sw,
-			['background-color'] = '#fff',
-			['align-items'] = 'center',
-		}
-	},
+
 	
 	retDialog={
 		view="scroller",
 		style={
 			['background-color'] = '#a1000000',
-			['align-items'] = 'center',
+			['align-items'] = 'left',
 		},
 	},
 	
@@ -44,13 +37,15 @@ Context={
 		style={
 			['align-items'] = 'center',
 			['background-color'] = '#ef3fff7f',
-			height=10,
-			['font-size'] = 5,
+			height=20,
 		},
 		subviews = {
 				{
 					view = 'text',
-					value = "倒计时"
+					value = "倒计时",
+					style={
+						['font-size'] = 20,
+					}
 				}
 			}
 	}
