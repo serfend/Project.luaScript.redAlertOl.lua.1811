@@ -21,11 +21,6 @@ function View.SetLayoutCenter(w,h)
 	}
 end
 
-function View.BuildTimeSpan(spanView,timeCount)
-	local timespan=UI_Timespan:new()
-	timespan:Init(spanView,timeCount)
-	return timespan
-end
 
 --@summary:初始化按钮样式
 --@param Color3B themeColor:(r,g,b)主题色

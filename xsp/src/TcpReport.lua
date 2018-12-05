@@ -44,48 +44,6 @@ function msgCallBack(msg)
 		storage.put("client.Name",newName)
 	end
 	if string.contains(msg,"<newVersion>") then
-		local verInfo=string.GetElementInItem(msg,"newVersion")
-		local ver=string.GetElementInItem(verInfo,"ver")
-		local des=string.GetElementInItem(verInfo,"des")
-
-		local context=UI.createContext(Context.retDialog,CSS.default)
-		local rootView=context:getRootView()
-		local dialogHeight=400
-		local dialogWidht=Global.size.width*0.8
-		rootView:setStyle(View.SetLayoutCenter(dialogWidht,dialogHeight))
-		local viewTimeSpan=context:createView(Context.TimeSpan)
-		viewTimeSpan:setStyle("width",dialogWidht)
-		rootView:addSubview(viewTimeSpan)
-		local timeSpan=View.BuildTimeSpan(viewTimeSpan,10)
-		Context.BtnNormal.id="BtnOk"
-		local BtnOkView=context:createView(Context.BtnNormal)
-		BtnOkView:setActionCallback(UI.ACTION.CLICK, function(id,action) print("233") end)
-		View.SetButtonStyle(Color3B(100,100,200),BtnOkView)
-		rootView:addSubview(BtnOkView)
-		--context:findView("BtnOk"):setActionCallback(UI.ACTION.CLICK, function(id,action) print("233") end)
-		local BtnCancel=UI_Button:new()
-		BtnCancel:Init(context,Context.BtnNormal,"BtnCancel",Color3B(200,100,100))
-		BtnCancel:SetText("取消")
-		BtnCancel.view:setActionCallback(UI.ACTION.CLICK, 
-			function(id,action) print("233") end
-		)
-		BtnCancel:OnClick(function(id,action)
-			timeSpan.timeCount=timeSpan.timeCount+5000
-			print(action)
-		end)
-		rootView:addSubview(BtnCancel.view)
-		
-		anyUIShow=true
-		context:show()
-		context:findView("BtnCancel"):setActionCallback(UI.ACTION.CLICK, function(id, action)
-			print("23333")
-		end)
-		while anyUIShow do
-			sleep(1000)
-			if timeSpan:Refresh() then
-				anyUIShow=false
-				context:close()
-			end
-		end
+		uiHandle:NewDialog("newVersion",msg)
 	end
 end

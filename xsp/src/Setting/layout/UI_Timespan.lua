@@ -13,11 +13,18 @@ function UI_Timespan:new (o)
     self.__index = self
     return o
 end
-function UI_Timespan:Init(view,count)
+--@summary:初始化TimeSpan控件
+--@param string id:控件id
+--@param UIContext context:源布局
+--@param table rawData:原始控件数据
+--@param int width:TimeSpan宽
+--@param float totalTime:倒计时初始长度
+function UI_Timespan:Init(id,context,rawData,width,totalTime)
+	rawData.id=id
 	self.timeCount=os.milliTime()
-	self.totalTime=count
-	self.view=view
-	self.viewWidth=self.view:getStyle("width")
+	self.totalTime=totalTime
+	self.view=context:createView(rawData)
+	self.viewWidth=width
 end
 function UI_Timespan:Refresh()
 	local leftTime=self.totalTime-(os.milliTime()-self.timeCount)/1000
@@ -32,4 +39,13 @@ function UI_Timespan:Refresh()
 	
 	self.view:getSubview(1):setAttr("value",string.format("%.1fs",self.nowTimeCount))
 	return false
+end
+
+--@summary:编辑剩余时间
+--@param float interval:变更时间值
+function UI_Timespan:AddTime(interval)
+	self.timeCount=self.timeCount+interval*1000
+	if self.timeCount>os.milliTime() then
+		self.timeCount=os.milliTime()
+	end
 end

@@ -20,11 +20,8 @@ function UI_Button:new (o)
 end
 
 function UI_Button:OnClick(callBack)
-    local onClicked = function (id, action)
-        callback(id, action)
-    end
-    self.view:setActionCallback(UI.ACTION.CLICK, onClicked)
-    self.view:setActionCallback(UI.ACTION.LONG_PRESS, onClicked)
+    self.view:setActionCallback(UI.ACTION.CLICK, callback)
+    self.view:setActionCallback(UI.ACTION.LONG_PRESS, callback)
 end
 function UI_Button:SetText(text)
 	self.view:getSubview(1):setAttr("value",text)

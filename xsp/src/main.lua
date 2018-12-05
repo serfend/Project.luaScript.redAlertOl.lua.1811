@@ -2,7 +2,7 @@ require "Setting.usingPack"
 require "Setting.UserSettingBase"
 require "util"--加载工具
 require "Setting.SettingACheck"--加载全局设置
-anyUIShow=false--当有任何UI运行时,停止操作
+
 function loadSetting()
 	userTargetSettingName=storage.get("UserSettingBase","默认设置")
 	ui=sfUI:new()
@@ -19,6 +19,7 @@ end
 
 function main()
 	app=Application:new()
+	uiHandle=UIHandle:new()
 	encrypt=Encrypt:new()
 	connection=TcpClient:new()
 	connection.msgCallBack=msgCallBack
@@ -56,16 +57,22 @@ function ResetForm()
 end
 
 function mainLoop()
-	Building.building:Navigate("特惠商人")
+	Building.building:ResetBuildingNavigator()
+	for index,v in ipairs(Setting.Building.List) do
+		Building.building:Navigate(v.Name)
+		MainForm:ExitForm()
+	end
 	while true do
 		newRound()
 	end
 end
 function newRound()
 	screen.keep(false)
-	if anyUIShow then
+	if uiHandle.anyUIShow then
 		ShowInfo.RunningInfo("设置中,暂停操作...")
 		return
+	else	
+		uiHandle:CheckIfNewDialog()
 	end
 	local thisTime=os.milliTime()
 	local activeMode=false
