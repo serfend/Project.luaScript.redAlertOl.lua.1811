@@ -14,27 +14,34 @@ function party:TaskSignUpReward()
 	return false
 end
 function party:RunAttainTaskward()
-	local todayValid=storage.get("todayValid",true)
-	local lastUnhdlExceptionTime=storage.get("lastUnhdlExceptionTime",0)
-	if not todayValid then
-		local nowTime=os.milliTime()
-		if nowTime-lastUnhdlExceptionTime >1000*86400 then
-			storage.put("todayValid",true)
-			ShowInfo.ResInfo("领取任务奖励")
+	local todayValid=storage.get("party.task.todayValid",true)
+	local lastUnhdlExceptionTime=storage.get("party.task.lastUnhdlExceptionTime",0)
+	if todayValid then
+		ShowInfo.ResInfo("领取任务奖励")
+		tap(361,1214)--全部领取
+		sleep(500)
+		local r,g,b=screen.getRGB(288,1234)
+		if r>50 and g>50 and b>50 then
+			storage.put("party.task.todayValid",false)
+			storage.put("party.task.lastUnhdlExceptionTime",os.milliTime()/1000)
+			ShowInfo.ResInfo(string.format("任务奖励领取失败,stamp:%d",storage.get("party.task.lastUnhdlExceptionTime",0)))
+		end
+		MainForm:ExitForm()--返回上一层
+		return true
+	else
+		local nowTime=os.milliTime()/1000
+		local interval=math.floor(nowTime-lastUnhdlExceptionTime)
+		if interval >14000 then
+			storage.put("party.task.todayValid",true)
+			ShowInfo.ResInfo(string.format("已超过%d秒，重新尝试领取",interval))
+			return self:RunAttainTaskward()
 		else
-			storage.put("lastUnhdlExceptionTime",nowTime)
-			ShowInfo.ResInfo("防封需要,24h内取消任务获取")
+			storage.put("party.task.lastUnhdlExceptionTime",nowTime)
+			ShowInfo.ResInfo("防封需要,4h内取消任务获取")
 			return false
 		end
 	end
-	tap(361,1214)--全部领取
-	sleep(500)
-	local r,g,b=screen.getRGB(288,1234)
-	if r>50 and g>50 and b>50 then
-		storage.put("todayValid",false)
-	end
-	MainForm:ExitForm()--返回上一层
-	return true
+	
 end
 
 function party:CheckIfNewTaskward()
