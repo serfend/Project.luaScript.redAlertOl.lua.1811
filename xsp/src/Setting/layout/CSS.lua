@@ -1,7 +1,8 @@
 CSS={
 	default = {
 		txt = {
-			color = '#aeffffcc',
+			color = '#ffddddcc',
+			['text-align']="center",
 			['font-size'] = 40,
 		},
 		logo = {
@@ -12,9 +13,10 @@ CSS={
 		},
 		button = {
 			height = 80,
+			['justify-content']="center",
 			['align-items'] = 'center',
 			['border-width'] = 1.5,
-			['border-radius'] = 2,
+			['border-radius'] = 5,
 			['background-image'] = 'linear-gradient(to bottom right, #4c95d7, #243153)'
 		},
 		['button:active'] = {

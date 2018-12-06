@@ -1,6 +1,8 @@
 IControl={
 	view=nil,--控件的源视图，来自context:createView()
 	parent=nil,--所属布局
+	targetX=0,targetY=0,nowX=0,nowY=0,
+	targetW=0,targetH=0,nowW=0,nowH=0,--根据情况，确认需要动画的属性
 }
 function IControl:new(o)
 	o = o or {}

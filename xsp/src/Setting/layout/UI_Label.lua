@@ -20,18 +20,23 @@ function UI_Label:new (o)
 	return o
 end
 function UI_Label:OnClick(callBack)
-	local f=function(id,action) callBack(id,action) end
+	local f=function(id,action) 
+		callBack(id,action)
+		self.targetY=self.targetY+10
+	end
     self.view:setActionCallback(UI.ACTION.CLICK, f)
     self.view:setActionCallback(UI.ACTION.LONG_PRESS, f)
 end
 
 function UI_Label:Refresh()
-	self.nowX=self.nowX*0.9+self.targetX*0.1
-	self.nowY=self.nowY*0.9+self.targetY*0.1
-	self.view:setStyle({
-		left=self.nowX,
-		top=self.nowY
-	})
+	if math.abs(self.nowX-self.targetY)+math.abs(self.nowY-self.targetY)>1 then
+		self.nowX=self.nowX*0.9+self.targetX*0.1
+		self.nowY=self.nowY*0.9+self.targetY*0.1
+		self.view:setStyle({
+			left=self.nowX,
+			top=self.nowY
+		})
+	end
 end
 
 --@summary:从布局中删除此控件

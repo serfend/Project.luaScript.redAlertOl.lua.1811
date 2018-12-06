@@ -36,16 +36,16 @@ function View.SetButtonStyle(themeColor,targetView)
 	local enableColor=Color3B(themeColor)
 	targetView:setPseudoStyle(UI.PSEUDO.ENABLED,'background-image' , 
 		string.format('linear-gradient(to bottom right, %s, %s)',
-			string.format("#%x",enableColor:toValue()),
-			string.format("#%x",View.Color3BModify(enableColor,0.5):toValue())
+			string.format("#%06x",enableColor:toValue()),
+			string.format("#%06x",View.Color3BModify(enableColor,0.5):toValue())
 			)
 		)
 	--ACTIVE
 	local activeColor=Color3B(themeColor)
 	targetView:setPseudoStyle(UI.PSEUDO.ACTIVE,'background-image' , 
 		string.format('linear-gradient(to bottom right, %s, %s)',
-		string.format("#%x",activeColor:toValue()),
-		string.format("#%x",View.Color3BModify(activeColor,0.1):toValue())
+		string.format("#%06x",activeColor:toValue()),
+		string.format("#%06x",View.Color3BModify(activeColor,0.1):toValue())
 		)
 	)	
 	--DISABLE
@@ -54,8 +54,8 @@ function View.SetButtonStyle(themeColor,targetView)
 	local disableColorLight=Color3B(maxColor,maxColor,maxColor)
 	targetView:setPseudoStyle(UI.PSEUDO.DISABLED,'background-image' , 
 		string.format('linear-gradient(to bottom right, %s, %s)',
-		string.format("#%x",disableColorLight:toValue()),
-		string.format("#%x",disableColorDark:toValue())
+		string.format("#%06x",disableColorLight:toValue()),
+		string.format("#%06x",disableColorDark:toValue())
 		)
 	)
 end
