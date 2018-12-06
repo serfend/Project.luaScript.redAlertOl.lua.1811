@@ -53,20 +53,41 @@ function ResetForm()
 	end
 	sleep(1000)
 end
-
-function mainLoop()
+function newConnection()
 	ShowInfo.RunningInfo("与服务器建立连接")
-	connection=TcpClient:new()	
-	connection.msgCallBack=msgCallBack
-	connection:start()
---	connection:send("AllSetting",formatTable(Setting))
+	local tryTime=1
 	while not uiHandle.InitCheck do
-		sleep(1000)
-		ShowInfo.RunningInfo("等待连接到服务器")
+		sleep(2000)
+		ShowInfo.RunningInfo(string.format("等待连接到服务器%d/5",tryTime))
+		tryTime=tryTime+1 
+		if tryTime>5 then
+			break
+		end
 	end
-	ShowInfo.RunningInfo("连接成功")
+	if uiHandle.InitCheck then
+		ShowInfo.RunningInfo("连接成功")
+	else
+		ShowInfo.RunningInfo("连接失败,离线模式")
+		
+		return false
+	end
 	sleep(1000)
-	uiHandle:CheckIfNewDialog()
+	task.execTimer(100,function()
+		connection=TcpClient:new()	
+		connection.msgCallBack=msgCallBack
+		connection:start()
+	end)
+end
+function mainLoop()
+	uiHandle:NewDialog("normalDialogOkCancel",
+		"<title>是否开启中控模式</title><info>开启中控模式后,进入:\nhttp://1s68948k74.imwork.net:16397页面进行控制</info>"
+	)
+	while uiHandle:CheckIfNewDialog() do
+		sleep(1000)
+	end
+	if uiHandle.uiResult=="ok" then
+		newConnection()
+	end
 	ResetForm()--初始化
 	while true do
 		newRound()
@@ -81,19 +102,16 @@ function newRound()
 	local thisTime=os.milliTime()
 	local activeMode=false
 	
-	if normal.InDanger then
-		ShowInfo.RunningInfo("【防御模式】")
+
+	local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
+		(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
+	if refreshTimeLeft<0 then
+		activeMode=true
+		Setting.Runtime.ActiveMode.LastActiveTime=thisTime
+		ShowInfo.RunningInfo("本轮主动操作开始")
+		ResetForm()
 	else
-		local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
-			(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
-		if refreshTimeLeft<0 then
-			activeMode=true
-			Setting.Runtime.ActiveMode.LastActiveTime=thisTime
-			ShowInfo.RunningInfo("本轮主动操作开始")
-			ResetForm()
-		else
-			ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
-		end
+		ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
 	end
 	MainForm:CheckNormalPageTask()
 	if not normal.InDanger then
@@ -104,11 +122,12 @@ function newRound()
 		Building.pandect:ResetSetting()
 		Building.pandect:NewCheckPandect(activeMode)
 		if Building.building:Run(activeMode) then
-			sleep(500)
+			sleepWithCheckEnemyConquer(500)
 		end
 		if activeMode then
 			ResetForm()
 		end
+		sleepWithCheckEnemyConquer(500)
 	end
 end
 main()

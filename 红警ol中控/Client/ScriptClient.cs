@@ -12,7 +12,7 @@ namespace 红警ol中控.Client
 	public class ScriptClient
 	{
 		public const string LatestVersion = "0.1.1";
-		public const string NewVersionDescription = "新的版本已发布\n2018-12-05";
+		public const string NewVersionDescription = "新的版本已发布\n发布时间:2018-12-05\n新增功能:暂无描述,加群:489518369了解更多";
 		private string clientDeviceId;
 		private string version;
 

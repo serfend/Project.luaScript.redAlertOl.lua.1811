@@ -8,3 +8,13 @@ D:\aserfend\workSpace\repos\projects\红警ol中控\bin\Debug\红警ol中控.pdb
 D:\aserfend\workSpace\repos\projects\红警ol中控\obj\Debug\红警ol中控.exe
 D:\aserfend\workSpace\repos\projects\红警ol中控\obj\Debug\红警ol中控.pdb
 D:\aserfend\workSpace\repos\projects\红警ol中控\obj\Debug\红警ol中控.csprojAssemblyReference.cache
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.Detail.resources
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.FrmMain.resources
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.Properties.Resources.resources
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.csproj.GenerateResource.cache
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.csproj.CoreCompileInputs.cache
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.exe
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.pdb
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\bin\Debug\红警ol中控.exe
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\bin\Debug\红警ol中控.pdb
+D:\aserfend\workSpace\lua\红警ol\Project.luaScript.redAlertOl.lua.1811\红警ol中控\obj\Debug\红警ol中控.csprojAssemblyReference.cache

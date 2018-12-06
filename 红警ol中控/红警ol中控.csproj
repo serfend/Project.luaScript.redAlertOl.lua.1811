@@ -44,17 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\util\coder\codeUtil.cs">
-      <Link>Util\codeUtil.cs</Link>
-    </Compile>
-    <Compile Include="..\..\util\reg.cs">
-      <Link>Util\reg.cs</Link>
-    </Compile>
-    <Compile Include="..\大话西游藏宝阁\Project.1703.DHXY-cbg\多开浏览器子线程\订单信息服务器\TcpServer.cs">
+    <Compile Include="..\..\..\..\repos\projects\大话西游藏宝阁\Project.1703.DHXY-cbg\多开浏览器子线程\订单信息服务器\TcpServer.cs">
       <Link>Tcp\TcpServer.cs</Link>
     </Compile>
-    <Compile Include="..\大话西游藏宝阁\Project.1703.DHXY-cbg\多开浏览器子线程\订单信息服务器\TcpServerManager.cs">
+    <Compile Include="..\..\..\..\repos\projects\大话西游藏宝阁\Project.1703.DHXY-cbg\多开浏览器子线程\订单信息服务器\TcpServerManager.cs">
       <Link>Tcp\TcpServerManager.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\repos\util\coder\codeUtil.cs">
+      <Link>Util\codeUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\repos\util\reg.cs">
+      <Link>Util\reg.cs</Link>
     </Compile>
     <Compile Include="Client\ScriptClient.cs" />
     <Compile Include="Detail.cs">
