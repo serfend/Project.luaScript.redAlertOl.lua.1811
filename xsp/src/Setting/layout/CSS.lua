@@ -3,8 +3,6 @@ CSS={
 		txt = {
 			color = '#aeffffcc',
 			['font-size'] = 40,
-			['padding-top'] = 10,
-			['padding-bottom'] = 10
 		},
 		logo = {
 			width = 200,

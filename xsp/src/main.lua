@@ -18,13 +18,11 @@ end
 
 
 function main()
+	wui=require "wui.wui"
 	app=Application:new()
 	uiHandle=UIHandle:new()
 	encrypt=Encrypt:new()
-	connection=TcpClient:new()
-	connection.msgCallBack=msgCallBack
-	connection:start()
---	connection:send("AllSetting",formatTable(Setting))
+	ShowInfo.RunningInfo("初始化")
 	math.randomseed(os.milliTime())
 	--while not loadSetting() do end
 	MainForm=Form:new()
@@ -38,12 +36,12 @@ function main()
 	ocrInfo=OcrInfo:new()
 	Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
 	--GetUserImages(45,2)
-	ResetForm()--初始化
 	
 	mainLoop()
 end
 
 function ResetForm()
+	ShowInfo.RunningInfo("<恢复状态>")
 	local nowScene=toolBar:GetNowScene()
 	if nowScene==3 then
 		MainForm:ExitForm(true)
@@ -57,22 +55,28 @@ function ResetForm()
 end
 
 function mainLoop()
-	Building.building:ResetBuildingNavigator()
-	for index,v in ipairs(Setting.Building.List) do
-		Building.building:Navigate(v.Name)
-		MainForm:ExitForm()
+	ShowInfo.RunningInfo("与服务器建立连接")
+	connection=TcpClient:new()	
+	connection.msgCallBack=msgCallBack
+	connection:start()
+--	connection:send("AllSetting",formatTable(Setting))
+	while not uiHandle.InitCheck do
+		sleep(1000)
+		ShowInfo.RunningInfo("等待连接到服务器")
 	end
+	ShowInfo.RunningInfo("连接成功")
+	sleep(1000)
+	uiHandle:CheckIfNewDialog()
+	ResetForm()--初始化
 	while true do
 		newRound()
 	end
 end
 function newRound()
 	screen.keep(false)
-	if uiHandle.anyUIShow then
+	if uiHandle:CheckIfNewDialog() then
 		ShowInfo.RunningInfo("设置中,暂停操作...")
 		return
-	else	
-		uiHandle:CheckIfNewDialog()
 	end
 	local thisTime=os.milliTime()
 	local activeMode=false
@@ -103,7 +107,6 @@ function newRound()
 			sleep(500)
 		end
 		if activeMode then
-			ShowInfo.RunningInfo("<恢复状态>")
 			ResetForm()
 		end
 	end

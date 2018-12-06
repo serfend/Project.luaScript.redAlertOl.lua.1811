@@ -1,5 +1,6 @@
 function msgCallBack(msg)
 	print("来自服务器:"..msg)
+	uiHandle.InitCheck=true
 	if string.contains(msg,"<SetSetting>") then
 		local list=string.GetAllElement(msg,"<setting>","</setting>")
 		for i,v in ipairs(list) do

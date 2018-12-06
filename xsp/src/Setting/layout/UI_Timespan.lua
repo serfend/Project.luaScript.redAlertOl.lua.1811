@@ -17,9 +17,10 @@ end
 --@param string id:控件id
 --@param UIContext context:源布局
 --@param table rawData:原始控件数据
+--@param Color3B color:主题色
 --@param int width:TimeSpan宽
 --@param float totalTime:倒计时初始长度
-function UI_Timespan:Init(id,context,rawData,width,totalTime)
+function UI_Timespan:Init(id,context,rawData,color,width,totalTime)
 	rawData.id=id
 	self.timeCount=os.milliTime()
 	self.totalTime=totalTime
@@ -39,6 +40,10 @@ function UI_Timespan:Refresh()
 	
 	self.view:getSubview(1):setAttr("value",string.format("%.1fs",self.nowTimeCount))
 	return false
+end
+--@summary:从布局中删除此控件
+function UI_Timespan:Delete()
+	self.parent:Delete(self.view:getID())
 end
 
 --@summary:编辑剩余时间

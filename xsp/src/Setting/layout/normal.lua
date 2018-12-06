@@ -1,5 +1,11 @@
+--@summary:
+--遵循layout管理所属控件，控件实现Controls接口
+--@author:@github.com/serfend
+--@date:2018-12-8
+require "Setting.layout.UI_Layout"
 require "Setting.layout.UI_Timespan"
 require "Setting.layout.UI_Button"
+require "Setting.layout.UI_Label"
 View = {
 	
 }--初始化

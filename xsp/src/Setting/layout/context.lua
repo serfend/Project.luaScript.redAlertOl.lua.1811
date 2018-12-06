@@ -12,6 +12,11 @@ Context={
 				}
 			}
 		},
+	LabelNormal={
+		id="LabelDefault",
+		view="text",
+		class="txt",
+	},
 	logo={
 			view = 'image',
 			class = 'logo', -- 动态创建的image使用到了globalStyle中的'logo'
@@ -24,10 +29,9 @@ Context={
 
 	
 	retDialog={
-		view="scroller",
+		view="div",
 		style={
 			['background-color'] = '#a1000000',
-			['align-items'] = 'left',
 		},
 	},
 	
