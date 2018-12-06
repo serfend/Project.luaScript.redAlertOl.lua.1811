@@ -16,7 +16,11 @@ function party:new (o)
 end
 function party:Enter()
 	tap(550,1230)
-	sleep(1500)
+	sleepWithCheckEnemyConquer(1500)
+	local point = screen.findColor(Rect(21, 65, 72, 46), 
+"0|0|0xf5fcff,37|10|0x305774,26|20|0x38789f",
+95, screen.PRIORITY_DEFAULT)
+	return point.x>0
 end
 function party:Run()
 	local anyTask={}
@@ -49,8 +53,11 @@ function party:NewCheckParty()
 		return
 	end
 	ShowInfo.RunningInfo("管理联盟")
-	self:Enter()
-	self:Run()
+	if self:Enter() then
+		self:Run()
+	else
+		ShowInfo.ResInfo("进入联盟界面失败")
+	end
 end
 function party:CheckIfPartyAction()
 	if not toolBar:CheckIfHaveMsg(4) then

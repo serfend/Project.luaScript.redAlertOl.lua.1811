@@ -173,7 +173,7 @@ end
 --@summary:点击【查找】按钮位置
 function pandect:NowSelectExpeditionQueryNext()
 	tap(600,1180)
-	sleep(1000)
+	sleepWithCheckEnemyConquer(1000)
 end
 function pandect:SelectTargetRank(index,gameMaxRank)
 	local beginX=107

@@ -18,7 +18,7 @@ end
 function party:RunAssistOtherTreasure()
 	ShowInfo.ResInfo("帮助其他玩家")
 	tap(587,173)
-	sleep(5000)
+	sleep(2000)
 	self:AssistOtherPreasure()
 	
 end

@@ -29,7 +29,7 @@ end
 function party:DonateAll(times)
 	ShowInfo.ResInfo("联盟捐献%d次",times)
 	tap(118,698)
-	sleep(1000)
+	sleepWithCheckEnemyConquer(1000)
 	local point = screen.findColor(Rect(244, 328, 140, 874), 
 "0|0|0xffefa1,3|0|0x52565a",
 95, screen.PRIORITY_DEFAULT)--半颗星

@@ -12,10 +12,10 @@ function CityBuilding:UpLevelBuilding()
 			if Setting.Building.UseRecommand then
 				ShowInfo.RunningInfo("按系统推荐建筑")
 				self:SelectConstructQueue(i)
-				sleep(1000)
+				sleepWithCheckEnemyConquer(1000)
 				if not self:NowSelectBuildingUplevel() then
 					if self:UpLevelBuildingByPriority() then
-						sleep(1000)
+						sleepWithCheckEnemyConquer(1000)
 					end
 				end
 			else
@@ -85,7 +85,7 @@ function CityBuilding:ResetBuildingNavigator()
 end
 function CityBuilding:ReEnterCity()
 	tap(65,1233)
-	sleep(1500)
+	sleepWithCheckEnemyConquer(1500)
 	ResetForm()
 end
 local firstTimeFindingBuilding=true
@@ -110,7 +110,7 @@ function CityBuilding:Navigate(buildingName,relyOnLastBuilding)
 	
 	self:NavigateScreen(targetX,targetY)
 	tap(360,640)
-	sleep(1000)
+	sleepWithCheckEnemyConquer(1000)
 end
 --@summary:检查是否真的在主基地处
 function CityBuilding:CheckIfActualyInPoint()

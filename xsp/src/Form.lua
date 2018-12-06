@@ -28,7 +28,7 @@ function Form:ExitForm(exitAll,tryTime)
 	if nowScene==3 then
 		tap(20,80)--左上角就是退出按钮
 		--touch.press(touch.KEY_BACK)--按返回键
-		sleep(500)
+		sleep(800)
 		if exitAll then self:ExitForm(exitAll) end
 	end
 end

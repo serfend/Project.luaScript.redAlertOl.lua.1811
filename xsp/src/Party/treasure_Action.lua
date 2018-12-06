@@ -5,7 +5,7 @@ function party:AssistOtherPreasure()
 	for k,p in ipairs(targets) do
 		ShowInfo.ResInfo(string.format("协助盟友挖掘%d阶宝藏",p.Type))
 		tap(p.x,p.y)
-		sleep(1000)
+		sleepWithCheckEnemyConquer(1000)
 	end
 end
 function party:HandleSelfWaitAssistPreasure()
@@ -13,7 +13,7 @@ function party:HandleSelfWaitAssistPreasure()
 	for k,p in ipairs(targets) do
 		ShowInfo.ResInfo(string.format("请求帮助%d阶宝藏",p.Type))
 		tap(p.x,p.y)
-		sleep(1500)
+		sleepWithCheckEnemyConquer(1500)
 		return self:HandleSelfWaitAssistPreasure()
 	end
 end
@@ -26,7 +26,7 @@ function party:ReceivePreasure()
 	if point.x>0 then
 		ShowInfo.ResInfo("领取宝藏")
 		tap(point.x,point.y)
-		sleep(1000)
+		sleepWithCheckEnemyConquer(1000)
 		return true
 	else
 		return false
@@ -40,7 +40,7 @@ function party:CheckIfAnyPreasureToDig()
 			if setting==target.Type then--等级匹配
 				ShowInfo.ResInfo(string.format("选中%d阶宝藏",setting))
 				tap(target.x,target.y)
-				sleep(500)
+				sleepWithCheckEnemyConquer(500)
 				return true
 			end
 		end

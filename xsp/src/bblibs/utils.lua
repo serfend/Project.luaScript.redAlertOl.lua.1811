@@ -132,9 +132,6 @@ end
 function sleepWithCheckEnemyConquer(interval)
 	if normal:CheckIfAnyEnemyConquer() then
 		ShowInfo.RunningInfo("【防御模式】")
-		while normal:CheckIfAnyEnemyConquer() do
-			sleep(1000)
-		end
 		return
 	end
 	if interval<1000 then

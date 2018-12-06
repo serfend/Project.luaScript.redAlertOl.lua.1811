@@ -85,7 +85,7 @@ end
 function pandect:RunConscript()
 	ShowInfo.RunningInfo("<生产军备>")
 	tap(self.cataButton[1],self.cataButtonY)
-	sleep(500)
+	sleepWithCheckEnemyConquer(500)
 	self:RunIfAnyConscript()
 end
 function pandect:RunExpedition()
@@ -95,7 +95,7 @@ function pandect:RunExpedition()
 	end
 	ShowInfo.RunningInfo("<出征>")
 	tap(self.cataButton[2],self.cataButtonY)
-	sleep(500)
+	sleepWithCheckEnemyConquer(500)
 	return self:RunIfAnyTroopsFree()
 end
 --@summary:执行面板3的任务
@@ -103,7 +103,7 @@ end
 function pandect:RunOther()
 	ShowInfo.RunningInfo("其他选项")
 	tap(self.cataButton[3],self.cataButtonY)
-	sleep(500)
+	sleepWithCheckEnemyConquer(500)
 	screen.keep(true)
 	local anyTask={}
 	anyTask[1]=self:CheckIfSupply()
