@@ -17,6 +17,7 @@ CityMap={
 	军需处={x=-1190,y=320,Priority=7},
 	特惠商人={x=120,y=320,Priority=-1},
 	军需处={x=-1080,y=340,Priority=-1},
+	英雄大厦={x=-310,y=320,Priority=-1},
 }
 
 for k,v in pairs(CityMap) do

@@ -93,6 +93,10 @@ Setting={
 			BuyTruck=true,--购买矿车加成
 			AutoRefresh=true,--自动免费刷新
 		},
+		Supply={
+			Enable=true,
+			res=1,--1:矿 2:油 3:合金 4:稀土
+		},
 	}
 }
 

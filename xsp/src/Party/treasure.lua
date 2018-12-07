@@ -66,7 +66,7 @@ function party:CheckIfNewTreasure()
 	end
 	local todayNewCheck=storage.get("party.treasure.todayNewCheck","")
 	local needCheck=false
-	if todayNewCheck==os.date("%Y-%m-%d") then
+	if todayNewCheck==os.date("%Y-%m-%d") then--新的一天，强行检查
 		local r,g,b=screen.getRGB(396,1170)--礼品信息点
 		needCheck=(r>200 and g<100 and b<100)
 	else

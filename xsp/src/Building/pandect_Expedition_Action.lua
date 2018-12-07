@@ -107,8 +107,10 @@ end
 --@summary:选中目标
 --@param selectModel:0-弹窗 1-5:由左至右5个按钮
 function pandect:SelectCurrentTarget(index)
-	tap(360,640)--屏幕正中间
-	sleep(1500)
+	if index==0 then--仅有弹窗类需要点击中间
+		tap(360,640)--屏幕正中间
+		sleep(1500)
+	end
 	self:SelectMapTargetButton(index)
 end
 --@summary:选中目标按钮

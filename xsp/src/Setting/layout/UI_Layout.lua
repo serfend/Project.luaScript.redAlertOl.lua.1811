@@ -57,3 +57,12 @@ function UI_Layout:Add(ui)
 	self.rootView:addSubview(ui.view)
 	ui.parent=self
 end
+
+--@summary:清空当前绑定的ui
+function UI_Layout:Clear()
+	self.Controls={}
+end
+--@summary:返回当前管理的ui数量
+function UI_Layout:Count()
+	return #self.Controls
+end

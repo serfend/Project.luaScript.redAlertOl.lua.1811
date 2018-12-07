@@ -6,6 +6,8 @@ UIHandle={
 	InitCheck=false,--当有第一条消息到达后返回
 }
 require "UIHandle.UIHandle_Dialog"
+require "UIHandle.UIHandle_Manager"
+require "UIHandle.UIHandle_Setting"
 function UIHandle:new(o)
     o = o or {}
     setmetatable(o, self)
@@ -56,8 +58,6 @@ function UIHandle:CheckIfNewDialog()
 		)
 	end
 end
-
-
 function UIHandle:CloseContext()
 	self.anyUIShow=false
 end

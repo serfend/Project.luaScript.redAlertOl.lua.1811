@@ -31,35 +31,3 @@ function UIHandle:Dialog_OkCancel(title,info,callbackOk,callbackCancel)
 	self:ControlsBind(uilist)
 	self:Dialog_Show(uilist)
 end
-function UIHandle:ControlsBind(uilist)
-	for i,v in pairs(uilist) do
-		if not v.Controls then--非layout
-			uilist.layout:Add(v)
-		end
-	end
-end
-function UIHandle:Dialog_Show(uilist)
-	uilist.layout:Show()
-	while self.anyUIShow do
-		sleep(10)
-		if uilist.layout:Refresh() then
-			self:CloseContext()
-		end
-	end
-	uilist.layout:Close()
-end
-local instanceCount=0
-function UIHandle:BuildButton(uilist,callback,color,caption)
-	instanceCount=instanceCount+1
-	local id="Btn"..instanceCount
-	local button=UI_Button:new()
-	button:Init(id,uilist.layout.context,Context.BtnNormal,color)
-	button:SetText(caption)
-	button:OnClick(
-		function(id,action)
-			callback(uilist)
-		end
-	)
-	uilist[id]=button
-	return button
-end

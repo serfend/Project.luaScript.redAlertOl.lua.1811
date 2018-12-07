@@ -30,6 +30,7 @@ function main()
 	Building.normal=normal:new()
 	Building.pandect=pandect:new()
 	Building.building=CityBuilding:new()
+	daily=Daily:new()
 	toolBar=ToolBar:new()
 	party=party:new()
 	ocr=OCR:new()
@@ -79,16 +80,17 @@ function newConnection()
 	end)
 end
 function mainLoop()
-	uiHandle:NewDialog("normalDialogOkCancel",
-		"<title>是否开启中控模式</title><info>开启中控模式后,进入:\nhttp://1s68948k74.imwork.net:16397页面进行控制</info>"
-	)
-	while uiHandle:CheckIfNewDialog() do
-		sleep(1000)
-	end
-	if uiHandle.uiResult=="ok" then
-		newConnection()
-	end
+--	uiHandle:NewDialog("normalDialogOkCancel",
+--		"<title>是否开启中控模式</title><info>开启中控模式后,进入:\nhttp://1s68948k74.imwork.net:16397页面进行控制</info>"
+--	)
+--	while uiHandle:CheckIfNewDialog() do
+--		sleep(1000)
+--	end
+--	if uiHandle.uiResult=="ok" then
+--		newConnection()
+--	end
 	ResetForm()--初始化
+	
 	while true do
 		newRound()
 	end
@@ -101,8 +103,6 @@ function newRound()
 	end
 	local thisTime=os.milliTime()
 	local activeMode=false
-	
-
 	local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
 		(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
 	if refreshTimeLeft<0 then
@@ -114,20 +114,19 @@ function newRound()
 		ShowInfo.RunningInfo(string.format("【值勤模式】,%d秒",refreshTimeLeft),true)
 	end
 	MainForm:CheckNormalPageTask()
-	if not normal.InDanger then
-		if activeMode then
-			party:NewCheckParty()
-		end
-		
-		Building.pandect:ResetSetting()
-		Building.pandect:NewCheckPandect(activeMode)
-		if Building.building:Run(activeMode) then
-			sleepWithCheckEnemyConquer(500)
-		end
-		if activeMode then
-			ResetForm()
-		end
+	if activeMode then
+		party:NewCheckParty()
+		daily:NewCheckDaily()
+	end
+	
+	Building.pandect:ResetSetting()
+	Building.pandect:NewCheckPandect(activeMode)
+	if Building.building:Run(activeMode) then
 		sleepWithCheckEnemyConquer(500)
 	end
+	if activeMode then
+		ResetForm()
+	end
+	sleepWithCheckEnemyConquer(500)
 end
 main()
