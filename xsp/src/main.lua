@@ -1,19 +1,14 @@
+
 require "Setting.usingPack"
-require "Setting.UserSettingBase"
 require "util"--加载工具
 require "Setting.SettingACheck"--加载全局设置
 
 function loadSetting()
-	userTargetSettingName=storage.get("UserSettingBase","默认设置")
-	ui=sfUI:new()
-	option,userSetting=ui:show(userTargetSettingName)
-	if option==0 then 
-		setting=SettingBase:new()
-		sysLog("设置初始化完成共计"..#setting.settings)
-		setting:SwitchSetting()
-		return loadSetting()
+	ShowInfo.RunningInfo("loadSetting")
+	uiHandle:NewDialog("mainSetting",userTargetSettingName)
+	while uiHandle:CheckIfNewDialog() do
+		sleep(1000)
 	end
-	return true
 end
 
 
@@ -24,7 +19,6 @@ function main()
 	encrypt=Encrypt:new()
 	ShowInfo.RunningInfo("初始化")
 	math.randomseed(os.milliTime())
-	--while not loadSetting() do end
 	MainForm=Form:new()
 	Building={}
 	Building.normal=normal:new()
@@ -69,7 +63,6 @@ function newConnection()
 		ShowInfo.RunningInfo("连接成功")
 	else
 		ShowInfo.RunningInfo("连接失败,离线模式")
-		
 		return false
 	end
 	sleep(1000)
@@ -80,17 +73,20 @@ function newConnection()
 	end)
 end
 function mainLoop()
---	uiHandle:NewDialog("normalDialogOkCancel",
---		"<title>是否开启中控模式</title><info>开启中控模式后,进入:\nhttp://1s68948k74.imwork.net:16397页面进行控制</info>"
---	)
---	while uiHandle:CheckIfNewDialog() do
---		sleep(1000)
---	end
---	if uiHandle.uiResult=="ok" then
---		newConnection()
---	end
+	uiHandle:NewDialog("normalDialogOkCancel",
+		"<title>是否开启中控模式</title><info>开启中控模式后,进入:\nhttp://1s68948k74.imwork.net:16397页面进行控制</info>"
+	)
+	while uiHandle:CheckIfNewDialog() do
+		sleep(1000)
+	end
+	local success=false
+	if uiHandle.uiResult=="ok" then
+		success=newConnection()
+	end
+	if not success then
+		loadSetting()
+	end
 	ResetForm()--初始化
-	
 	while true do
 		newRound()
 	end
