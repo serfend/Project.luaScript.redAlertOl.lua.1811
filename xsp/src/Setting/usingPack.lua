@@ -1,4 +1,7 @@
-require "Setting.SettingUserInterface"
+require "Setting.layout.normal"
+require "Setting.layout.CSS"
+require "Setting.layout.context"
+
 require "SettingBase.Init"
 require "SettingBase.Screen"
 

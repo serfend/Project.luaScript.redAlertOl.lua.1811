@@ -37,10 +37,10 @@ Setting={
 		--@property Action:0-Dialog_OK 1-5:对应地图中按钮
 		--@property Troop:0-默认 5-最高等级 6-最大负重 7-最快行军 8-均衡搭配 1到4-编队
 		TargetInfo={
-			[1]={Enemy=4,Rank={max=7,min=4},Action=5,Troop=0},
-			[2]={Enemy=4,Rank={max=7,min=4},Action=5,Troop=0},
-			[3]={Enemy=4,Rank={max=7,min=4},Action=5,Troop=0},
-			[4]={Enemy=4,Rank={max=7,min=4},Action=5,Troop=0},
+			[1]={Enemy=3,Rank={max=7,min=4},Action=5,Troop=0},
+			[2]={Enemy=3,Rank={max=7,min=4},Action=5,Troop=0},
+			[3]={Enemy=3,Rank={max=7,min=4},Action=5,Troop=0},
+			[4]={Enemy=3,Rank={max=7,min=4},Action=5,Troop=0},
 		},
 		NoEnergyTargetInfo={
 			[1]={Enemy=4,Rank={max=7,min=6},Action=5,Troop=0},
@@ -89,8 +89,10 @@ Setting={
 		Recruit=true,--每日5次招募
 		DiscountStore={
 			Enable=true,
-			BuyResource=true,--购买资源类商品
-			BuyTruck=true,--购买矿车加成
+			Buy={--金币购买,矿石购买,石油购买
+				BuyNormal={0,10,10},--购买资源付费的商品
+				BuyTruck={5,10,10},--购买矿车加成 采集加速
+			},
 			AutoRefresh=true,--自动免费刷新
 		},
 		Supply={
@@ -120,16 +122,16 @@ Const={
 			[7]=0,
 			[8]=15,
 		},
-		Description={
-			[1]="野怪",
-			[2]="兵营",
-			--[3]="叛军",
-			[3]="矿石",
-			[4]="石油",
-			[5]="合金",
-			[6]="稀土",
-			[7]="基地",
-		},
+--		Description={
+--			[1]="野怪",
+--			[2]="兵营",
+--			--[3]="叛军",
+--			[3]="矿石",
+--			[4]="石油",
+--			[5]="合金",
+--			[6]="稀土",
+--			[7]="基地",
+--		},
 		
 		TargetButton={
 			[1]={200,590},
@@ -137,6 +139,14 @@ Const={
 			[3]={350,425},
 			[4]={470,485},
 			[5]={530,590}
+		},
+		
+	},
+	Daily={
+		DiscountStore={
+			Require={
+				"金币支付","矿石支付","石油支付"
+			}
 		}
 	}
 }

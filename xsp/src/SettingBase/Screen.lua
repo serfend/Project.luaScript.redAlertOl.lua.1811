@@ -20,12 +20,149 @@ CityMap={
 	英雄大厦={x=-310,y=320,Priority=-1},
 }
 
+OutCityMap={
+	{
+		Name="城外建筑",x=1120,y=60,Priority=7
+	},
+	{
+		Name="城外建筑",x=1290,y=105,Priority=7
+	},
+	{
+		Name="城外建筑",x=955,y=220,Priority=7
+	},
+	{
+		Name="城外建筑",x=1105,y=195,Priority=7
+	},
+	{
+		Name="城外建筑",x=1330,y=210,Priority=7
+	},
+	
+	
+	{--6到10
+		Name="城外建筑",x=1080,y=360,Priority=7
+	},
+	{
+		Name="城外建筑",x=1270,y=400,Priority=7
+	},
+	{
+		Name="城外建筑",x=1435,y=430,Priority=7
+	},
+	{
+		Name="城外建筑",x=1120,y=470,Priority=7
+	},
+	{
+		Name="城外建筑",x=1310,y=510,Priority=7
+	},
+	
+	{--11到15
+		Name="城外建筑",x=1010,y=600,Priority=7
+	},
+	{
+		Name="城外建筑",x=1150,y=630,Priority=7
+	},
+	{
+		Name="城外建筑",x=1300,y=680,Priority=7
+	},
+	{
+		Name="城外建筑",x=990,y=720,Priority=7
+	},
+	{
+		Name="城外建筑",x=1150,y=780,Priority=7
+	},
+	
+	
+	{--16到20
+		Name="城外建筑",x=800,y=680,Priority=7
+	},
+	{
+		Name="城外建筑",x=700,y=790,Priority=7
+	},
+	{
+		Name="城外建筑",x=820,y=860,Priority=7
+	},
+	{
+		Name="城外建筑",x=570,y=890,Priority=7
+	},
+	{
+		Name="城外建筑",x=670,y=955,Priority=7
+	},
+	
+	
+	{--21到25
+		Name="城外建筑",x=1000,y=1000,Priority=7
+	},
+	{
+		Name="城外建筑",x=1180,y=1050,Priority=7
+	},
+	{
+		Name="城外建筑",x=800,y=1100,Priority=7
+	},
+	{
+		Name="城外建筑",x=950,y=1160,Priority=7
+	},
+	{
+		Name="城外建筑",x=1140,y=1220,Priority=7
+	},
+	
+	{--26到30
+		Name="城外建筑",x=230,y=1030,Priority=7
+	},
+	{
+		Name="城外建筑",x=110,y=1150,Priority=7
+	},
+	{
+		Name="城外建筑",x=320,y=1200,Priority=7
+	},
+	{
+		Name="城外建筑",x=-45,y=1240,Priority=7
+	},
+	{
+		Name="城外建筑",x=150,y=1330,Priority=7
+	},
+	
+	
+	{--31到35
+		Name="城外建筑",x=560,y=1250,Priority=7
+	},
+	{
+		Name="城外建筑",x=690,y=1340,Priority=7
+	},
+	{
+		Name="城外建筑",x=470,y=1380,Priority=7
+	},
+	{
+		Name="城外建筑",x=590,y=1490,Priority=7
+	},
+	{
+		Name="城外建筑",x=750,y=1460,Priority=7
+	},
+}
+
+CityIndex={}--建筑索引
 for k,v in pairs(CityMap) do
 	if v.Priority>0 then
 		local tmp={}
 		tmp.Name=k
 		tmp.Priority=v.Priority
 		tmp.MaxRank=0
+		tmp.x=v.x
+		tmp.y=v.y
 		table.insert(Setting.Building.List,tmp)--初始化建筑
+		CityIndex[tmp.Name]=tmp
 	end
 end
+
+for i,v in ipairs(OutCityMap) do
+	if v.Priority>0 then
+		local tmp={}
+		tmp.Name=v.Name .. i
+		tmp.Priority=v.Priority
+		tmp.MaxRank=0
+		tmp.x=v.x
+		tmp.y=v.y
+		tmp.isOutside=true
+		table.insert(Setting.Building.List,tmp)
+		CityIndex[tmp.Name]=tmp
+	end
+end
+
