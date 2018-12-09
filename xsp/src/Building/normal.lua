@@ -15,6 +15,7 @@ function normal:UseProtect()
 95, screen.PRIORITY_DEFAULT)
 	if point.x<0 then
 		ShowInfo.RunningInfo("当前无防护罩可用")
+		sleep(1000)
 	else
 		showRectPos(point.x+100,point.y+30)
 	end
@@ -43,13 +44,14 @@ function normal:StartProtect(targetY)
 	tap(621,targetY)--点击查看按钮
 	sleep(1000)
 	tap(186,458)--坐标点按钮
-	sleep(1000)
+	sleep(2000)
 	pandect:SelectCurrentTarget(5)
 	sleep(500)
 	local point = screen.findColor(Rect(30, 61, 72, 52), 
 "0|0|0xfffdf4,25|8|0x6d4e31,11|17|0x8d683c",
 95, screen.PRIORITY_DEFAULT)--检查是否在开罩界面
 	if point.x>0 then
+		ShowInfo.ResInfo("防护罩界面")
 		tap(354,233)
 		sleep(500)
 		self:UseProtect()
@@ -109,7 +111,6 @@ end
 
 --@summary:检查当前来犯敌人类型
 function normal:CheckEnemyConquerCount()
-	
 	local judgeX=35
 	local result={[1]={},[2]={},[3]={}}
 	local enemyCount={0,0,0}--攻击数量

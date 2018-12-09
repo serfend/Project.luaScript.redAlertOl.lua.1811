@@ -20,22 +20,21 @@ function pandect:ExpeditAction_OnTarget(targetInfo)
 	end
 	while true do
 		self:SelectTargetRank(targetInfo.Rank.now,nowRankRange)
-		ShowInfo.ResInfo(string.format("选中 %s 等级:%d",
-			Const.Expedition.Description[targetInfo.Enemy],
+		ShowInfo.ResInfo(string.format("选中%d号目标 等级:%d",
+			targetInfo.Enemy,
 			targetInfo.Rank.now
 		))
 		result=self:EnsureSelectTarget(targetInfo)
 		if result==0 then
 			break
-			else if result==-4 then--仅只有无目标可选时继续
-				targetInfo.Rank.now=targetInfo.Rank.now-1
-				if targetInfo.Rank.now<actualRankMin then
-					ShowInfo.ResInfo("已无目标可选")
-					return -4
-				end
-			else
-				return result
+		elseif result==-4 then--仅只有无目标可选时继续
+			targetInfo.Rank.now=targetInfo.Rank.now-1
+			if targetInfo.Rank.now<actualRankMin then
+				ShowInfo.ResInfo("已无目标可选")
+				return -4
 			end
+		else
+			return result
 		end
 	end
 	return 0

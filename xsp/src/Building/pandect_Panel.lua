@@ -48,6 +48,5 @@ function pandect:PanelCheckRangeColor(x,y,colorInfo)
 	tg=tg/3
 	tb=tb/3
 	result= colorInfo.rmax>tr and colorInfo.rmin<tr and colorInfo.gmax>tg and colorInfo.gmin<tg and colorInfo.bmax>tb and colorInfo.bmin<tb
-	--showRectPos(x,y,1000,nil,result and "有效" or "无效")
 	return result
 end

@@ -5,7 +5,8 @@ pandect={
 	},
 	cataButtonY=300,
 	Expedition={
-		nowQueue
+		rankRangeY=0,--//TODO 用于监测等级区域发生变化的情况
+		rankSwipRangeY=0,--//TODO 同上
 	},
 	banTroopQueue={}
 }
