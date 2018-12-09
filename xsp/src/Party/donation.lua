@@ -27,7 +27,7 @@ end
 
 --@summary:进行全部捐献	
 function party:DonateAll(times)
-	ShowInfo.ResInfo("联盟捐献%d次",times)
+	ShowInfo.ResInfo(string.format("联盟捐献%d次",times))
 	tap(118,698)
 	sleepWithCheckEnemyConquer(1000)
 	local point = screen.findColor(Rect(244, 328, 140, 874), 
