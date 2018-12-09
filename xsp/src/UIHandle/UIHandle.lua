@@ -1,18 +1,17 @@
 UIHandle={
-	anyUIShow=false,--当有任何UI运行时,停止操作
-	uiDialog="",
-	uiInfo="",
-	uiResult="",
-	InitCheck=false,--当有第一条消息到达后返回
+
 }
 require "UIHandle.UIHandle_Dialog"
 require "UIHandle.UIHandle_Manager"
 require "UIHandle.UIHandle_Setting"
 function UIHandle:new(o)
     o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    return o
+	o.anyUIShow=false--当有任何UI运行时,停止操作
+	o.uiDialog=""
+	o.uiInfo=""
+	o.uiResult=""
+	o.InitCheck=false--当有第一条消息到达后返回
+    return setmetatable(o, {__index=UIHandle})
 end
 function UIHandle:NewDialog(id,info)
 	self.uiDialog=id
@@ -36,10 +35,12 @@ function UIHandle:CheckIfNewDialog()
 		local des=string.GetElementInItem(verInfo,"des")
 		return self:Dialog_OkCancel("新版本"..ver,des,
 			function(x) 
-				x.timespan:AddTime(15)
+				self.uiResult="ok"
+				self:CloseContext()
 			end,
 			function(x) 
-		
+				self.uiResult="cancel"
+				self:CloseContext()
 			end
 		)
 	end
@@ -56,6 +57,9 @@ function UIHandle:CheckIfNewDialog()
 				self:CloseContext()
 			end
 		)
+	end
+	if self.uiDialog=="mainSetting" then--主设置界面
+		return self:SettingDialogShow()
 	end
 end
 function UIHandle:CloseContext()

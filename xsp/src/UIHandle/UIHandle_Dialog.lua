@@ -1,26 +1,26 @@
 
 function UIHandle:Dialog_OkCancel(title,info,callbackOk,callbackCancel)
-	local uilist={}
-	uilist.layout=UI_Layout:new()
+	local uilist=Container:new()
+	uilist:Add("layout",UI_Layout:new())
 	uilist.layout:Init(Context.retDialog)
 	local dialogHeight=400
-	local dialogWidht=Global.size.width*0.8
-	uilist.layout:SetStyle(View.SetLayoutCenter(dialogWidht,dialogHeight))
+	local dialogWidth=Global.size.width*0.8
+	uilist.layout:SetStyle(View.SetLayoutCenter(dialogWidth,dialogHeight))
 	
-	uilist.timespan=UI_Timespan:new()
-	uilist.timespan:Init("countdown_1",uilist.layout.context,Context.TimeSpan,Color3B(100,100,200),dialogWidht,15)
+	uilist:Add("timespan",UI_Timespan:new())
+	uilist.timespan:Init("countdown_1",uilist.layout.context,Context.TimeSpan,Color3B(100,100,200),dialogWidth,15)
 	
-	uilist.TxtTitle=UI_Label:new()
+	uilist:Add("TxtTitle",UI_Label:new())
 	uilist.TxtTitle:Init("TxtTitle",uilist.layout.context,Context.LabelNormal,Color3B(100,100,220))
 	uilist.TxtTitle:SetText(title)
 	uilist.TxtTitle:SetFontSize(40)
-	uilist.TxtTitle.nowX=-dialogWidht
+	uilist.TxtTitle.nowX=-dialogWidth
 	
-	uilist.TxtInfo=UI_Label:new()
+	uilist:Add("TxtInfo",UI_Label:new())
 	uilist.TxtInfo:Init("TxtInfo",uilist.layout.context,Context.LabelNormal,Color3B(100,100,220))
 	uilist.TxtInfo:SetText(info)
 	uilist.TxtInfo:SetFontSize(20)
-	uilist.TxtInfo.nowX=dialogWidht
+	uilist.TxtInfo.nowX=dialogWidth
 
 	local btnOK=self:BuildButton(uilist,callbackOk,Color3B(100,100,220),"确定")
 	local btnCancel=self:BuildButton(uilist,callbackCancel,Color3B(200,100,100),"取消")
