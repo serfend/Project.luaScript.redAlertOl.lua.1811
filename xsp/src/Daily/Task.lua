@@ -25,6 +25,7 @@ function Daily:DailyTaskRun()
 			v()
 		end
 	end
+	MainForm:ExitForm()
 end
 
 --@summary:检查是否每日任务上有红点
@@ -59,6 +60,7 @@ function Daily:RunDailyTaskActivityAward()
 		tap(k.x-5,k.y-5)
 		sleep(1000)
 		tap(359,965)--领取
+		sleep(1000)
 	end
 end
 

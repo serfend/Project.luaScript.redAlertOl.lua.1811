@@ -5,6 +5,7 @@ function Daily:RunSupply()
 		ShowInfo.ResInfo("军需处被禁用")
 		return
 	end
+	storage.put("Daily.Supply.todayNewCheck",os.date("%Y-%m-%d"))
 end
 
 function Daily:CheckIfNewSupply()
@@ -12,7 +13,6 @@ function Daily:CheckIfNewSupply()
 	if todayNewCheck==os.date("%Y-%m-%d") then
 		return false--当天已查询过则返回
 	else
-		storage.put("Daily.Supply.todayNewCheck",os.date("%Y-%m-%d"))
 		ShowInfo.ResInfo("开始检查军需处")
 		return function() self:RunSupply() end
 	end
