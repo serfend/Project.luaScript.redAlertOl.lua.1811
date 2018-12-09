@@ -1,18 +1,15 @@
 UI_Timespan={
-	beginTimeStamp=0,
-	totalTime=0,
-	nowShowTimeLeft=0,
-	view=nil,
-	viewWidth=0,
-	
 	
 }
 
 function UI_Timespan:new (o)
     o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    return o
+	o.beginTimeStamp=0
+	o.totalTime=0
+	o.nowShowTimeLeft=0
+	o.view=nil
+	o.viewWidth=0
+	return setmetatable(o, {__index=UI_Timespan})
 end
 --@summary:初始化TimeSpan控件
 --@param string id:控件id
@@ -37,12 +34,19 @@ function UI_Timespan:Refresh()
 	local colorLen=math.floor(255*self.nowShowTimeLeft/self.totalTime)
 	if colorLen>255 then colorLen=255 end
 	local color=Color3B(255-colorLen,colorLen,0)
-	self.view:setStyle("background-color",string.format("#%06x",color:toValue()))
+	local colorStr=string.format("#%06x",color:toInt())
+	self.view:setStyle("background-color",colorStr)
 	self.view:setStyle("width",self.viewWidth*self.nowShowTimeLeft/self.totalTime)
-	
-	self.view:getSubview(1):setAttr("value",string.format("%.1fs",self.nowShowTimeLeft))
+	local txtView=self.view:getSubview(1)
+	if txtView then
+		txtView:setAttr("value",string.format("%.1fs",self.nowShowTimeLeft))
+	else
+		print("UI_Timespan.Refresh().Exception:TextViewIsNil")
+	end
 	return false
 end
+
+
 --@summary:从布局中删除此控件
 function UI_Timespan:Delete()
 	self.parent:Delete(self.view:getID())

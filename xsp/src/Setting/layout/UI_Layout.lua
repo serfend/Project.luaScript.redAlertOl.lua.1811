@@ -1,7 +1,5 @@
 UI_Layout={
-	context=nil,
-	rootView=nil,
-	Controls={},--管理所有控件
+
 }
 
 --@summary:初始化布局
@@ -9,14 +7,21 @@ UI_Layout={
 --@param string cssData:布局样式数据源
 function UI_Layout:Init(contextData,cssData)
 	cssData=cssData or CSS.default
-	self.context=UI.createContext(contextData,CSS.default)
-	self.rootView=self.context:getRootView()
+	self.context=UI.createContext(contextData,cssData)
+	if not self.context then
+		dialog("界面初始化异常，请联系作者\nTrace:"..formatTable(contextData))
+		return false
+	else
+		self.view=self.context:getRootView()
+	end
 end
-function UI_Layout:new (o)
+function UI_Layout.new (o)
     o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-	return o
+	o.context=nil
+	o.view=nil
+	o.Controls={}--管理所有控件
+	
+	return setmetatable(o, { __index = UI_Layout })
 end
 function UI_Layout:Show()
 	self.context:show()
@@ -54,7 +59,7 @@ end
 --@summary:在此布局下加入控件
 function UI_Layout:Add(ui)
 	table.insert(self.Controls,ui)
-	self.rootView:addSubview(ui.view)
+	self.view:addSubview(ui.view)
 	ui.parent=self
 end
 
@@ -65,4 +70,8 @@ end
 --@summary:返回当前管理的ui数量
 function UI_Layout:Count()
 	return #self.Controls
+end
+
+function UI_Layout:CreateControl(control)
+	
 end

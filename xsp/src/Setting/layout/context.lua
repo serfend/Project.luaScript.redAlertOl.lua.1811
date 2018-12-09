@@ -1,5 +1,5 @@
 Context={
-	
+	--@summary:常规按钮控件
 	BtnNormal={
 			id = 'BtnDefault',
 			view = 'div',
@@ -12,22 +12,14 @@ Context={
 				}
 			}
 		},
+	--@summary:常规标签控件
 	LabelNormal={
 		id="LabelDefault",
 		view="text",
 		class="txt",
 	},
-	logo={
-			view = 'image',
-			class = 'logo', -- 动态创建的image使用到了globalStyle中的'logo'
-			src = 'http://www.xxzhushou.cn/statics/images/xxcms5/logo.png',
-			style = {
-				width = 280,
-				height = 76
-			}
-		},
-
 	
+	--@summary:对话框布局
 	retDialog={
 		view="div",
 		style={
@@ -35,6 +27,15 @@ Context={
 		},
 	},
 	
+	--@summary:核心设置布局
+	rootSetting={
+		view="div",
+		style={
+			['background-color'] = '#a1000000',
+		},
+	},
+	
+	--@summary:计时器控件
 	TimeSpan={
 		id="timeSpan",
 		view="div",

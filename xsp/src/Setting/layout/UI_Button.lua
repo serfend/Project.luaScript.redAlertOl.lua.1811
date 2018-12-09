@@ -1,7 +1,5 @@
 UI_Button={
-	view=nil,
-	targetX=0,targetY=0,nowX=0,nowY=0
-}
+	}
 
 --@summary:创建新的按钮
 --@param string id:对象id
@@ -15,9 +13,12 @@ function UI_Button:Init(id,context,rawData,color)
 end
 function UI_Button:new (o)
     o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-	return o
+	o.view=nil
+	o.targetX=0
+	o.targetY=0
+	o.nowX=0
+	o.nowY=0
+    return setmetatable(o, {__index=UI_Button})
 end
 
 function UI_Button:OnClick(callBack)

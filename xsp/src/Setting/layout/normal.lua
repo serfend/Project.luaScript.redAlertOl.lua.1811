@@ -1,7 +1,8 @@
 --@summary:
---遵循layout管理所属控件，控件实现Controls接口
+--遵循layout管理所属控件，控件实现IControl接口
 --@author:@github.com/serfend
 --@date:2018-12-8
+require "Setting.layout.Container"
 require "Setting.layout.UI_Layout"
 require "Setting.layout.UI_Timespan"
 require "Setting.layout.UI_Button"
@@ -20,9 +21,9 @@ function View.SetLayout(x,y,w,h)
 end
 function View.SetLayoutCenter(w,h)
 	return {
-		left=0.5*(Global.size.width-w),
-		top=0.5*(Global.size.height-h),
-		width=w,
+		left=math.floor(0.5*(Global.size.width-w)),
+		top=math.floor(0.5*(Global.size.height-h)),
+		width=w+30,
 		height=h
 	}
 end
@@ -34,30 +35,24 @@ end
 function View.SetButtonStyle(themeColor,targetView)
 	--ENABLED
 	local enableColor=Color3B(themeColor)
-	targetView:setPseudoStyle(UI.PSEUDO.ENABLED,'background-image' , 
-		string.format('linear-gradient(to bottom right, %s, %s)',
-			string.format("#%06x",enableColor:toValue()),
-			string.format("#%06x",View.Color3BModify(enableColor,0.5):toValue())
+	local formatEnableColor=string.format('linear-gradient(to bottom right, #%06x, #%06x)',
+				enableColor:toInt(),View.Color3BModify(enableColor,0.5):toInt()
 			)
-		)
+	targetView:setPseudoStyle(UI.PSEUDO.ENABLED,'background-image' , formatEnableColor)
 	--ACTIVE
 	local activeColor=Color3B(themeColor)
-	targetView:setPseudoStyle(UI.PSEUDO.ACTIVE,'background-image' , 
-		string.format('linear-gradient(to bottom right, %s, %s)',
-		string.format("#%06x",activeColor:toValue()),
-		string.format("#%06x",View.Color3BModify(activeColor,0.1):toValue())
+	local formatActiveColor=string.format('linear-gradient(to bottom right, #%06x,#%06x)',
+			activeColor:toInt(),View.Color3BModify(activeColor,0.1):toInt()
 		)
-	)	
+	targetView:setPseudoStyle(UI.PSEUDO.ACTIVE,'background-image', formatActiveColor)	
 	--DISABLE
 	local disableColorDark=Color3B(12,12,12)
 	local maxColor=math.max(themeColor.r,themeColor.g,themeColor.b)
 	local disableColorLight=Color3B(maxColor,maxColor,maxColor)
-	targetView:setPseudoStyle(UI.PSEUDO.DISABLED,'background-image' , 
-		string.format('linear-gradient(to bottom right, %s, %s)',
-		string.format("#%06x",disableColorLight:toValue()),
-		string.format("#%06x",disableColorDark:toValue())
+	local formatDisableColor=string.format('linear-gradient(to bottom right, #%06x, #%06x)',
+			disableColorLight:toInt(),disableColorDark:toInt()
 		)
-	)
+	targetView:setPseudoStyle(UI.PSEUDO.DISABLED,'background-image' , formatDisableColor)
 end
 
 --@summary:按比例变换颜色值

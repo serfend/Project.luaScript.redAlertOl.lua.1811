@@ -1,7 +1,5 @@
 UI_Label={
-	view=nil,
-	targetX=0,targetY=0,
-	nowX=0,nowY=0
+	
 }
 
 --@summary:创建新的标签
@@ -15,9 +13,13 @@ function UI_Label:Init(id,context,rawData,color)
 end
 function UI_Label:new (o)
     o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-	return o
+	o.view=nil
+	o.targetX=0
+	o.targetY=0
+	o.nowX=0
+	o.nowY=0
+    setmetatable(o, {__index=UI_Label})
+    return o
 end
 function UI_Label:OnClick(callBack)
 	local f=function(id,action) 
