@@ -79,10 +79,7 @@ function CityBuilding:RunBuilding(buildingName)
 	local success=self:NowSelectBuildingUpLevel()
 	return success
 end
---summary:重置建筑导航，将导致寻址时退回重进城市
-function CityBuilding:ResetBuildingNavigator()
-	firstTimeFindingBuilding=true--归零上次移动
-end
+
 function CityBuilding:ReEnterCity()
 	tap(65,1233)
 	sleepWithCheckEnemyConquer(1500)
@@ -90,26 +87,58 @@ function CityBuilding:ReEnterCity()
 end
 local firstTimeFindingBuilding=true
 local lastPosX,lastPosY=0,0
+--summary:重置建筑导航，将导致寻址时退回重进城市
+function CityBuilding:ResetBuildingNavigator()
+	firstTimeFindingBuilding=true--归零上次移动
+	lastPosX=0
+	lastPosY=0
+end
 function CityBuilding:Navigate(buildingName,relyOnLastBuilding)
+	ShowInfo.ResInfo(string.format("寻找建筑:%s",buildingName))
+	local building=CityIndex[buildingName]
+	if not building then
+		dialog(string.format("正在尝试寻找不存在的建筑:%s\n请联系作者询问原因",buildingName))
+		return false
+	end
 	local targetX,targetY=0,0
-	if relyOnLastBuilding and not firstTimeFindingBuilding then
-		targetX,targetY=CityMap[buildingName].x-lastPosX,CityMap[buildingName].y-lastPosY
+	if relyOnLastBuilding and (not firstTimeFindingBuilding) then
+		print("依据上次坐标进行查询")
+		targetX,targetY=building.x-lastPosX,building.y-lastPosY
 	else
 		self:ReEnterCity()
 		firstTimeFindingBuilding=false
 		if not self:CheckIfActualyInPoint() then
 			ShowInfo.ResInfo("处理总览以修正坐标")
 			Building.pandect:NewCheckPandect(true)
+			sleep(1000)
 			self:ReEnterCity()
 		end
-		targetX,targetY=CityMap[buildingName].x,CityMap[buildingName].y
+		targetX,targetY=building.x,building.y
 	end
-	lastPosX,lastPosY=CityMap[buildingName].x,CityMap[buildingName].y
-	ShowInfo.ResInfo(string.format("寻找建筑:%s",buildingName))
-	sleep(500)
+	lastPosX,lastPosY=building.x,building.y
 	
+	sleep(500)
 	self:NavigateScreen(targetX,targetY)
-	tap(360,640)
+	if building.isOutside then
+		--城外建筑检查是否成功选中，而非点中【获取资源】
+		local tryTime=0
+		while tryTime<5 do
+			tap(360,640)
+			sleep(500)
+			local point = screen.findColor(Rect(137, 652, 474, 204), 
+	"0|0|0xc7a86f,7|-7|0xc1a26b",
+	98, screen.PRIORITY_DEFAULT)
+			if point.x>0 then break end
+			tryTime=tryTime+1
+		end
+		if tryTime==5 then
+			ShowInfo.ResInfo("建筑定位失败")
+			self:ResetBuildingNavigator()
+			return false
+		end
+	else
+		tap(360,640)
+	end
 	sleepWithCheckEnemyConquer(1000)
 end
 --@summary:检查是否真的在主基地处
@@ -128,5 +157,5 @@ function CityBuilding:NavigateScreen(dx,dy)
 	local dis=math.abs(dx)+math.abs(dy)+20
 
 	swip(beginX,beginY,beginX-dx,beginY-dy,dis/50)
-	showRect(355,635,365,645,500)
+	showRectPos(360,640,500)
 end
