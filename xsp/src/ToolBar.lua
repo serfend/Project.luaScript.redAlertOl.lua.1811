@@ -9,7 +9,7 @@ function ToolBar:new (o)
     return o
 end
 function ToolBar:CheckIfInCity()
-	--showRect(555,52,555+81,52+47,5000)
+	--showRect(555,52,81,47,5000)
 	local point = screen.findColor(Rect(555, 52, 81, 47), 
 "0|0|0x773e11,1|35|0xc67f39",
 95, screen.PRIORITY_DEFAULT)
@@ -35,7 +35,7 @@ function ToolBar:GetNowScene()
 		end
 	end
 	screen.keep(false)
-	ShowInfo.ResInfo(string.format("当前处于%s场景下",Const.Toolbar.scene[self.nowScene]))
+	--ShowInfo.ResInfo(string.format("当前处于%s场景下",Const.Toolbar.scene[self.nowScene]))
 	return self.nowScene
 end
 local toolBarInfo={
