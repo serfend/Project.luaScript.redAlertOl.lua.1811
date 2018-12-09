@@ -4,6 +4,8 @@ OcrInfo={
 		mapTargetRank="0xa99956-0xa0a022",
 		PandectLeftTime="0x99894d-0x41ffff",
 		DonationTime="0xafa46a-0x4c9c4c",
+		DiscountStoreDiscount="0xffffff-0x828282",
+		DiscountStoreRefreshTime="0xffffff-0xafafaf",
 	}
 }
 function OcrInfo:new (o)
@@ -11,6 +13,14 @@ function OcrInfo:new (o)
     setmetatable(o, self)
     self.__index = self
     return o
+end
+function OcrInfo:GetDiscountStoreRefreshTime()
+	local code,result=ocr:GetMapPos(401,1246,99,28,self.fore.DiscountStoreRefreshTime)
+	return result
+end
+function OcrInfo:GetDiscountStoreDiscount(x,y,w,h)
+	local code,result=ocr:GetMapPos(x,y,w,h,self.fore.DiscountStoreDiscount)
+	return result
 end
 function OcrInfo:GetMapTargetRank()
 	local code,result=ocr:GetMapPos(255,1125,61,20,self.fore.mapTargetRank)
