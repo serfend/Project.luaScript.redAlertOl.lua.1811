@@ -1,10 +1,11 @@
 Application={
-	version="0.1.0",
-	updateDate="2018-12-5 7:21",
+	version="0.1.1",
+	updateDate="2018-12-8 20:21",
 	author="serfend",
-	groupQQ="638804493",
+	groupQQ="489518369",
 	UpdateInfo={
-		
+		"",
+		"测试版本发布"
 	},
 	ProcessInfo={
 		
