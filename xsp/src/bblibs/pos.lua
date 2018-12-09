@@ -32,7 +32,6 @@ function pos:GetImageDescription(pixInterval,size)
 	local tmpX,tmpY=dialogInput("修改坐标("..self.x..","..self.y..")",self.x.."#"..self.y,"确定")
 	self.x=tonumber((tmpX=="" and self.x or tmpX))
 	self.y=tonumber((tmpY or  self.y))
-	--showRect(self.x-10,self.y-10,self.x+10,self.y+10,1000)
 	local result="" firstInfo=""
 	for col=-size,size do
 		for row=-size,size do

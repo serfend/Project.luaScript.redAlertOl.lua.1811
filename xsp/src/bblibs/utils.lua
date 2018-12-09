@@ -51,15 +51,15 @@ function restartApp(delay)
 	end
 end
 function showRectPos(x,y,timeDelay,color,info)
-	showRect(x-10,y-10,x+10,y+10,timeDelay,color,info)
+	showRect(x-5,y-5,10,10,timeDelay,color,info)
 end
-function showRect(x1,y1,x2,y2,timeDelay,color,info)
-	sysLog("ShowRect"..x1..","..y1.."."..x2..","..y2)
+function showRect(x,y,w,h,timeDelay,color,info)
+	print("ShowRect"..x..","..y.."."..w..","..h)
 	color=color or "0xacff0000"
 	info=info or ""
 	timeDelay=timeDelay or 1000
 	local tmpHud=createHUD()
-	showHUD(tmpHud,info,(x2-x1)*0.2,"0xffffffff",color,0,x1,y1,x2-x1,y2-y1)
+	showHUD(tmpHud,info,w*0.2,"0xffffffff",color,0,x,y,w,h)
 	mSleep(timeDelay)
 	hideHUD(tmpHud)
 	mSleep(30)
@@ -104,7 +104,7 @@ end
 function CheckRectPos(x,y,r,g,b,endurence)
 	if x>rectAera.x2 or x<rectAera.x1 or y>rectAera.y2 or y<rectAera.y1 then return false end
 	if expandedRect[x][y] then return false end
-	local r2,g2,b2	=	getColorRGB(x,y)
+	local r2,g2,b2	=	screen.getRGB(x,y)
 	local aberration= 	GetAberration(r,g,b,r2,g2,b2)
 	return endurence>=aberration
 end
