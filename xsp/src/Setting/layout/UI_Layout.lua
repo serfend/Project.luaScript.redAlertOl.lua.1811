@@ -13,6 +13,7 @@ function UI_Layout:Init(contextData,cssData)
 		return false
 	else
 		self.view=self.context:getRootView()
+		self:SynView()
 	end
 end
 function UI_Layout.new (o)
@@ -20,7 +21,6 @@ function UI_Layout.new (o)
 	o.context=nil
 	o.view=nil
 	o.Controls={}--管理所有控件
-	
 	return setmetatable(o, { __index = UI_Layout })
 end
 function UI_Layout:Show()
@@ -33,6 +33,12 @@ end
 --@param table styleTable:样式数据
 function UI_Layout:SetStyle(styleTable)
 	self.context:getRootView():setStyle(styleTable)
+	self:SynView()
+end
+--@summary:同步当前view尺寸以适应控件变换
+function UI_Layout:SynView()
+	self.width=self.view:getStyle("width")
+	self.height=self.view:getStyle("height")
 end
 function UI_Layout:Refresh()
 	for i,k in ipairs(self.Controls) do

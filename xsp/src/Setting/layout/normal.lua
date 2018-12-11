@@ -4,6 +4,7 @@
 --@date:2018-12-8
 require "Setting.layout.Container"
 require "Setting.layout.UI_Layout"
+require "Setting.layout.UI_Tab"
 require "Setting.layout.UI_Timespan"
 require "Setting.layout.UI_Button"
 require "Setting.layout.UI_Label"
@@ -19,12 +20,14 @@ function View.SetLayout(x,y,w,h)
 		height=h
 	}
 end
+--@summary:设置布局尺寸并居中
+--@param single w/h:布局尺寸像素
 function View.SetLayoutCenter(w,h)
 	return {
-		left=math.floor(0.5*(Global.size.width-w)),
-		top=math.floor(0.5*(Global.size.height-h)),
-		width=w+30,
-		height=h
+		left=math.floor(375*(Global.size.width-w)/Global.size.width),--原始宽为750
+		top=math.floor(0.5*(Global.size.height-h)),--原始高为 设备高*750/设备宽
+		width=w*750/Global.size.width,
+		height=h*750/Global.size.width
 	}
 end
 

@@ -4,7 +4,7 @@ function UIHandle:Dialog_OkCancel(title,info,callbackOk,callbackCancel)
 	uilist:Add("layout",UI_Layout:new())
 	uilist.layout:Init(Context.retDialog)
 	local dialogHeight=400
-	local dialogWidth=Global.size.width*0.8
+	local dialogWidth=Global.size.width*0.9
 	uilist.layout:SetStyle(View.SetLayoutCenter(dialogWidth,dialogHeight))
 	
 	uilist:Add("timespan",UI_Timespan:new())
@@ -14,20 +14,22 @@ function UIHandle:Dialog_OkCancel(title,info,callbackOk,callbackCancel)
 	uilist.TxtTitle:Init("TxtTitle",uilist.layout.context,Context.LabelNormal,Color3B(100,100,220))
 	uilist.TxtTitle:SetText(title)
 	uilist.TxtTitle:SetFontSize(40)
-	uilist.TxtTitle.nowX=-dialogWidth
-	
+	uilist.TxtTitle.EnableAnimation=true
+	uilist.TxtTitle:Move(-dialogWidth)
 	uilist:Add("TxtInfo",UI_Label:new())
 	uilist.TxtInfo:Init("TxtInfo",uilist.layout.context,Context.LabelNormal,Color3B(100,100,220))
 	uilist.TxtInfo:SetText(info)
 	uilist.TxtInfo:SetFontSize(20)
-	uilist.TxtInfo.nowX=dialogWidth
+	uilist.TxtInfo.EnableAnimation=true
+	uilist.TxtInfo:Move(dialogWidth)
 
 	local btnOK=self:BuildButton(uilist,callbackOk,Color3B(100,100,220),"确定")
 	local btnCancel=self:BuildButton(uilist,callbackCancel,Color3B(200,100,100),"取消")
 	
-	btnOK.nowY=dialogHeight
-	btnCancel.nowY=dialogHeight
-
+	btnOK:Move(nil,dialogHeight)
+	btnCancel:Move(nil,dialogHeight)
+	btnOK.EnableAnimation=true
+	btnCancel.EnableAnimation=true
 	self:ControlsBind(uilist)
 	self:Dialog_Show(uilist)
 end

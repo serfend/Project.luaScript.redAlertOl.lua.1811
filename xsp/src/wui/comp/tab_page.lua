@@ -90,18 +90,18 @@ local wtab_page = {
             ['text-overflow'] = 'ellipsis'
         },
         tabStyleDefault = {
-            backgroundColor = '#FFFFFF',
+            backgroundColor = '#aaaaFF',
             titleColor = '#666666',
             activeTitleColor = '#3D3D3D',
-            activeBackgroundColor = '#FFFFFF',
+            activeBackgroundColor = '#9999FF',
             isActiveTitleBold = true,
             iconWidth = 70,
             iconHeight = 70,
-            width = 160,
+            width = 120,
             height = 120,
             fontSize = 24,
-            hasActiveBottom = true,
-            activeBottomColor = '#FFC900',
+            hasActiveBottom = false,
+            activeBottomColor = '#9999ff',
             activeBottomWidth = 120,
             activeBottomHeight = 6,
             textPaddingLeft = 10,
@@ -112,7 +112,35 @@ local wtab_page = {
     instanceCount = 0,
     propertyMap = {}
 }
-
+--@summary:创建一个page列表
+--@param table layout:布局数据
+--			string	.id:布局id
+--			table	.pages:布局子page源数据列表
+--			table	.config:布局设置
+--			int			.currentPage:初始化页面位置,默认为1
+--			table		.tabTitles:子page标题列表
+--			string			.activeIcon/icon:标题icon
+--			string			.value:标题内容
+--			int			.pageWidth/pageHeight:page尺寸
+--			string		.wrapBackgroundColor:布局背景色
+--			table		.tabStyle:布局菜单样式
+--			string			.backgroundColor:菜单背景色
+--			int				.height:菜单宽度
+--			int				.leftOffset:菜单偏移
+--			int				.iconWidth/iconHeight:icon尺寸
+--			int				.fontSize:icon字体大小
+--			bool			.isActiveTitleBold:激活的标题字体是否粗体
+--			string			.activeTitleColor/titleColor:标题字体颜色
+--			string			.activeBackgroundColor/backgroundColor:icon背景色
+--			string			.activeBottomColor:下划线 背景色
+--			table	.subviews:布局子页面
+--			table			[1]:作为page列表的菜单栏
+--@return table:subview:page列表
+--		table		[1]:菜单栏...
+--		table		[2]:内容...
+--		table			view:
+--		table			style:
+--		table			subviews:子page内容
 function wtab_page.createLayout(layout)
     if layout.id == nil then
         wtab_page.instanceCount = wtab_page.instanceCount + 1
@@ -124,7 +152,7 @@ function wtab_page.createLayout(layout)
     local tabTitles = tpconfig.tabTitles or {}
 
     if #tabPages ~= #tabTitles then
-        print('wtab_page config error')
+		dialog('Exception.wui.wtab_page.Init()页面与索引不匹配')
         return nil
     end
 
@@ -206,6 +234,7 @@ function wtab_page.createLayout(layout)
 
     return layout
 end
+
 
 function wtab_page.createView(context, layout)
     layout.config = layout.config or {}

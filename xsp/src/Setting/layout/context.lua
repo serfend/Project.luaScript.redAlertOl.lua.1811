@@ -29,7 +29,7 @@ Context={
 	
 	--@summary:核心设置布局
 	rootSetting={
-		view="div",
+		view="scroller",
 		style={
 			['background-color'] = '#a1000000',
 		},
@@ -53,6 +53,110 @@ Context={
 					}
 				}
 			}
+	},
+	
+	MainSetting={
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = 
+            {
+            }
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+		{
+			view = 'div',
+			style = {
+				['background-color'] = '#0000ff'
+			},
+			subviews = {
+					
+				}
+        },
+    },
+	
+	MainSettingTitle={
+		{
+			title="通用",
+			icon = 'https://gw.alicdn.com/tfs/TB1MWXdSpXXXXcmXXXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1kCk2SXXXXXXFXFXXXXXXXXXX-72-72.png',
+		},
+		{
+			title="城建",
+			icon = 'https://gw.alicdn.com/tfs/TB1ARoKSXXXXXc9XVXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB19Z72SXXXXXamXFXXXXXXXXXX-72-72.png'
+		},
+		{
+			title="日常",
+			icon = 'https://gw.alicdn.com/tfs/TB1VKMISXXXXXbyaXXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1aTgZSXXXXXazXFXXXXXXXXXX-72-72.png'
+		},
+		{
+			title="出征",
+			icon = 'https://gw.alicdn.com/tfs/TB1Do3tSXXXXXXMaFXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1LiNhSpXXXXaWXXXXXXXXXXXX-72-72.png'
+		},
+		{
+			title="联盟",
+			icon = 'https://gw.alicdn.com/tfs/TB1jFsLSXXXXXX_aXXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1_Kc.SXXXXXa8XpXXXXXXXXXX-72-72.png'
+		},
+		{
+			title="监控",
+			icon = 'https://gw.alicdn.com/tfs/TB199sPSXXXXXb4XVXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1DR.3SXXXXXc2XpXXXXXXXXXX-72-72.png'
+		},
+		{
+			title="关于",
+			icon = 'https://gw.alicdn.com/tfs/TB1hedfSpXXXXchXXXXXXXXXXXX-72-72.png',
+			activeIcon = 'https://gw.alicdn.com/tfs/TB1mrXaSpXXXXaqXpXXXXXXXXXX-72-72.png'
+		},
 	}
 }
 

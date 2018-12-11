@@ -22,21 +22,56 @@ function UI_Button:new (o)
 end
 
 function UI_Button:OnClick(callBack)
+	if not callBack then return false end
 	local f=function(id,action) callBack(id,action) end
     self.view:setActionCallback(UI.ACTION.CLICK, f)
     self.view:setActionCallback(UI.ACTION.LONG_PRESS, f)
 end
---@summary:刷新控件
---@return bool:是否要求布局结束
-function UI_Button:Refresh()
-	if math.abs(self.nowX-self.targetY)+math.abs(self.nowY-self.targetY)>1 then
-		self.nowX=self.nowX*0.9+self.targetX*0.1
-		self.nowY=self.nowY*0.9+self.targetY*0.1
-		self.view:setStyle({
-			left=self.nowX,
-			top=self.nowY
-		})		
+--@summary:控件立即移动到目标点
+--@param float newX/newY/newW/newH:控件目标
+--@param bool applyMove:应用本次移动将使得控件目标点发生变化
+function UI_Button:Move(newX,newY,applyMove)
+	if applyMove then
+		self:Navigate(newX,newY)
 	end
+	self.nowX=newX or self.nowX
+	self.nowY =newY or self.nowY
+	self.AnimationComplete=false--重置动画
+end
+
+--@summary:新增控件目标点
+--@param float newX/newY/newW/newH:控件新目标
+function UI_Button:Navigate(newX,newY)
+	self.targetX=newX or self.targetX
+	self.targetY=newY or self.targetY
+	self.AnimationComplete=false--重置动画
+end
+function UI_Button:Refresh()
+	if not self.EnableAnimation then 
+		return false
+	end
+	if self.AnimationComplete then
+		return false
+	end
+	local newMoveCheck= math.abs(self.nowX-self.targetX)+math.abs(self.nowY-self.targetY)>10
+	if newMoveCheck then
+		self.nowX=self.nowX*0.8+self.targetX*0.2
+		self.nowY=self.nowY*0.8+self.targetY*0.2
+	else
+		self.nowX=self.targetX
+		self.nowY=self.targetY
+		self.AnimationComplete=true
+	end
+	if self.nowX>self.parent.width then 
+		self.AnimationComplete=true
+	end
+	if self.nowY>self.parent.height then 
+		self.AnimationComplete=true
+	end
+	self.view:setStyle({
+		left=self.nowX,
+		top=self.nowY
+	})
 	return false
 end
 --@summary:从布局中删除此控件
