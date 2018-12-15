@@ -5,6 +5,7 @@ require "Setting.layout.context"
 require "SettingBase.Init"
 require "SettingBase.Screen"
 
+require "Translator"
 require "Form"
 require "Application"
 require "Building.normal"

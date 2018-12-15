@@ -65,9 +65,9 @@ function CityBuilding:UpLevelBuildingByPriority()
 	for i=1,7 do
 		if buildingInPriority[i] then
 			for index,building in ipairs(buildingInPriority[i]) do
-				ShowInfo.ResInfo(string.format("%d级:%s 开始",i,building.Name))
-				if self:RunBuilding(building.Name) then
-					ShowInfo.ResInfo(string.format("%s 完成",building.Name))
+				ShowInfo.ResInfo(string.format("%d级:%s 开始",i,building.Description))
+				if self:RunBuilding(building.Description) then
+					ShowInfo.ResInfo(string.format("%s 完成",building.Description))
 					return true
 				end
 			end

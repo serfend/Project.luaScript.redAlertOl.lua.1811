@@ -15,7 +15,9 @@ end
 function main()
 	wui=require "wui.wui"
 	app=Application:new()
+	Setting.About.Application=Application.Info--加载更新日志
 	uiHandle=UIHandle:new()
+	translator=Translator:new()
 	encrypt=Encrypt:new()
 	ShowInfo.RunningInfo("初始化")
 	math.randomseed(os.milliTime())
@@ -29,9 +31,9 @@ function main()
 	party=party:new()
 	ocr=OCR:new()
 	ocrInfo=OcrInfo:new()
-	Setting.Runtime.ActiveMode.LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
+	LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
 	--GetUserImages(45,2)
-	
+	ReloadCityIndex()
 	mainLoop()
 end
 
@@ -100,10 +102,10 @@ function newRound()
 	local thisTime=os.milliTime()
 	local activeMode=false
 	local refreshTimeLeft=math.floor(Setting.Runtime.ActiveMode.Interval-
-		(thisTime-Setting.Runtime.ActiveMode.LastActiveTime)/1000)
+		(thisTime-LastActiveTime)/1000)
 	if refreshTimeLeft<0 then
 		activeMode=true
-		Setting.Runtime.ActiveMode.LastActiveTime=thisTime
+		LastActiveTime=thisTime
 		ShowInfo.RunningInfo("本轮主动操作开始")
 		ResetForm()
 	else
