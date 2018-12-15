@@ -8,6 +8,10 @@ require "Setting.layout.UI_Tab"
 require "Setting.layout.UI_Timespan"
 require "Setting.layout.UI_Button"
 require "Setting.layout.UI_Label"
+require "Setting.layout.UI_TextBox"
+require "Setting.layout.UI_CheckBok"
+require "Setting.layout.UI_Line"
+require "Setting.layout.UI_Div"
 View = {
 	
 }--初始化
@@ -25,9 +29,9 @@ end
 function View.SetLayoutCenter(w,h)
 	return {
 		left=math.floor(375*(Global.size.width-w)/Global.size.width),--原始宽为750
-		top=math.floor(0.5*(Global.size.height-h)),--原始高为 设备高*750/设备宽
+		top=math.floor(375*(Global.size.height-h)/Global.size.height),--原始高为 设备高*750/设备宽
 		width=w*750/Global.size.width,
-		height=h*750/Global.size.width
+		height=h
 	}
 end
 

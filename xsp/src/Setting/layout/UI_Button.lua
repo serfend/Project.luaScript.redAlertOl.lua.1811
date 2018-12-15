@@ -1,5 +1,6 @@
 UI_Button={
-	}
+	_instanceCount=0
+}
 
 --@summary:创建新的按钮
 --@param string id:对象id
@@ -7,17 +8,24 @@ UI_Button={
 --@param table rawData:控件原始数据
 --@param Color3B color:主题色
 function UI_Button:Init(id,context,rawData,color)
-	rawData.id=id
+	if id then
+		rawData.id=id
+	else
+		UI_Button._instanceCount=UI_Button._instanceCount+1
+		rawData.id="btnInner"..UI_Button._instanceCount
+	end
 	self.view=context:createView(rawData)
-	View.SetButtonStyle(color,self.view)
+	if color then
+		View.SetButtonStyle(color,self.view)
+	end
 end
 function UI_Button:new (o)
     o = o or {}
 	o.view=nil
-	o.targetX=0
-	o.targetY=0
-	o.nowX=0
-	o.nowY=0
+	o.targetX=0.0
+	o.targetY=0.0
+	o.nowX=0.0
+	o.nowY=0.0
     return setmetatable(o, {__index=UI_Button})
 end
 
@@ -33,10 +41,12 @@ end
 function UI_Button:Move(newX,newY,applyMove)
 	if applyMove then
 		self:Navigate(newX,newY)
+	else
+		self.AnimationComplete=false--重置动画
 	end
 	self.nowX=newX or self.nowX
 	self.nowY =newY or self.nowY
-	self.AnimationComplete=false--重置动画
+	
 end
 
 --@summary:新增控件目标点
@@ -62,12 +72,7 @@ function UI_Button:Refresh()
 		self.nowY=self.targetY
 		self.AnimationComplete=true
 	end
-	if self.nowX>self.parent.width then 
-		self.AnimationComplete=true
-	end
-	if self.nowY>self.parent.height then 
-		self.AnimationComplete=true
-	end
+	
 	self.view:setStyle({
 		left=self.nowX,
 		top=self.nowY

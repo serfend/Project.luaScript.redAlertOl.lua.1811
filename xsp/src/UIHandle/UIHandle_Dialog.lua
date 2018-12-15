@@ -15,13 +15,15 @@ function UIHandle:Dialog_OkCancel(title,info,callbackOk,callbackCancel)
 	uilist.TxtTitle:SetText(title)
 	uilist.TxtTitle:SetFontSize(40)
 	uilist.TxtTitle.EnableAnimation=true
-	uilist.TxtTitle:Move(-dialogWidth)
+	uilist.TxtTitle:Move(-750)
+
+
 	uilist:Add("TxtInfo",UI_Label:new())
 	uilist.TxtInfo:Init("TxtInfo",uilist.layout.context,Context.LabelNormal,Color3B(100,100,220))
 	uilist.TxtInfo:SetText(info)
 	uilist.TxtInfo:SetFontSize(20)
 	uilist.TxtInfo.EnableAnimation=true
-	uilist.TxtInfo:Move(dialogWidth)
+	uilist.TxtInfo:Move(750)
 
 	local btnOK=self:BuildButton(uilist,callbackOk,Color3B(100,100,220),"确定")
 	local btnCancel=self:BuildButton(uilist,callbackCancel,Color3B(200,100,100),"取消")

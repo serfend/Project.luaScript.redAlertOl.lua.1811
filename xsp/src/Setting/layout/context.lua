@@ -1,4 +1,32 @@
 Context={
+	BrLine={
+		id="lineDefault",
+		view="div",
+		style={
+			width=100,
+			['background-color'] = '#aaaaaa',
+			height=2,
+			['border-bottom-width']=1,
+			['border-bottom-color']="#aaaaff"
+		}
+	},
+	--@summary:标准的输入组
+	InputDiv={
+		id="divDefault",
+		view="div",
+		subviews={
+			{
+				view="text",
+				style = {
+					['font-size'] = 30,
+					color = '#707070',
+				}
+			}
+		},
+		style={
+			['flex-direction'] = 'row',
+		}
+	},
 	--@summary:常规按钮控件
 	BtnNormal={
 			id = 'BtnDefault',
@@ -18,7 +46,20 @@ Context={
 		view="text",
 		class="txt",
 	},
-	
+	--@summary:常规输入框
+	TextNormal={
+		id="TextDefalut",
+		view="input",
+		class ="input",
+		style = {
+                width = 300,
+                height = 45,
+                ['background-color'] = '#3f0000ff',
+				['padding-top'] = 5,
+				['padding-bottom'] = 5,
+				['border-radius']=5
+            }
+	},
 	--@summary:对话框布局
 	retDialog={
 		view="div",
@@ -59,67 +100,53 @@ Context={
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
-			subviews = 
-            {
-            }
-        },
+			subviews = {
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
+			}
+		},
 		{
 			view = 'div',
 			style = {
-				['background-color'] = '#0000ff'
 			},
 			subviews = {
-					
-				}
-        },
-    },
+			}
+		},
+	},
 	
 	MainSettingTitle={
 		{

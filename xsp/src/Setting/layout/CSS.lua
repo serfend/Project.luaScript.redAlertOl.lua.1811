@@ -5,6 +5,9 @@ CSS={
 			['text-align']="center",
 			['font-size'] = 40,
 		},
+		input={
+			color = '#ff000015',
+		},
 		logo = {
 			width = 200,
 			height = 30,

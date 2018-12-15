@@ -59,7 +59,28 @@ function UIHandle:CheckIfNewDialog()
 		)
 	end
 	if self.uiDialog=="mainSetting" then--主设置界面
-		return self:SettingDialogShow()
+		return self:SettingDialogShow(
+			function(uilist)
+				--self:ExtractView(uilist.layout.view,0)
+				self.uiResult="ok"
+				self:CloseContext()
+			end,
+			function(uilist)
+				self.uiResult="cancel"
+				self:CloseContext()
+			end
+		)
+	end
+end
+function UIHandle:ExtractView(view,rank)
+	local id=view:getID()
+	local start,_=string.find(id,"Setting")
+	if start==1 then
+		local value=view:getAttr("value")
+		self:SynSetting(id,value)
+	end
+	for i=1,view:subviewsCount() do
+		self:ExtractView(view:getSubview(i),rank+1)
 	end
 end
 function UIHandle:CloseContext()

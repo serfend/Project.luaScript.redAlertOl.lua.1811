@@ -36,13 +36,13 @@ local wtab_page = {
             subviews = {
                 {
                     view = 'scroller',
-                    ['show-scrollbar'] = 'false',
+                    ['show-scrollbar'] = 'true',
                     scrollDirection = 'horizontal',
                     style = {},
                     subviews = {}
                 },
                 {
-                    view = 'div',
+                    view = 'scroller',
                     style = {},
                     subviews = {
                         {
@@ -77,13 +77,17 @@ local wtab_page = {
             overflow = 'hidden'
         },
         ['tab-container'] = {
-            position = ' relative',
-            width = 3750,
-            flex = 1,
+            position = 'relative',
+			['padding-top'] = 10,
+			['padding-bottom'] = 10,
+			['padding-left'] = 10,
+			['padding-right'] = 10,
+--            width = 750,
+--            flex = 1,
             ['flex-direction'] = 'row',
-            ['align-items'] = 'stretch',
-            ['background-color'] = '#F5F5F5',
-            transition = 'left 0.2s ease-in-out'
+--            ['align-items'] = 'stretch',
+            ['background-color'] = '#eeeeff',
+--            transition = 'left 0.2s ease-in-out'
         },
         ['tab-text'] = {
             lines = 1,
@@ -97,12 +101,12 @@ local wtab_page = {
             isActiveTitleBold = true,
             iconWidth = 70,
             iconHeight = 70,
-            width = 120,
-            height = 120,
+            width = 100,
+            height = 100,
             fontSize = 24,
             hasActiveBottom = false,
             activeBottomColor = '#9999ff',
-            activeBottomWidth = 120,
+            activeBottomWidth = 100,
             activeBottomHeight = 6,
             textPaddingLeft = 10,
             textPaddingRight = 10,
@@ -152,7 +156,7 @@ function wtab_page.createLayout(layout)
     local tabTitles = tpconfig.tabTitles or {}
 
     if #tabPages ~= #tabTitles then
-		dialog('Exception.wui.wtab_page.Init()页面与索引不匹配')
+		dialog('Exception.wui.wtab_page.Init()页面与索引不匹配'..#tabPages..","..#tabTitles)
         return nil
     end
 

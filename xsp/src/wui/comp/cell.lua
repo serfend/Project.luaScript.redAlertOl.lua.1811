@@ -46,27 +46,26 @@ local wcell = {
         ['wcell'] = {
             ['flex-direction'] = 'row',
             ['align-items'] = 'center',
-            ['padding-left'] = 24,
-            ['padding-right'] = 24,
-            ['background-color'] = '#ffffff',
+            ['padding-left'] = 0,
+            ['padding-right'] = 0,
             ['margin'] = 0
         },
         ['cell_margin'] = {
-            ['margin-bottom'] = 24,
+            ['margin-bottom'] = 0,
         },
         ['cell_title'] = {
             flex = 1,
         },
         ['cell_indent'] = {
-            ['padding-bottom'] = 30,
-            ['padding-top'] = 30,
+            ['padding-bottom'] = 0,
+            ['padding-top'] = 0,
         },
         ['has_desc'] = {
-            ['padding-bottom'] = 18,
-            ['padding-top'] = 18,
+            ['padding-bottom'] = 0,
+            ['padding-top'] = 0,
         },
         ['cell_top_border'] = {
-            ['border-top-color'] = '#e2e2e2',
+            ['border-top-color'] = '#f',
             ['border-top-width'] = 1,
         },
         ['cell_bottom_border'] = {
@@ -84,7 +83,7 @@ local wcell = {
             height = 22,
         },
         ['cell_content'] = {
-            color = '#333333',
+            color = '#0',
             ['font-size'] = 30,
             ['line-height'] = 40,
         },
@@ -93,7 +92,7 @@ local wcell = {
             ['font-size'] = 24,
             ['line-height'] = 30,
             ['margin-top'] = 4,
-            ['margin-right'] = 30,
+            ['margin-right'] = 0,
         },
         ['extra_content_text'] = {
             ['font-size'] = 28,
@@ -177,7 +176,7 @@ local wplain_cell = {
                                 ['font-size'] = 30,
                                 color = '#666666',
                                 width = 188,
-                                ['margin-right'] = 10,
+                                ['margin-right'] = 0,
                             }
 
                         }
@@ -204,8 +203,8 @@ local wplain_cell = {
                                 color = '#999999',
                                 ['font-size'] = 24,
                                 ['line-height'] = 30,
-                                ['margin-top'] = 4,
-                                ['margin-right'] = 30,
+                                ['margin-top'] = 0,
+                                ['margin-right'] = 0,
                             }
                         }
                     }

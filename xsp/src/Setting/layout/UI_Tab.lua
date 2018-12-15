@@ -23,9 +23,17 @@ end
 --		string		.activeIcon:选中时图标
 --@param Action<string,int>	callBack:当page选中发生变化时回调 id,pageIndex
 function UI_Tab:Init(id,context,rawData,tabPageConfig,callBack)
+	--归并所有pages尺寸
+	local pageWidth=tabPageConfig.pageWidth or defaultSetting.pageWidth
+	for i,k in ipairs(rawData) do
+		k.style.width=pageWidth
+	end
+	
 	self.view=wui.TabPage.createView(context, 
 		{ pages = rawData, config = tabPageConfig }
 	)
+	
+	
 	
 	local defaultSetting=wui.TabPage.style
 	--滑块背景
@@ -45,6 +53,8 @@ function UI_Tab:Init(id,context,rawData,tabPageConfig,callBack)
 	self.barLinerFront=UI_Label:new()
 	self.barLinerFront:Init("barTest",context,Context.LabelNormal)
 	self.view:addSubview(self.barLinerFront.view)
+	
+	
 	self:OnSelect(function(id,page) 
 		self:SwitchBarTo(page)
 		if callBack then
@@ -61,29 +71,57 @@ function UI_Tab:Init(id,context,rawData,tabPageConfig,callBack)
 		left=self.barWidth*(startPage-1),
 		top=tabPageConfig.height or defaultSetting.tabStyleDefault.height,
 	})
+	--初始化标题索引
+	self.tabTitle={}
+	local titleView=self.view:getSubview(1)
+	for i=1,#rawData do
+		self.tabTitle[i]=titleView:getSubview(i)
+	end
 	
+	--控制内容位置
+	self.containerView=self.view:getSubview(2):getSubview(1)
+	self.containerTargetX=0
+	self.containerNowX=0
+	self.containerWidth=pageWidth
+	
+	--初始化各页面索引
+	self.page={}
+	for i=1,#rawData do
+		self.page[i]=self.containerView:getSubview(i)
+	end
 end
 --@summary:更改当前bottomActiveBar位置
 function UI_Tab:SwitchBarTo(pageIndex)
 	self.barLinerFront.targetX=self.barWidth*(pageIndex-1)
 	self.barLinerFront.AnimationComplete=false
+	self.containerView:setStyle("left",self.containerNowX)
+	self.containerTargetX=(pageIndex - 1) * (-1 * self.containerWidth)
+	self.AnimationComplete=false
 end
+
 --@summary:刷新控件
 --@return bool:是否要求布局结束
 function UI_Tab:Refresh()
-	if self.barLinerFront.AnimationComplete then
-		return false
+	if not self.barLinerFront.AnimationComplete then			
+		local newMoveCheck= math.abs(self.barLinerFront.nowX-self.barLinerFront.targetX)>2
+		if newMoveCheck then
+			self.barLinerFront.nowX=self.barLinerFront.nowX*0.8+self.barLinerFront.targetX*0.2
+		else
+			self.barLinerFront.nowX=self.barLinerFront.targetX
+			self.barLinerFront.AnimationComplete=true
+		end
+		self.barLinerFront.view:setStyle("left",self.barLinerFront.nowX)
 	end
-	local newMoveCheck= math.abs(self.barLinerFront.nowX-self.barLinerFront.targetX)>2
-	if newMoveCheck then
-		self.barLinerFront.nowX=self.barLinerFront.nowX*0.8+self.barLinerFront.targetX*0.2
-	else
-		self.barLinerFront.nowX=self.barLinerFront.targetX
-		self.barLinerFront.AnimationComplete=true
+	if not self.AnimationComplete then
+		local newMoveCheck= math.abs(self.containerNowX-self.containerTargetX)>2
+		if newMoveCheck then
+			self.containerNowX=self.containerNowX*0.8+self.containerTargetX*0.2
+		else
+			self.containerNowX=self.containerTargetX
+			self.AnimationComplete=true
+		end
+		self.containerView:setStyle("left",self.containerNowX)
 	end
-	self.barLinerFront.view:setStyle({
-		left=self.barLinerFront.nowX
-	})
 	return false
 end
 --@summary:从布局中删除此控件

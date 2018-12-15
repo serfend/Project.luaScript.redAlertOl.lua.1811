@@ -115,30 +115,32 @@ function wcheckbox.createView(context, layout)
     local layout = wcheckbox.createLayout(layout)
     return context:createView(layout)
 end
+function wcheckbox.OnChecked(id,view,callback)
+	disabled = wcheckbox.propertyMap[id].disabled
+	if not disabled then
+		wcheckbox.propertyMap[id].checked = not wcheckbox.propertyMap[id].checked
+		local checked = wcheckbox.propertyMap[id].checked
+		local cbconfig = wcheckbox.propertyMap[id].config
 
+		local icon = checked and (disabled and cbconfig.checkedDisabledIcon or cbconfig.checkedIcon) or (disabled and cbconfig.uncheckedDisabledIcon or cbconfig.uncheckedIcon)
+		local image = view:getSubview(2)
+		image:setAttr('src', icon)
+
+		local checkedColor = cbconfig.checkedColor
+		if checked == false or disabled then
+			checkedColor= cbconfig.uncheckedColor
+		end
+		local titleText = view:getSubview(1):getSubview(1)
+		titleText:setStyle('color', checkedColor)
+
+		if callback then
+			callback(id, wcheckbox.propertyMap[id].title, wcheckbox.propertyMap[id].value, checked)
+		end
+	end
+end
 function wcheckbox.setOnCheckedCallback(view, callback)
     local onClicked = function (id, action)
-        disabled = wcheckbox.propertyMap[id].disabled
-        if not disabled then
-            wcheckbox.propertyMap[id].checked = not wcheckbox.propertyMap[id].checked
-            local checked = wcheckbox.propertyMap[id].checked
-            local cbconfig = wcheckbox.propertyMap[id].config
-
-            local icon = checked and (disabled and cbconfig.checkedDisabledIcon or cbconfig.checkedIcon) or (disabled and cbconfig.uncheckedDisabledIcon or cbconfig.uncheckedIcon)
-            local image = view:getSubview(2)
-            image:setAttr('src', icon)
-
-            local checkedColor = cbconfig.checkedColor
-            if checked == false or disabled then
-                checkedColor= cbconfig.uncheckedColor
-            end
-            local titleText = view:getSubview(1):getSubview(1)
-            titleText:setStyle('color', checkedColor)
-
-            if callback then
-                callback(id, wcheckbox.propertyMap[id].title, wcheckbox.propertyMap[id].value, checked)
-            end
-        end
+        wcheckbox.OnChecked(id,view,callback)
     end
 
     view:setActionCallback(UI.ACTION.CLICK, onClicked)

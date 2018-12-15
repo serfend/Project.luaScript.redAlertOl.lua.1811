@@ -23,7 +23,7 @@ function UI_Timespan:Init(id,context,rawData,color,width,totalTime)
 	self.beginTimeStamp=os.milliTime()
 	self.totalTime=totalTime
 	self.view=context:createView(rawData)
-	self.viewWidth=width
+	self.viewWidth=width*720/Global.size.width
 end
 function UI_Timespan:Refresh()
 	local leftTime=self.totalTime-(os.milliTime()-self.beginTimeStamp)/1000
