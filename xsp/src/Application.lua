@@ -1,14 +1,18 @@
 Application={
-	version="0.1.1",
-	updateDate="2018-12-8 20:21",
-	author="serfend",
-	groupQQ="489518369",
-	UpdateInfo={
-		"",
-		"测试版本发布"
-	},
-	ProcessInfo={
-		
+	Info={
+		version="0.2.0",
+		updateDate="2018-12-13 10:14",
+		author="serfend",
+		groupQQ="489518369",
+		Project={
+			UpdateInfo={
+				"ui界面基本实现",
+				"测试版本发布"
+			},
+			ProcessInfo={
+				
+			}
+		}
 	}
 }
 function Application:new (o)
