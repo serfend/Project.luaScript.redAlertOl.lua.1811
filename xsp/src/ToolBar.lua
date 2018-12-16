@@ -24,7 +24,7 @@ end
 --@summary:获取当前场景
 --@return:0-未知 1-城市 2-世界
 function ToolBar:GetNowScene()
-	screen:keep(true)
+	screen.keep(true)
 	if self:CheckIfInCity() then
 		self.nowScene=1
 	else
