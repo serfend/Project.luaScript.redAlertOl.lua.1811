@@ -54,7 +54,7 @@ function pandect:GetNowPlayerEnergySupply()
 	if result==-1 then result=100 end
 	ShowInfo.ResInfo(string.format("玩家体力值:%d/%d",result,maxEnergy))
 	screen.keep(false)
-	return result
+	return result or -1
 end
 local lastExpeditPos={}
 --@summary:检查当前坐标是否和上次一致，以此判断是否成功寻找目标

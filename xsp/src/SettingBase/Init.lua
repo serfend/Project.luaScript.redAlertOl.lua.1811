@@ -86,6 +86,7 @@ Setting={
 			Self={
 				Enable="true",
 				AutoRefresh="true",
+				TreasureSort={4,3,2,1}
 			}
 		},
 		Donation={

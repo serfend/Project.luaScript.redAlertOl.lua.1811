@@ -145,25 +145,29 @@ function ReloadCityIndex()
 	for nowPriority=1,7 do
 		for k,v in ipairs(CityMap) do
 			v.isOutSize=false
-			if v.Priority==nowPriority then
-				local tmp={}
+			local tmp={}
 				tmp.Description=v.Name
 				tmp.Priority=v.Priority
 				tmp.MaxRank=0
+			CityIndex[tmp.Description]=tmp
+			CityIndex[tmp.Description].x=v.x
+			CityIndex[tmp.Description].y=v.y
+			if v.Priority==nowPriority then
 				table.insert(Setting.Building.List,tmp)--初始化建筑
-				CityIndex[tmp.Description]=tmp
 			end
 		end
 
 		for i,v in ipairs(OutCityMap) do
 			v.isOutside=true
-			if v.Priority==nowPriority then
-				local tmp={}
+			local tmp={}
 				tmp.Description=v.Name .. i
 				tmp.Priority=v.Priority
 				tmp.MaxRank=0
+			CityIndex[tmp.Description]=tmp
+			CityIndex[tmp.Description].x=v.x
+			CityIndex[tmp.Description].y=v.y
+			if v.Priority==nowPriority then
 				table.insert(Setting.Building.List,tmp)
-				CityIndex[tmp.Description]=tmp
 			end
 		end
 	end

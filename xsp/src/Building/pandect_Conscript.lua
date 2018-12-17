@@ -35,12 +35,12 @@ end
 --@summary:执行生产
 --@param index:执行生产的序号
 function pandect:DoConscript(index)
-	if not Setting.Conscript[index].Enable then
-		ShowInfo.ResInfo(string.format("%s生产被禁用",Setting.Conscript[index].Description))
+	if not Setting.Building.Conscript[index].Enable then
+		ShowInfo.ResInfo(string.format("%s生产被禁用",Setting.Building.Conscript[index].Description))
 		return
 	end
 	local targetPos=self:PanelPos(conscriptInitInfo.Pos[index][1],conscriptInitInfo.Pos[index][2])
-	ShowInfo.ResInfo(string.format("生产%s",Setting.Conscript[index].Description))
+	ShowInfo.ResInfo(string.format("生产%s",Setting.Building.Conscript[index].Description))
 	tap(targetPos.x,targetPos.y)
 	sleep(1000)--进入招兵页面
 	if self:CheckIfConscripting() then
