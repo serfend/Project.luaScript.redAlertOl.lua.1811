@@ -23,7 +23,7 @@ screen.init(screen.PORTRAIT)
 Global.size=screen.getSize()
 Global.dpi=screen.getDPI()
 local supportSize=false
-if  Global.size.width==720 and Global.size.height==1280 and Global.dpi==320 then
+if  Global.size.width==1080 and Global.size.height==1920 and Global.dpi==480 then
 	supportSize=true
 else
 	supportSize=false
@@ -39,5 +39,4 @@ if not supportSize then
 	end
 	--dialog("出于用户体验考虑,\n强制运行已被管理员关闭\n您可以使用:\n模拟器或对应分辨率的手机运行脚本")
 	--lua_exit()
-	setScreenScale(720,1280)
 end

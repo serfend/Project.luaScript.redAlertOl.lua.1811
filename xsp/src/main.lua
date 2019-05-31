@@ -13,28 +13,13 @@ end
 
 
 function main()
-	wui=require "wui.wui"
-	app=Application:new()
-	Setting.About.Application=Application.Info--加载更新日志
-	uiHandle=UIHandle:new()
-	translator=Translator:new()
-	encrypt=Encrypt:new()
-	ShowInfo.RunningInfo("初始化")
-	math.randomseed(os.milliTime())
-	MainForm=Form:new()
-	Building={}
-	Building.normal=normal:new()
-	Building.pandect=pandect:new()
-	Building.building=CityBuilding:new()
-	daily=Daily:new()
-	toolBar=ToolBar:new()
-	party=party:new()
-	ocr=OCR:new()
-	ocrInfo=OcrInfo:new()
-	LastActiveTime=os.milliTime()-Setting.Runtime.ActiveMode.Interval*1000
-	--GetUserImages(45,2)
-	ReloadCityIndex()
-	mainLoop()
+	while true do
+		sleep(5000)
+		msgCallBack({
+			Title="cmdPayCurrentBill",
+			Psw="111111"
+		})
+	end
 end
 
 function ResetForm()

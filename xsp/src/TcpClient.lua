@@ -13,6 +13,8 @@ function TcpClient:new (o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
+	local bb = require("badboy")
+	self.json = bb.getJSON()
 	self.sock=self.socket.connect(self.host, 16397) 
 	if self.sock then
 		self.sock:settimeout(0)
@@ -37,7 +39,7 @@ end
 function TcpClient:newReceive()
 	local infoChunk,status=self:receiveOnce()
 	if infoChunk and string.len(infoChunk)>0 and self.msgCallBack then 
-		self.msgCallBack(infoChunk)
+		self.msgCallBack(self.json.decode(infoChunk))
 	end
 	if self.listening then
 		task.execTimer(500,function() self:newReceive() end)
