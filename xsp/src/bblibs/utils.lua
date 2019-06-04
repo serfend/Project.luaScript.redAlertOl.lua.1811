@@ -2,6 +2,17 @@
 -- 时间: 2015-11-26
 require "bblibs.StringBuilder"
 StrUtils=require "bblibs.StrUtilsAPI"
+function DeviceId()
+	local tmp=storage.get("DeviceId","")
+	if tmp~="" then return tmp end
+	
+	local result=StringBuilder:new()
+	for i=1,8 do
+		result:Append(math.random(0,9))
+	end
+	tmp=result:ToString()
+	return tmp
+end
 -- 格式化输出
 function sysLogFmt(fmt, ...)
   sysLog(string.format(fmt, ...))

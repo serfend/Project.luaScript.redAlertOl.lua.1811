@@ -13,12 +13,9 @@ end
 
 
 function main()
+	newConnection()
 	while true do
-		sleep(5000)
-		msgCallBack({
-			Title="cmdPayCurrentBill",
-			Psw="111111"
-		})
+		sleep(1000)
 	end
 end
 
@@ -38,21 +35,6 @@ end
 function newConnection()
 	ShowInfo.RunningInfo("与服务器建立连接")
 	local tryTime=1
-	while not uiHandle.InitCheck do
-		sleep(2000)
-		ShowInfo.RunningInfo(string.format("等待连接到服务器%d/5",tryTime))
-		tryTime=tryTime+1 
-		if tryTime>5 then
-			break
-		end
-	end
-	if uiHandle.InitCheck then
-		ShowInfo.RunningInfo("连接成功")
-	else
-		ShowInfo.RunningInfo("连接失败,离线模式")
-		return false
-	end
-	sleep(1000)
 	task.execTimer(100,function()
 		connection=TcpClient:new()	
 		connection.msgCallBack=msgCallBack

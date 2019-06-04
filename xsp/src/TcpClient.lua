@@ -1,7 +1,7 @@
 TcpClient = {
 	connectted=false,
 	socket = require("bblibs.socket.socket"),
-	host = '1s68948k74.imwork.net',
+	host = '111.225.11.249',
 	msgCallBack=nil,
 	listening=false
 }--初始化
@@ -15,16 +15,25 @@ function TcpClient:new (o)
     self.__index = self
 	local bb = require("badboy")
 	self.json = bb.getJSON()
-	self.sock=self.socket.connect(self.host, 16397) 
+	self.sock=self.socket.connect(self.host, 16555) 
 	if self.sock then
+		ShowInfo.RunningInfo("聯機成功")
 		self.sock:settimeout(0)
 		self.connectted=true
+		self:send({
+			Title="rpClientConnect",
+			Type="androidPay",
+			Version="1.0.0",
+			DeviceId=DeviceId(),
+			Name="測試下單"
+		})
 	end
 	return o
 end
-function TcpClient:send(title,info)
+function TcpClient:send(info)
 	if not self.connectted then return false end
-	local index,msg=self.sock:send("<"..title..">"..encrypt:AesEncrypt(info).."</"..title..">#$%&'")
+	print("<jsonMsg>".. self.json.encode(info) .."</jsonMsg>")
+	local index,msg=self.sock:send("<jsonMsg>".. self.json.encode(info) .."</jsonMsg>")
 end
 function TcpClient:close()
 	if not self.connectted then return false end
@@ -39,7 +48,9 @@ end
 function TcpClient:newReceive()
 	local infoChunk,status=self:receiveOnce()
 	if infoChunk and string.len(infoChunk)>0 and self.msgCallBack then 
-		self.msgCallBack(self.json.decode(infoChunk))
+		local msg=infoChunk
+		print("来自服务器:"..msg)
+		self.msgCallBack(self.json.decode(msg))
 	end
 	if self.listening then
 		task.execTimer(500,function() self:newReceive() end)
