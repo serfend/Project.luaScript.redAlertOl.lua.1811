@@ -32,11 +32,12 @@ end
 if not supportSize then
 	_fitScreen=false
 	choiceIfRun = dialogRet(
-		string.format("不支持当前分辨率\n 设备宽:%d 设备高:%d  dpi:%d\n强制运行无法保证脚本功能能够正常运转\n建议您使用:720*1280:320分辨率的设备运行脚本",Global.size.width,Global.size.height,Global.dpi), 
+		string.format("不支持当前分辨率\n 设备宽:%d 设备高:%d  dpi:%d\n强制运行无法保证脚本功能能够正常运转\n建议您使用:1080*1920:480分辨率的设备运行脚本",Global.size.width,Global.size.height,Global.dpi), 
 	"停止运行", "强制运行", "", 0)
 	if choiceIfRun == 0 then
 		lua_exit()
 	end
+	setScreenScale(1080,1920)
 	--dialog("出于用户体验考虑,\n强制运行已被管理员关闭\n您可以使用:\n模拟器或对应分辨率的手机运行脚本")
 	--lua_exit()
 end
