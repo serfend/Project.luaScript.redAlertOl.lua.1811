@@ -8,14 +8,22 @@ function loadSetting()
 	uiHandle:NewDialog("mainSetting",userTargetSettingName)
 	while uiHandle:CheckIfNewDialog() do
 		sleep(1000)
+		
 	end
 end
 
 
 function main()
 	newConnection()
+	local heartBeatCounter=0
+	
 	while true do
 		sleep(1000)
+		heartBeatCounter=heartBeatCounter+1
+		if heartBeatCounter==10 then
+			heartBeatCounter=0
+			connection:send({Title="rpNormalMessage",Content=os.time()})
+		end
 	end
 end
 
@@ -34,7 +42,6 @@ function ResetForm()
 end
 function newConnection()
 	ShowInfo.RunningInfo("与服务器建立连接")
-	local tryTime=1
 	task.execTimer(100,function()
 		connection=TcpClient:new()	
 		connection.msgCallBack=msgCallBack

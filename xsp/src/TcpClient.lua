@@ -1,7 +1,7 @@
 TcpClient = {
 	connectted=false,
 	socket = require("bblibs.socket.socket"),
-	host = '111.225.11.249',
+	host = '111.225.9.87',
 	msgCallBack=nil,
 	listening=false
 }--初始化
@@ -17,7 +17,7 @@ function TcpClient:new (o)
 	self.json = bb.getJSON()
 	self.sock=self.socket.connect(self.host, 16555) 
 	if self.sock then
-		ShowInfo.RunningInfo("聯機成功")
+		ShowInfo.RunningInfo("联机成功")
 		self.sock:settimeout(0)
 		self.connectted=true
 		self:send({
@@ -25,7 +25,7 @@ function TcpClient:new (o)
 			Type="androidPay",
 			Version="1.0.0",
 			DeviceId=DeviceId(),
-			Name="測試下單"
+			Name="测试下单"
 		})
 	end
 	return o

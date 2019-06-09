@@ -347,7 +347,7 @@ Init(id,context,rawData,color)	C:/Users/王凯/Documents/xspworkspace/Project.luaS
 Init(id,context,rawData,color,width,totalTime)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_Timespan.lua	21;"	f
 Init(id,context,rawData,tabPageConfig,callBack)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_Tab.lua	25;"	f
 InputDiv	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\context.lua	14;"	e
-InputPsw	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	41;"	f
+InputPsw	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	65;"	f
 Interval	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\SettingBase\Init.lua	33;"	e
 Interval	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Translator.lua	34;"	e
 JSON.assert	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	93;"	f
@@ -360,7 +360,7 @@ K	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/sr
 KEYS	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	897;"	e
 L64	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\StrUtilsAPI.lua	878;"	e
 LabelNormal	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\context.lua	44;"	e
-LastActiveTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	75;"	e
+LastActiveTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	82;"	e
 Length()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\StringBuilder.lua	20;"	f
 List	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\SettingBase\Init.lua	11;"	e
 List	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\SettingBase\Init.lua	27;"	e
@@ -530,7 +530,7 @@ Research(index)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandl
 ResearchAskHelp()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Research.lua	30;"	f
 ResearchBegin()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Research.lua	2;"	f
 ResetBuildingNavigator()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Action.lua	91;"	f
-ResetForm	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	22;"	f
+ResetForm	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	30;"	f
 ResetSetting()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect.lua	82;"	f
 ReturnBase()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Form.lua	20;"	f
 Run()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect.lua	67;"	f
@@ -1019,8 +1019,8 @@ activeIcon	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.19
 activeIcon	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\context.lua	175;"	e
 activeIcon	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\context.lua	180;"	e
 activeIcon	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\context.lua	185;"	e
-activeMode	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	70;"	e
-activeMode	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	74;"	e
+activeMode	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	77;"	e
+activeMode	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	81;"	e
 activeTitleColor	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\SettingUserInterface.lua	93;"	e
 activeTitleColor	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\wui\comp\tab_bar.lua	92;"	e
 activeTitleColor	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\wui\comp\tab_page.lua	99;"	e
@@ -1358,7 +1358,7 @@ config	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/x
 connect(host,	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\tp.lua	114;"	f
 connect4(address,	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\socket.lua	19;"	f
 connect6(address,	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\socket.lua	23;"	f
-connection	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	39;"	e
+connection	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	46;"	e
 connectted	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpClient.lua	2;"	e
 conscriptInitInfo	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Conscript.lua	2;"	e
 container	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\UIHandle\UIHandle_Setting.lua	153;"	e
@@ -1684,6 +1684,9 @@ headers	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/
 headers_s	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\mbox.lua	23;"	e
 headers_s	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\mbox.lua	24;"	e
 headers_t	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\mbox.lua	37;"	e
+heartBeatCounter	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	18;"	e
+heartBeatCounter	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	22;"	e
+heartBeatCounter	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	24;"	e
 height	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\SettingUserInterface.lua	99;"	e
 height	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\CSS.lua	13;"	e
 height	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\CSS.lua	18;"	e
@@ -2032,8 +2035,8 @@ ltn12	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xs
 ltn12	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\smtp.lua	17;"	e
 ltn12	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\tp.lua	13;"	e
 mail(from)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\smtp.lua	50;"	f
-main	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	15;"	f
-mainLoop	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	44;"	f
+main	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	16;"	f
+mainLoop	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	51;"	f
 make_set	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\url.lua	44;"	f
 map	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	776;"	e
 mapPos	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\OCR\OCR.lua	3;"	e
@@ -2216,7 +2219,7 @@ new(o)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/x
 new(o)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\UIHandle\UIHandle.lua	7;"	f
 new(x,	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\pos.lua	14;"	f
 newArray(tbl)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	296;"	f
-newConnection	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	35;"	f
+newConnection	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	43;"	f
 newList	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\utils.lua	175;"	e
 newMoveCheck	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\IControl.lua	64;"	e
 newMoveCheck	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_Button.lua	66;"	e
@@ -2227,7 +2230,7 @@ newMoveCheck	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.
 newMoveCheck	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_TextBox.lua	51;"	e
 newObject(tbl)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	300;"	f
 newReceive()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpClient.lua	48;"	f
-newRound	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	63;"	f
+newRound	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	70;"	f
 new_key	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\util.lua	49;"	e
 newboundary	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\smtp.lua	141;"	f
 newval	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	712;"	e
@@ -2258,7 +2261,7 @@ nowRankRange	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.
 nowScene	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Form.lua	27;"	e
 nowScene	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Form.lua	41;"	e
 nowScene	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\ToolBar.lua	2;"	e
-nowScene	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	24;"	e
+nowScene	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	32;"	e
 nowSetting	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\UIHandle\UIHandle_Setting.lua	147;"	e
 nowSetting	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\UIHandle\UIHandle_Setting.lua	156;"	e
 nowState	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Form.lua	2;"	e
@@ -2633,7 +2636,7 @@ red	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/
 redictIndex	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\UserSettingBase.lua	28;"	e
 redictIndex	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\UserSettingBase.lua	30;"	e
 reduced	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\url.lua	97;"	e
-refreshTimeLeft	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	71;"	e
+refreshTimeLeft	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	78;"	e
 register(componentName,	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\wui\comp\cell.lua	156;"	f
 relative_parsed	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\url.lua	228;"	e
 remainder	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\JSON.lua	325;"	e
@@ -2918,6 +2921,7 @@ start	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xs
 start	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\StrUtilsAPI.lua	890;"	e
 start()	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpClient.lua	43;"	f
 startPage	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_Tab.lua	64;"	e
+startTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	18;"	e
 startsWith	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\StrUtilsAPI.lua	476;"	f
 state	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\ltn12.lua	147;"	e
 state	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\ltn12.lua	165;"	e
@@ -3129,8 +3133,8 @@ subviewsCount	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler
 success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Action.lua	79;"	e
 success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Expedition_Action.lua	44;"	e
 success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Expedition_Action.lua	54;"	e
-success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	51;"	e
-success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	53;"	e
+success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	58;"	e
+success	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	60;"	e
 suffix	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\util.lua	126;"	e
 sum(s)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\md5.lua	379;"	f
 sumhexa(s)	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\md5.lua	354;"	f
@@ -3255,11 +3259,11 @@ text_len	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906
 tg	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Panel.lua	44;"	e
 tg	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Panel.lua	48;"	e
 tget	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\socket\ftp.lua	246;"	f
-thisChr	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	47;"	e
+thisChr	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	71;"	e
 thisChr	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\StringBuilder.lua	27;"	e
 thisKeepInBase	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\UserSettingBase.lua	76;"	e
 thisName	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\UserSettingBase.lua	74;"	e
-thisTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	69;"	e
+thisTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	76;"	e
 thisUsing	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\UserSettingBase.lua	75;"	e
 timeDelay	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\bblibs\utils.lua	71;"	e
 times	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Party\donation.lua	23;"	e
@@ -3368,7 +3372,7 @@ tryRangeGetTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandl
 tryRangeGetTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\pandect_Expedition_Info.lua	8;"	e
 tryTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Action.lua	124;"	e
 tryTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Building\Building_Action.lua	132;"	e
-tryTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\main.lua	37;"	e
+tryTime	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\TcpReport.lua	19;"	e
 txt	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\CSS.lua	3;"	e
 txtView	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\Setting\layout\UI_Timespan.lua	40;"	e
 type	C:/Users/王凯/Documents/xspworkspace/Project.luaScript.BillHandler.1906/xsp/src\util.lua	25;"	e
